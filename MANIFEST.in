@@ -1,0 +1,4 @@
+include *.txt
+exclude build
+exclude dist
+####recursive-include recon3d/test_data * 
