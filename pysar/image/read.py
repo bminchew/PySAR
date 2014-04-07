@@ -8,7 +8,7 @@ import numpy as np
 __all__ = ['readHDF5'] #,'readNetCDF','readRaster','readGeoTiff']
 
 ###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-def readHDF5(filename,dataid='z',retxy=False):
+def readHDF5(filename,dataid='z',rtrnxy=False):
    '''
    Return binary data from a single band HDF5 file
 
@@ -19,14 +19,14 @@ def readHDF5(filename,dataid='z',retxy=False):
                Name of file
    dataid   :  str
                Data tag ['z']
-   retxy    :  bool
+   rtrnxy   :  bool
                Return x,y,data tuple (must be tagged 'x' and 'y') [False]
 
    Returns
    -------
 
-   ret      :  ndarray or tuple of ndarrays if retxy=True
-               Data tagged dataid
+   rtrn     :  ndarray or tuple of ndarrays if rtrnxy=True
+               Data tagged dataid, 'x', and 'y'
    '''
    try:
       import h5py
@@ -46,7 +46,7 @@ def readHDF5(filename,dataid='z',retxy=False):
    finally:
       fn.close()
    
-   if retxy:
+   if rtrnxy:
       return x,y,z
    else:
       return z
