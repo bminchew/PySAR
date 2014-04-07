@@ -1,5 +1,3 @@
 externalpackages
 build
-pysar/plot/cpt/cmaps.pkl
-.bzr
-.bzrignore
+dist
