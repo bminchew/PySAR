@@ -9,7 +9,7 @@ C
 C     subsurf is called by phase_detrend.py 
 C
 C
-      integer*8 n,deg,cnt,i,j
+      integer*8 n,deg,cnt,i,j,lc
       real*4    x(n),y(n),m(n),v(n)
       real*8    nul,d(n),c(lc),xm(n),ym(n)
 

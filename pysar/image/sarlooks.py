@@ -64,8 +64,7 @@ class Params():
          elif o == '-d':
             self.ld = np.int32(a)
          elif o == '-n':
-            self.null = np.complex64(a)
-            if self.null == np.conj(self.null): self.null = np.float32(a)
+            self.null = np.float32(a)
          elif o == '-i':
             self.outnan = True
          elif o == '-s':
