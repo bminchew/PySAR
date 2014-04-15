@@ -270,8 +270,7 @@ def writeNetCDF(z,filename,x=None,y=None,null=None,xunit=None,yunit=None,zunit=N
    elif len(y) == 2:
       y = np.asarray(y,dtype=z.dtype)
       y = y[0] + np.arange(rows)*y[1]
-      if y[1] < 0:
-         y = y[::-1]  ### GMT expects values to start at lower left 
+      y = y[::-1]  ### GMT expects values to start at lower left 
    elif len(y) != rows:
       raise ValueError(xyerr % 'y')
    elif y.dtype != z.dtype:
