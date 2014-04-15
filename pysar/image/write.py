@@ -325,9 +325,9 @@ def writeNetCDF(z,filename,x=None,y=None,null=None,xunit=None,yunit=None,zunit=N
       fn.variables['y'][:] = y
       if z.size > maxio:
          for i in xrange(rows):
-            fn.variables['z'][i,:] = z[i,:]
+            fn.variables['z'][i,:] = z[(-i+1),:] ### match GMT convention 
       else:
-         fn.variables['z'][:,:] = z
+         fn.variables['z'][:,:] = z[::-1,:]  ### match GMT convention
    except:
       raise
    finally:
