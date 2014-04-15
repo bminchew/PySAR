@@ -242,6 +242,7 @@ def writeNetCDF(z,filename,x=None,y=None,null=None,xunit=None,yunit=None,zunit=N
 
    Notes
    -----
+   * writeNetCDF outputs files with x, y referenced to lower left (GMT convention)
    * if size(z) > maxio, file is written line by line to conserve memory.
    '''
    ncformoptions = ['NETCDF4', 'NETCDF4_CLASSIC','NETCDF3_CLASSIC','NETCDF3_64BIT']
@@ -269,6 +270,8 @@ def writeNetCDF(z,filename,x=None,y=None,null=None,xunit=None,yunit=None,zunit=N
    elif len(y) == 2:
       y = np.asarray(y,dtype=z.dtype)
       y = y[0] + np.arange(rows)*y[1]
+      if y[1] < 0:
+         y = y[::-1]  ### GMT expects values to start at lower left 
    elif len(y) != rows:
       raise ValueError(xyerr % 'y')
    elif y.dtype != z.dtype:
