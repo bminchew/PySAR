@@ -32,10 +32,12 @@ Write some standard formats (:mod:`pysar.image.write`)
 .. autosummary::
    :toctree: generated/
 
-   writeHDF5            Write binary data to an HDF5 file
-   writeNetCDF          Write binary data to a NetCDF file
-   writeRaster          Write binary data to a raster file
-   writeGeoTiff         Write binary data to a GeoTiff file
+   writeHDF5            Write data to an HDF5 file
+   writeNetCDF          Write data to a NetCDF file
+   writeRaster          Write data to a raster file
+   writeGeoTiff         Write data to a GeoTiff file
+   writeBinary          Write data to a binary file
+   writeMultiBand2d     Write 2D multiband data to a binary file
 
 Scripts
 -------

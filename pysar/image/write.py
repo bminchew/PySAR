@@ -5,7 +5,8 @@ from __future__ import print_function
 import sys,os
 import numpy as np
 
-__all__ = ['writeHDF5','writeNetCDF','writeRaster','writeGeoTiff']
+__all__ = ['writeHDF5','writeNetCDF','writeRaster',
+            'writeGeoTiff','writeBinary','writeMultiBand2d']
 
 ###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 def writeHDF5(z,filename,x=None,y=None,dataname=None):
@@ -329,6 +330,86 @@ def writeNetCDF(z,filename,x=None,y=None,null=None,xunit=None,yunit=None,zunit=N
       raise
    finally:
       fn.close()
+
+###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+def writeBinary(data,filename):
+    '''
+    Write 2D data to a headerless binary file
+
+    Parameters
+    ----------
+    data        :   ndarray
+                    Data to be written
+    filename    :   str
+                    Output filename
+    '''
+    if not isinstance(data,np.ndarray):
+        raise ValueError('data must be a numpy array')
+    with open(filename,'w') as fid:
+        data.flatten().tofile(fid)
+
+###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+def writeMultiBand2d(datalist,filename,inter='bil'):
+    '''
+    Write 2D data to multiband headerless binary file 
+    
+    Parameters
+    ----------
+
+    datalist    :   list of ndarrays, single ndarray, or multidimensional ndarray
+                    - List containing data arrays; length = number of bands
+                    - Single array writes single band
+                    - 3d array with bands stacked along third axis
+    filename    :   str
+                    Output file name
+    inter       :   str {'bil','bip','bsq'}
+                    Interleave format ['bil']
+                    bil = by line
+                    bip = by pixel
+                    bsq = band sequential 
+
+    '''
+    if inter.lower() not in ['bil','bip','bsq']:
+        raise ValueError("inter must be one of 'bil','bip','bsq'. given %s" % inter)
+    if isinstance(datalist,list) or isinstance(datalist,tuple):
+        bands = len(datalist)
+        dtype = datalist[0].dtype
+        shape = datalist[0].shape
+        for i in range(1,bands):
+            if dtype != datalist[i].dtype:
+                raise TypeError('data in list must have a consistent data type')
+            elif shape != datalist[1].shape:
+                raise ValueError('data in list must have a consistent shape')
+        data = datalist
+    elif isinstance(datalist,np.ndarray):
+        dtype = datalist.dtype
+        if datalist.ndim == 3:
+            bands = datalist.shape[2]
+            data = np.dsplit(datalist)
+            shape = data[0].shape
+        else:
+            bands = 1
+            shape = datalist.shape
+            data = [datalist]
+    else:
+        raise ValueError('datalist must be list, tuple, or ndarray')
+    
+    fn = np.memmap(filename,dtype=dtype,mode='w+',shape=shape)
+    if inter == 'bil' or inter == 'bsq':
+        shp = (shape[0]*bands,shape[1])
+        fn = np.memmap(filename,dtype=dtype,mode='w+',shape=shp)
+        if inter == 'bil':
+            for i in range(bands):
+                fn[i::bands,:] = data[i]
+        elif inter == 'bsq':
+            for i in range(bands):
+                fn[i*shape[0]:(i+1)*shape[0],:] = data[i]
+    elif inter == 'bip':
+        shp = (shape[0],shape[1]*bands)
+        fn = np.memmap(filename,dtype=dtype,mode='w+',shape=shp)
+        for i in range(bands):
+            fn[:,i::bands] = data[i]
+    del fn  ### this should flush memory to file
 
 ###========================================================================
 class _npdtype2gdaldtype():

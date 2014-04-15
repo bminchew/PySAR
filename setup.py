@@ -28,7 +28,13 @@ GNU Licensed
 --------------------------------------------------------------------
 """
 import sys,os
-
+import shutil
+if sys.version[:3] != '2.7':
+   sys.path[1] = '/'.join([sys.prefix,'lib','python%s' % sys.version[:3],'site-packages'])
+if sys.version_info[0] < 3:
+    import __builtin__ as builtins
+else:
+    import builtins
 # Version info
 MAJOR               = 0 
 MINOR               = 1
@@ -75,25 +81,52 @@ def configuration(parent_package='',top_path=None):
    return config
 
 def setup_package():
-   from distutils.dir_util import remove_tree
    from numpy.distutils.core import setup   
-   write_version_py()
-   if os.path.exists('./build'):  
+   if os.path.exists('./build'):
+      from distutils.dir_util import remove_tree
       remove_tree('./build')
-   setup(name='pysar',
-      author='Brent Minchew',
-      author_email='bminchew@caltech.edu',
-      description='\n'.join(__doc__.split('\n')[:1]),
-      license = 'GNU',
-      classifiers=[
-      'Development Status :: 4 - Beta',
-      'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
-      'Programming Language :: Fortran',
-      'Programming Language :: Python',
-      'Operating System :: OS Independent',
-      'Intended Audience :: Science/Research',
-      'Topic :: Scientific/Engineering'],
-      configuration=configuration)
+
+   '''
+   # Perform 2to3 if needed
+   local_path = os.path.dirname(os.path.abspath(sys.argv[0]))
+   src_path = local_path
+
+   if sys.version_info[0] == 3:
+      src_path = os.path.join(local_path, 'build', 'py3k')
+      sys.path.insert(0, os.path.join(local_path, 'tools'))
+      import py3tool
+      print("Converting to Python3 via 2to3...")
+      py3tool.sync_2to3('numpy', os.path.join(src_path, 'numpy'))
+
+      site_cfg = os.path.join(local_path, 'site.cfg')
+      if os.path.isfile(site_cfg):
+         shutil.copy(site_cfg, src_path)
+
+   old_path = os.getcwd()
+   os.chdir(src_path)
+   sys.path.insert(0, src_path)
+   '''
+   write_version_py()
+
+   try:
+      setup(name='pysar',
+         author='Brent Minchew',
+         author_email='bminchew@caltech.edu',
+         description='\n'.join(__doc__.split('\n')[:1]),
+         license = 'GNU',
+         classifiers=[
+         'Development Status :: 4 - Beta',
+         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+         'Programming Language :: Fortran',
+         'Programming Language :: Python',
+         'Operating System :: OS Independent',
+         'Intended Audience :: Science/Research',
+         'Topic :: Scientific/Engineering'],
+         configuration=configuration)
+   finally:
+      print(' ')
+      #del sys.path[0]    ### part of Python3 upgrade
+      #os.chdir(old_path)
 
 if __name__ == '__main__':
    setup_package()

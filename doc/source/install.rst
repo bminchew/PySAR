@@ -4,7 +4,7 @@
 Getting Started
 ===============
 
-Welcome to PySAR. 
+PySAR does not currently support Python 3.
 
 Download
 --------
@@ -12,6 +12,13 @@ Download
 .. code-block:: bash
 
    $ git clone from somewhere 
+
+Installation
+------------
+
+.. code-block:: bash
+
+    $ [sudo] python setup.py install
 
 Requirements
 ------------
@@ -25,5 +32,6 @@ Optional packages
 
 * netcdf4-python
 * h5py
+* gdal for python
 
 
