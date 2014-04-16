@@ -32,7 +32,7 @@ class Databank():
       for i in np.arange(len(pars.items)):
          if pars.types[i] != 'scalar':
             fid = open(pars.items[i],'r')
-            self.data.append( np.fromfile(fid,dtype=pars.types[i]) )
+            self.data.append(np.fromfile(fid,dtype=pars.types[i]))
             fid.close()
          else:
             self.data.append(np.float64(pars.items[i]))
@@ -44,7 +44,6 @@ class Parse_command_line():
    """ 
    A class for parsing the command line and storing parameters 
    """
-
    def __init__(self,args):
       self.args = args
       opts, operators, opaction, typeabbrevs, nptypes = option_list()
@@ -83,14 +82,14 @@ class Parse_command_line():
 
          elif a in operators:
             try:
-               self.action.append( opaction[ operators.index(a) ] )
+               self.action.append(opaction[operators.index(a)])
             except ValueError:
                print(a + ' is not a valid operator')
                raise
 
          else:
             a = ','.join(k.strip() for k in a.split(',')).split(',')  # strip whitespace from entries in a
-            self.items.append( a[0] )
+            self.items.append(a[0])
             self.cols.append(None)
             self.types.append(None)
 
@@ -107,9 +106,9 @@ class Parse_command_line():
                         self.cols[-1] = np.int64(a[j])
                      except:
                         try:
-                           typ = nptypes[ typeabbrevs.index(a[j].strip()) ]
+                           typ = nptypes[typeabbrevs.index(a[j].strip())]
                         except ValueError:
-                           print(a[j] + ' is not a valid type or an integer')
+                           print('%s is not a valid type or an integer' % a[j])
                            raise
                      j += 1
                self.types[-1] = typ
@@ -117,28 +116,27 @@ class Parse_command_line():
                try:
                   b = np.float64(a[0])
                   self.types[-1] = 'scalar'
-
                except:
-                  if 'pi' == a[0] or 'Pi' == a[0] or 'PI' == a[0]:
+                  if 'pi' == a[0].lower():
                      self.items[-1] = str(pi)
                      self.types[-1] = 'scalar'
-                  elif '-pi' == a[0] or '-Pi' == a[0] or '-PI' == a[0]:
+                  elif '-pi' == a[0].lower():
                      self.items[-1] = str(-pi)
                      self.types[-1] = 'scalar'
-                  elif '2pi' == a[0] or '2Pi' == a[0] or '2PI' == a[0]:
+                  elif '2pi' == a[0].lower():
                      self.items[-1] = str(2*pi)
                      self.types[-1] = 'scalar'
-                  elif '-2pi' == a[0] or '-2Pi' == a[0] or '-2PI' == a[0]:
+                  elif '-2pi' == a[0].lower():
                      self.items[-1] = str(-2*pi)
                      self.types[-1] = 'scalar'
-                  elif 'e' == a[0] or 'exp' == a[0] or 'EXP' == a[0]:
+                  elif 'e' == a[0].lower() or 'exp' == a[0].lower():
                      self.items[-1] = str(np.exp(1))
                      self.types[-1] = 'scalar'
-                  elif '-e' == a[0]:
+                  elif '-e' == a[0].lower():
                      self.items[-1] = str(-np.exp(1))
                      self.types[-1] = 'scalar'
                   else:
-                     print('Cannot open the file or convert ' + a[0] + ' to float')
+                     print('Cannot open the file or convert %s to float' % a[0])
                      raise 
          i += 1
 
