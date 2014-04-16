@@ -39,6 +39,15 @@ Write some standard formats (:mod:`pysar.image.write`)
    writeBinary          Write data to a binary file
    writeMultiBand2d     Write 2D multiband data to a binary file
 
+Read some standard formats (:mod:`pysar.image.read`)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. autosummary::
+   :toctree: generated/
+
+   readHDF5             Read data from an HDF5 file
+   readNetCDF           Read data from a NetCDF file
+
 Scripts
 -------
 
