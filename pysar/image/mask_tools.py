@@ -1,24 +1,19 @@
 """
-poly2mask.py  :  Generate a region-of-interest mask from a polygon 
+mask_tools.py  :  Tools for creating and manipulating masks 
 
 Contents
 --------
 poly2mask(polygon,imdim,imtype=np.float32)
 xy2mask(polygon,imdim,imtype=np.float32)
 ll2mask(latlon,imdim,corner,spacing,imtype=np.float32)
-
+buffermask(mask,width,dx=1.,dy=1.)
 """
 from __future__ import print_function, division
 import numpy as np
-try:
-   from PIL import Image, ImageDraw
-except:
-   raise ImportError('poly2mask.py requires PIL.  PIL must be installed in PYTHONPATH before continuing')
 
-__all__ = ['poly2mask','xy2mask','ll2mask']
+__all__ = ['poly2mask','xy2mask','ll2mask','buffermask']
 
 ###==================================================================================
-
 def poly2mask(polygon,imdim,imtype=np.float32):
    """
    poly2mask(polygon,imdim,imtype=np.float32)
@@ -44,6 +39,11 @@ def poly2mask(polygon,imdim,imtype=np.float32):
    *  Values inside polygon will be True or 1 depending on imtype
  
    """
+   try:
+      from PIL import Image, ImageDraw
+   except:
+      raise ImportError('poly2mask.py requires PIL.')
+
    if polygon[-1] != polygon[0]:  polygon.append(polygon[0])
 
    nx, ny = imdim[0], imdim[1]
@@ -61,7 +61,6 @@ def poly2mask(polygon,imdim,imtype=np.float32):
    return mask 
    
 ###==================================================================================
-
 def ll2mask(latlon,imdim,corner,spacing,imtype=np.float32):
    """
    ll2mask(latlon,imdim,corner,spacing,imtype=np.float32)
@@ -102,7 +101,6 @@ def ll2mask(latlon,imdim,corner,spacing,imtype=np.float32):
    return poly2mask(polygon=polygon,imdim=imdim,imtype=imtype)
 
 ###==================================================================================
-
 def xy2mask(polygon,imdim,imtype=np.float32):
    """ 
    xy2mask(polygon,imdim,imtype=np.float32)
@@ -130,4 +128,40 @@ def xy2mask(polygon,imdim,imtype=np.float32):
    """
    return poly2mask(polygon=polygon,imdim=imdim,imtype=imtype)
 
+###==================================================================================
+def buffermask(mask,width,dx=1.,dy=1.):
+    '''
+    buffermask(mask,width,dx=1.,dy=1.)
+
+    Add or remove a buffer zone from a binary mask
+
+    Parameters
+    ----------
+    mask    :   ndarray
+                binary mask (ROI values assumd = 1)
+    width   :   float
+                width of buffer zone (> 0 for outer buffer; < 0 for inner)
+    dx      :   float
+                grid spacing in x direction [1]
+    dy      :   float
+                grid spacing in y direaction [1]
+    '''
+    from pysar.signal import boxfilter
+    if np.abs(width) < np.finfo(np.float32).eps:
+        raise ValueError('width must not be 0')
+
+    mtype = mask.dtype
+    if mask.ndim == 1:
+        window = np.abs(width//dx)
+        fmask = boxfilter.boxcar1d(mask.astype(np.float32),window)
+    elif mask.ndim == 2:
+        window = [np.abs(width//dx), np.abs(width//dy)]
+        fmask = boxfilter.boxcar2d(mask.astype(np.float32),window) 
  
+    if np.sign(width) == -1:
+        fmask[fmask < 0.99] = 0.
+    else:
+        fmask[fmask > 0.01] = 1. 
+    return fmask.astype(mtype)
+
+

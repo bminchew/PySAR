@@ -16,8 +16,8 @@ Decimate (look) 2D images (:mod:`pysar.image.looks`)
    look        Image decimation 
    look2D      Same as look
 
-Generate a mask from a 2d polygon (:mod:`pysar.image.poly2mask`)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Generate a mask from a 2d polygon (:mod:`pysar.image.mask_tools`)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autosummary::
    :toctree: generated/
@@ -25,6 +25,7 @@ Generate a mask from a 2d polygon (:mod:`pysar.image.poly2mask`)
    poly2mask            Polygon in Cartesian coordinates
    ll2mask              Polygon in latitude/longitude coordinates
    xy2mask              Same as poly2mask
+   buffermask           Expand or contract a mask 
 
 Write some standard formats (:mod:`pysar.image.write`)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -61,7 +62,7 @@ from pysar.signal import boxfilter, conefilter
 
 from read import *
 from write import *
-from poly2mask import *
+from mask_tools import *
 from looks import *
 import sarfilter
 import sarlooks

@@ -8,10 +8,7 @@ boxcar2d(data,window,null=None,nullset=None,thread='auto',numthrd=8,tdthrsh=1e5)
 
 """
 from __future__ import print_function, division
-#import pyximport
 import numpy as np
-#pyximport.install(setup_args={'include_dirs':[np.get_include()]})
-#from _filtermod import f_boxcar2d
 import _filter_modc
 
 __all__ = ['boxcar1d','boxcar2d']

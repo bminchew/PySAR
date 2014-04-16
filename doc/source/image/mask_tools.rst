@@ -1,9 +1,9 @@
 .. highlight:: rst
-.. _poly2mask:
+.. _mask_tools:
 
-poly2mask
+mask_tools
 ---------
 Convert polynomial to mask
 
-.. automodule:: pysar.image.poly2mask
+.. automodule:: pysar.image.mask_tools
    :members:
