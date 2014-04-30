@@ -148,7 +148,7 @@ def buffermask(mask,width,dx=1.,dy=1.):
     '''
     from pysar.signal import boxfilter
     if np.abs(width) < np.finfo(np.float32).eps:
-        raise ValueError('width must not be 0')
+        return mask
 
     mtype = mask.dtype
     if mask.ndim == 1:
