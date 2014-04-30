@@ -152,18 +152,18 @@ def buffermask(mask,width,dx=1.,dy=1.):
 
     mtype = mask.dtype
     if mask.ndim == 1:
-        window = np.abs(width//dx)
+        window = int(np.abs(width//dx))
         fmask = boxfilter.boxcar1d(mask.astype(np.float32),window)
     elif mask.ndim == 2:
-        window = [np.abs(width//dx), np.abs(width//dy)]
+        window = [int(np.abs(width//dx)), int(np.abs(width//dy))]
         fmask = boxfilter.boxcar2d(mask.astype(np.float32),window) 
  
     if np.sign(width) == -1:
         onemask = fmask > 0.99
     else:
         onemask = fmask > 0.01
+    fmask = 0.
     fmask[onemask] = 1.
-    fmask[-onemask] = 0.
     return fmask.astype(mtype)
 
 
