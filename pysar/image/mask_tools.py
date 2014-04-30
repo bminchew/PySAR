@@ -162,8 +162,8 @@ def buffermask(mask,width,dx=1.,dy=1.):
         onemask = fmask > 0.99
     else:
         onemask = fmask > 0.01
-    fmask = 0.
     fmask[onemask] = 1.
+    fmask[-onemask] = 0.
     return fmask.astype(mtype)
 
 
