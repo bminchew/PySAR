@@ -9,7 +9,7 @@ __all__ = ['progressbar','nrprint']
 ###===========================================================================
 def progressbar(index,length,modval=2,prevbar=None):
    """ 
-   Prints a progress bar to the screen
+   Prints a wget-like progress bar to the screen
 
    ex.  [=====>      ] 50%
 
@@ -41,7 +41,8 @@ def progressbar(index,length,modval=2,prevbar=None):
             prog += '>' 
             point = False
          else:
-            prog += ' ' 
+            prog += '=' 
+            percent = 100
    prog += ']' 
    if prevbar != prog:
       sys.stdout.write("%s %3d%%\r" % (prog,percent))

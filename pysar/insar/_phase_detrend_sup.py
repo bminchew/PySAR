@@ -54,7 +54,8 @@ def polyfit2d(x,y,d,n,p=2,w=False,cor=-1,N=36):
    if p == 1:
       from scipy.optimize import fmin
       deg = np.arange(n+2)
-      s = fmin(L1norm,np.ones((deg.sum())),args=(a,d),ftol=1e-9,xtol=1e-6,maxiter=100000,
+      init = np.linalg.lstsq(a,d)[0]
+      s = fmin(L1norm,init,args=(a,d),ftol=1e-9,xtol=1e-6,maxiter=100000,
                   maxfun=10000,full_output=1,disp=1)
       return s[0]
    else:
