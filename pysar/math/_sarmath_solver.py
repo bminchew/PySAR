@@ -116,9 +116,9 @@ class Solver():
       elif action == 'med':
          return np.median(data)
       elif action == 'isnan':
-         return np.isnan(data)
+         return np.isnan(data).astype(data.dtype)
       elif action == 'notnan':
-         return -np.isnan(data)
+         return (-np.isnan(data)).astype(data.dtype)
       else:
          return data
 
