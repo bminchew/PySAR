@@ -2,7 +2,8 @@
 Additional exceptions
 """
 
-__all__ = ['InputError','InSARCorrBoundsError','cptError']
+__all__ = ['InputError','InSARCorrBoundsError','cptError',
+        'GdalError','NetcdfError','H5pyError']
 
 ###===========================================================
 class InputError(Exception):
