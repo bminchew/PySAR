@@ -84,7 +84,7 @@ def writeHDF5(z,filename,x=None,y=None,dataname=None):
 ###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 def writeRaster(z,filename,filetype='GTiff',x=None,y=None,null=None,coords='EPSG:4326'):
    '''
-   Write binary data to a GeoTiff file
+   Write binary data to a raster file
 
    Parameters
    ----------
