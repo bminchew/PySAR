@@ -121,6 +121,7 @@ class DeTrend():
          if self.wbool:   # if weighting = True, set cor threshold so that all correlation values are included
             self.cthresh = np.finfo(np.float32).eps
             self.corarr = data.copy()
+            self.corarr[self.corarr < np.finfo(np.float32).eps] = np.finfo(np.float32).eps
          self.mask = data > self.cthresh
       else:
          self.wbool = False
@@ -142,11 +143,11 @@ class DeTrend():
       fid.close()
 
       if self.maskf is not None:
-         self.mask *= np.abs(self.unw - self.null) > 1.e-7
+         self.mask *= np.abs(self.unw - self.null) > np.finfo(np.float32).eps
       elif self.corf is not None:
-         self.mask *= np.abs(self.unw - self.null) > 1.e-7
+         self.mask *= np.abs(self.unw - self.null) > np.finfo(np.float32).eps
       else:
-         self.mask = np.abs(self.unw - self.null) > 1.e-7
+         self.mask = np.abs(self.unw - self.null) > np.finfo(np.float32).eps
 
       self.lines = np.shape(self.unw)[0]
       print('done reading')
