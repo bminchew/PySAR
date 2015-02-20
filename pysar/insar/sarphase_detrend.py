@@ -121,12 +121,12 @@ class DeTrend():
       # read in correlation data and mask values less than threshold 
       if self.corf is not None:
          fid = open(self.corf,'r')
-         data = np.fromfile(fid, dtype=np.float32).reshape(-1,self.cols)
+         data = np.fromfile(fid, dtype=np.float32).reshape(-1,self.cols) 
          fid.close()
          
          if self.wbool:   # if weighting = True, set cor threshold so that all correlation values are included
-            self.cthresh = 0.
-            self.corarr = data.copy()
+            self.cthresh = np.finfo(np.float32).eps
+            self.corarr = data + np.finfo(np.float32).eps
          self.mask = data > self.cthresh
       else:
          self.wbool = False
