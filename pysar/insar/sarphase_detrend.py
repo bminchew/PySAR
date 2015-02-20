@@ -49,13 +49,7 @@ def main(args):
 ###==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==###
 class DeTrend():
    def __init__(self,args):
-      try:
-         opts, args = getopt.gnu_getopt(args, 'f:o:p:c:m:n:x:y:w:s:')
-      except getopt.GetoptError as err:
-         print(str(err))
-         s = raw_input('do you wish to continue? [y or n]:  ')
-         if 'n' in s.lower():
-            sys.exit()
+      opts, args = getopt.gnu_getopt(args, 'f:o:p:c:m:n:x:y:w:s:')
 
       self.unwf  = args[0]
       self.cols  = np.int32(args[1])
@@ -126,7 +120,7 @@ class DeTrend():
          
          if self.wbool:   # if weighting = True, set cor threshold so that all correlation values are included
             self.cthresh = np.finfo(np.float32).eps
-            self.corarr = data + np.finfo(np.float32).eps
+            self.corarr = data.copy()
          self.mask = data > self.cthresh
       else:
          self.wbool = False
