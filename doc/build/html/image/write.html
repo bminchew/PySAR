@@ -1,0 +1,352 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>&lt;no title&gt; &mdash; PySAR 0.1.0</title>
+    
+    <link rel="stylesheet" href="../_static/pysar.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="PySAR 0.1.0" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li><a href="../index.html">PySAR</a> &raquo;</li>
+ 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <span class="target" id="module-pysar.image.write"><span id="write"></span></span><p>Write routines for a few standard file formats</p>
+<dl class="function">
+<dt id="pysar.image.write.writeHDF5">
+<tt class="descclassname">pysar.image.write.</tt><tt class="descname">writeHDF5</tt><big>(</big><em>z</em>, <em>filename</em>, <em>x=None</em>, <em>y=None</em>, <em>dataname=None</em><big>)</big><a class="reference internal" href="../_modules/pysar/image/write.html#writeHDF5"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.image.write.writeHDF5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write binary data to an HDF5 file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>z</strong> :  ndarray</p>
+<blockquote>
+<div><p>Data array</p>
+</div></blockquote>
+<p><strong>filename</strong> :  str</p>
+<blockquote>
+<div><p>Name of output file</p>
+</div></blockquote>
+<p><strong>x</strong> :  array-like</p>
+<blockquote>
+<div><p>2-element list: (top-left x value, x spacing) [(0,1)]</p>
+</div></blockquote>
+<p><strong>y</strong> :  array-like</p>
+<blockquote>
+<div><p>2-element list: (top-left y value, y spacing) [(z.shape[0]-1,-1)]</p>
+</div></blockquote>
+<p><strong>dataname</strong> :  str</p>
+<blockquote class="last">
+<div><p>Optional name for dataset to be included in the header [None]</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pysar.image.write.writeNetCDF">
+<tt class="descclassname">pysar.image.write.</tt><tt class="descname">writeNetCDF</tt><big>(</big><em>z</em>, <em>filename</em>, <em>x=None</em>, <em>y=None</em>, <em>null=None</em>, <em>xunit=None</em>, <em>yunit=None</em>, <em>zunit=None</em>, <em>dataname=None</em>, <em>ncform=4</em>, <em>maxio=100000000.0</em><big>)</big><a class="reference internal" href="../_modules/pysar/image/write.html#writeNetCDF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.image.write.writeNetCDF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write binary data to a NetCDF file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>z</strong> :     2d array</p>
+<blockquote>
+<div><p>data to be written to netCDF file</p>
+</div></blockquote>
+<p><strong>filename</strong> :  str</p>
+<blockquote>
+<div><p>output file name</p>
+</div></blockquote>
+<p><strong>x</strong> :     array-like</p>
+<blockquote>
+<div><p>2-element list: (top-left x value, x spacing)
+or array of x positions [(0,1)]</p>
+</div></blockquote>
+<p><strong>y</strong> :     array-like</p>
+<blockquote>
+<div><p>2-element list: (top-left y value, y spacing)
+or array of y positions [(z.shape[0]-1,-1)]</p>
+</div></blockquote>
+<p><strong>null</strong> :     scalar type(z)</p>
+<blockquote>
+<div><p>Null or no-data value [None]</p>
+</div></blockquote>
+<p><strong>xunit</strong> :     string or None</p>
+<blockquote>
+<div><p>units in x direction [None]</p>
+</div></blockquote>
+<p><strong>yunit</strong> :     string or None</p>
+<blockquote>
+<div><p>units in y direction [None]</p>
+</div></blockquote>
+<p><strong>zunit</strong> :     string or None</p>
+<blockquote>
+<div><p>units in z direction [None]</p>
+</div></blockquote>
+<p><strong>dataname</strong> :   str</p>
+<blockquote>
+<div><p>Optional name given to z in the header [None]</p>
+</div></blockquote>
+<p><strong>ncform</strong> :     int (either 3 or 4) or str (netcdf4 type)</p>
+<blockquote>
+<div><p>NetCDF format [4]</p>
+</div></blockquote>
+<p><strong>maxio</strong> :     int or float</p>
+<blockquote class="last">
+<div><p>maximum single block for output [1.e8]</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>writeNetCDF outputs files with x, y referenced to lower left (GMT convention)</li>
+<li>if size(z) &gt; maxio, file is written line by line to conserve memory.</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="pysar.image.write.writeRaster">
+<tt class="descclassname">pysar.image.write.</tt><tt class="descname">writeRaster</tt><big>(</big><em>z</em>, <em>filename</em>, <em>filetype='GTiff'</em>, <em>x=None</em>, <em>y=None</em>, <em>null=None</em>, <em>coords='EPSG:4326'</em><big>)</big><a class="reference internal" href="../_modules/pysar/image/write.html#writeRaster"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.image.write.writeRaster" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write binary data to a GeoTiff file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>z</strong> :  ndarray</p>
+<blockquote>
+<div><p>Data array</p>
+</div></blockquote>
+<p><strong>filename</strong> :  str</p>
+<blockquote>
+<div><p>Name of output file</p>
+</div></blockquote>
+<p><strong>filetype</strong> :  str</p>
+<blockquote>
+<div><p>Type of GDAL-supported raster file (<a class="reference external" href="http://www.gdal.org/formats_list.html">list</a>)</p>
+</div></blockquote>
+<p><strong>x</strong> :  array-like</p>
+<blockquote>
+<div><p>2-element list: (top-left x value, x spacing) 
+or array of x positions [(0,1)]</p>
+</div></blockquote>
+<p><strong>y</strong> :  array-like</p>
+<blockquote>
+<div><p>2-element list: (top-left y value, y spacing) 
+or array of y positions [(z.shape[0]-1,-1)]</p>
+</div></blockquote>
+<p><strong>null</strong> :  scalar type(z)</p>
+<blockquote>
+<div><p>Null or no-data value [None]</p>
+</div></blockquote>
+<p><strong>coords</strong> :  str</p>
+<blockquote class="last">
+<div><p>Coordinate system (must be recognizable by GDAL) [EPSG:4326]</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Requires gdal for python</li>
+<li>Only supports single-band outputs</li>
+<li>If x or y are default or None, coords is set to None</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="pysar.image.write.writeGeoTiff">
+<tt class="descclassname">pysar.image.write.</tt><tt class="descname">writeGeoTiff</tt><big>(</big><em>z</em>, <em>filename</em>, <em>x=None</em>, <em>y=None</em>, <em>null=None</em>, <em>coords='EPSG:4326'</em><big>)</big><a class="reference internal" href="../_modules/pysar/image/write.html#writeGeoTiff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.image.write.writeGeoTiff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write binary data to a GeoTiff file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>z</strong> :  ndarray</p>
+<blockquote>
+<div><p>Data array</p>
+</div></blockquote>
+<p><strong>filename</strong> :  str</p>
+<blockquote>
+<div><p>Name of output file</p>
+</div></blockquote>
+<p><strong>x</strong> :  array-like</p>
+<blockquote>
+<div><p>2-element list: (top-left x value, x spacing)
+or array of x positions [(0,1)]</p>
+</div></blockquote>
+<p><strong>y</strong> :  array-like</p>
+<blockquote>
+<div><p>2-element list: (top-left y value, y spacing)
+or array of y positions [(z.shape[0]-1,-1)]</p>
+</div></blockquote>
+<p><strong>null</strong> :  scalar type(z)</p>
+<blockquote>
+<div><p>Null or no-data value [None]</p>
+</div></blockquote>
+<p><strong>coords</strong> :  str</p>
+<blockquote class="last">
+<div><p>Coordinate system (must be recognizable by GDAL) [EPSG:4326]</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Requires gdal for python</li>
+<li>Only supports single-band outputs</li>
+<li>If x or y are default or None, coords is set to None</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="pysar.image.write.writeBinary">
+<tt class="descclassname">pysar.image.write.</tt><tt class="descname">writeBinary</tt><big>(</big><em>data</em>, <em>filename</em><big>)</big><a class="reference internal" href="../_modules/pysar/image/write.html#writeBinary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.image.write.writeBinary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write 2D data to a headerless binary file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>data</strong> :   ndarray</p>
+<blockquote>
+<div><p>Data to be written</p>
+</div></blockquote>
+<p><strong>filename</strong> :   str</p>
+<blockquote class="last">
+<div><p>Output filename</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pysar.image.write.writeMultiBand2d">
+<tt class="descclassname">pysar.image.write.</tt><tt class="descname">writeMultiBand2d</tt><big>(</big><em>datalist</em>, <em>filename</em>, <em>inter='bil'</em><big>)</big><a class="reference internal" href="../_modules/pysar/image/write.html#writeMultiBand2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.image.write.writeMultiBand2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write 2D data to multiband headerless binary file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>datalist</strong> :   list of ndarrays, single ndarray, or multidimensional ndarray</p>
+<blockquote>
+<div><ul class="simple">
+<li>List containing data arrays; length = number of bands</li>
+<li>Single array writes single band</li>
+<li>3d array with bands stacked along third axis</li>
+</ul>
+</div></blockquote>
+<p><strong>filename</strong> :   str</p>
+<blockquote>
+<div><p>Output file name</p>
+</div></blockquote>
+<p><strong>inter</strong> :   str {&#8216;bil&#8217;,&#8217;bip&#8217;,&#8217;bsq&#8217;}</p>
+<blockquote class="last">
+<div><p>Interleave format [&#8216;bil&#8217;]
+bil = by line
+bip = by pixel
+bsq = band sequential</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/image/write.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<ul class="this-page-menu">
+  <li><a href="/numpy/docs/numpy-docs/image/write.rst">Edit page</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li><a href="../index.html">PySAR</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Brent Minchew.
+      Last updated on Feb 20, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

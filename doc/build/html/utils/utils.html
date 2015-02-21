@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Utils (pysar.utils) &mdash; PySAR 0.1.0</title>
+    
+    <link rel="stylesheet" href="../_static/pysar.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="PySAR 0.1.0" href="../index.html" />
+    <link rel="up" title="PySAR" href="../toolbox.html" />
+    <link rel="next" title="pysar.utils.inc2range" href="generated/pysar.utils.inc2range.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="generated/pysar.utils.inc2range.html" title="pysar.utils.inc2range"
+             accesskey="N">next</a> |</li>
+<li><a href="../index.html">PySAR</a> &raquo;</li>
+
+          <li><a href="../toolbox.html" accesskey="U">PySAR</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <span class="target" id="module-pysar.utils"><span id="utils"></span></span><div class="section" id="utils-pysar-utils">
+<h1>Utils (<a class="reference internal" href="#module-pysar.utils" title="pysar.utils"><tt class="xref py py-mod docutils literal"><span class="pre">pysar.utils</span></tt></a>)<a class="headerlink" href="#utils-pysar-utils" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="sar-specific-tools-pysar-utils-sartools">
+<h3>SAR-specific tools (<a class="reference internal" href="sartools.html#module-pysar.utils.sartools" title="pysar.utils.sartools"><tt class="xref py py-mod docutils literal"><span class="pre">pysar.utils.sartools</span></tt></a>)<a class="headerlink" href="#sar-specific-tools-pysar-utils-sartools" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="generated/pysar.utils.inc2range.html#pysar.utils.inc2range" title="pysar.utils.inc2range"><tt class="xref py py-obj docutils literal"><span class="pre">inc2range</span></tt></a>(inc[,&nbsp;h,&nbsp;rho_0,&nbsp;Re,&nbsp;xlook,&nbsp;...])</td>
+<td>Computes range bin for a given incidence angle</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/pysar.utils.range2inc.html#pysar.utils.range2inc" title="pysar.utils.range2inc"><tt class="xref py py-obj docutils literal"><span class="pre">range2inc</span></tt></a>(...)</td>
+<td>Computes incidence angle for a given range bin</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/pysar.utils.alpha_hh.html#pysar.utils.alpha_hh" title="pysar.utils.alpha_hh"><tt class="xref py py-obj docutils literal"><span class="pre">alpha_hh</span></tt></a>(eps,&nbsp;theta[,&nbsp;units])</td>
+<td>HH Bragg scattering coefficient for an untilted plane</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/pysar.utils.alpha_vv.html#pysar.utils.alpha_vv" title="pysar.utils.alpha_vv"><tt class="xref py py-obj docutils literal"><span class="pre">alpha_vv</span></tt></a>(eps,theta,units=)</td>
+<td>VV Bragg scattering coefficient for an untilted plane</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="general-tools-pysar-utils-gen-tools">
+<h3>General tools (<a class="reference internal" href="generated/pysar.utils.gen_tools.html#module-pysar.utils.gen_tools" title="pysar.utils.gen_tools"><tt class="xref py py-mod docutils literal"><span class="pre">pysar.utils.gen_tools</span></tt></a>)<a class="headerlink" href="#general-tools-pysar-utils-gen-tools" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="generated/pysar.utils.d2r.html#pysar.utils.d2r" title="pysar.utils.d2r"><tt class="xref py py-obj docutils literal"><span class="pre">d2r</span></tt></a>(n)</td>
+<td>degrees to radians</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/pysar.utils.r2d.html#pysar.utils.r2d" title="pysar.utils.r2d"><tt class="xref py py-obj docutils literal"><span class="pre">r2d</span></tt></a>(n)</td>
+<td>radians to degrees</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/pysar.utils.acosd.html#pysar.utils.acosd" title="pysar.utils.acosd"><tt class="xref py py-obj docutils literal"><span class="pre">acosd</span></tt></a>(n)</td>
+<td>t [degrees] = arccos(n)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/pysar.utils.asind.html#pysar.utils.asind" title="pysar.utils.asind"><tt class="xref py py-obj docutils literal"><span class="pre">asind</span></tt></a>(n)</td>
+<td>t [degrees] = arcsin(n)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/pysar.utils.cosd.html#pysar.utils.cosd" title="pysar.utils.cosd"><tt class="xref py py-obj docutils literal"><span class="pre">cosd</span></tt></a>(n&nbsp;[degrees])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/pysar.utils.sind.html#pysar.utils.sind" title="pysar.utils.sind"><tt class="xref py py-obj docutils literal"><span class="pre">sind</span></tt></a>(n&nbsp;[degrees])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/pysar.utils.iscomplex.html#pysar.utils.iscomplex" title="pysar.utils.iscomplex"><tt class="xref py py-obj docutils literal"><span class="pre">iscomplex</span></tt></a>(n)</td>
+<td>Tests for complexity...returns np.iscomplex(n)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/pysar.utils.anycomplex.html#pysar.utils.anycomplex" title="pysar.utils.anycomplex"><tt class="xref py py-obj docutils literal"><span class="pre">anycomplex</span></tt></a>(n)</td>
+<td>Tests for any complexity</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/pysar.utils.allcomplex.html#pysar.utils.allcomplex" title="pysar.utils.allcomplex"><tt class="xref py py-obj docutils literal"><span class="pre">allcomplex</span></tt></a>(n)</td>
+<td>Tests for all complexity</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/pysar.utils.typecomplex.html#pysar.utils.typecomplex" title="pysar.utils.typecomplex"><tt class="xref py py-obj docutils literal"><span class="pre">typecomplex</span></tt></a>(n)</td>
+<td>tests for any type complex</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="scripts">
+<h2>Scripts<a class="headerlink" href="#scripts" title="Permalink to this headline">¶</a></h2>
+<p>None</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Utils (<tt class="docutils literal"><span class="pre">pysar.utils</span></tt>)</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a><ul>
+<li><a class="reference internal" href="#sar-specific-tools-pysar-utils-sartools">SAR-specific tools (<tt class="docutils literal"><span class="pre">pysar.utils.sartools</span></tt>)</a></li>
+<li><a class="reference internal" href="#general-tools-pysar-utils-gen-tools">General tools (<tt class="docutils literal"><span class="pre">pysar.utils.gen_tools</span></tt>)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#scripts">Scripts</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="generated/pysar.utils.inc2range.html"
+                        title="next chapter">pysar.utils.inc2range</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/utils/utils.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<ul class="this-page-menu">
+  <li><a href="/numpy/docs/numpy-docs/utils/utils.rst">Edit page</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="generated/pysar.utils.inc2range.html" title="pysar.utils.inc2range"
+             >next</a> |</li>
+<li><a href="../index.html">PySAR</a> &raquo;</li>
+
+          <li><a href="../toolbox.html" >PySAR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Brent Minchew.
+      Last updated on Feb 20, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

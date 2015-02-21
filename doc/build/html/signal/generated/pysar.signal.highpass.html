@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pysar.signal.highpass &mdash; PySAR 0.1.0</title>
+    
+    <link rel="stylesheet" href="../../_static/pysar.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="PySAR 0.1.0" href="../../index.html" />
+    <link rel="up" title="Signal (pysar.signal)" href="../signal.html" />
+    <link rel="next" title="pysar.signal.taper" href="pysar.signal.taper.html" />
+    <link rel="prev" title="pysar.signal.lowpass" href="pysar.signal.lowpass.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pysar.signal.taper.html" title="pysar.signal.taper"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pysar.signal.lowpass.html" title="pysar.signal.lowpass"
+             accesskey="P">previous</a> |</li>
+<li><a href="../../index.html">PySAR</a> &raquo;</li>
+
+          <li><a href="../../toolbox.html" >PySAR</a> &raquo;</li>
+          <li><a href="../signal.html" accesskey="U">Signal (<tt class="docutils literal"><span class="pre">pysar.signal</span></tt>)</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="pysar-signal-highpass">
+<h1>pysar.signal.highpass<a class="headerlink" href="#pysar-signal-highpass" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="pysar.signal.highpass">
+<tt class="descclassname">pysar.signal.</tt><tt class="descname">highpass</tt><big>(</big><em>data</em>, <em>low</em>, <em>dt=None</em>, <em>df=None</em>, <em>order=4</em>, <em>zero_phase=False</em><big>)</big><a class="headerlink" href="#pysar.signal.highpass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Butterworth highpass filter</p>
+<p>highpass(data,low,dt=None,df=None,order=4,zero_phase=False)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>data</strong> :      array</p>
+<blockquote class="last">
+<div><blockquote>
+<div><p>input data vector (real-valued)</p>
+</div></blockquote>
+<dl class="docutils">
+<dt>low <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">min frequency in passband [Hz]</p>
+</dd>
+<dt>dt <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">sampling interval [sec]</p>
+</dd>
+<dt>df <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">sampling frequency [Hz]</p>
+</dd>
+<dt>order <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">filter order (default = 4; max = 10)</p>
+</dd>
+<dt>zero_phase: bool</dt>
+<dd><p class="first last">True to run the filter fwd and rev for 0 phase shift (default = False)</p>
+</dd>
+</dl>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>dt or df must be defined (dt has priority)</li>
+</ul>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pysar.signal.lowpass.html"
+                        title="previous chapter">pysar.signal.lowpass</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pysar.signal.taper.html"
+                        title="next chapter">pysar.signal.taper</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/signal/generated/pysar.signal.highpass.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<ul class="this-page-menu">
+  <li><a href="/numpy/docs/numpy-docs/signal/generated/pysar.signal.highpass.rst">Edit page</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pysar.signal.taper.html" title="pysar.signal.taper"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pysar.signal.lowpass.html" title="pysar.signal.lowpass"
+             >previous</a> |</li>
+<li><a href="../../index.html">PySAR</a> &raquo;</li>
+
+          <li><a href="../../toolbox.html" >PySAR</a> &raquo;</li>
+          <li><a href="../signal.html" >Signal (<tt class="docutils literal"><span class="pre">pysar.signal</span></tt>)</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Brent Minchew.
+      Last updated on Feb 20, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

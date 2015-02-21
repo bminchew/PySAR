@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pysar.plot.cm &mdash; PySAR 0.1.0</title>
+    
+    <link rel="stylesheet" href="../../../_static/pysar.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="PySAR 0.1.0" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li><a href="../../../index.html">PySAR</a> &raquo;</li>
+
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for pysar.plot.cm</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">cm</span>
+<span class="sd">--</span>
+
+<span class="sd">Colormap tools and additional colormaps from :ref:`http://soliton.vm.bytemark.co.uk/pub/cpt-city/` </span>
+<span class="sd">in matplotlib format</span>
+
+<span class="sd">.. currentmodule:: pysar.plot.cm</span>
+
+<span class="sd">Functions</span>
+<span class="sd">---------</span>
+
+<span class="sd">.. autosummary::</span>
+<span class="sd">   :toctree: generated/</span>
+
+<span class="sd">   cpt2python           Convert GMT-style CPT files to matplotlib colormap</span>
+<span class="sd">   cpt2cmap             Convert GMT-style CPT files to matplotlib colormap</span>
+
+<span class="sd">Scripts</span>
+<span class="sd">-------</span>
+
+<span class="sd">None</span>
+
+<span class="sd">Native functions</span>
+<span class="sd">----------------</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">cPickle</span>
+<span class="kn">import</span> <span class="nn">cpt_tools</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="kn">as</span> <span class="nn">mpl</span>
+<span class="kn">import</span> <span class="nn">matplotlib.cbook</span> <span class="kn">as</span> <span class="nn">cbook</span>
+<span class="kn">import</span> <span class="nn">matplotlib.colors</span> <span class="kn">as</span> <span class="nn">colors</span>
+<span class="kn">from</span> <span class="nn">cpt_tools</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">_cpt_defs</span> <span class="kn">import</span> <span class="n">preload</span><span class="p">,</span> <span class="n">cptfldr</span><span class="p">,</span> <span class="n">cptdic</span><span class="p">,</span> <span class="n">specialcpt</span><span class="p">,</span> <span class="n">mpl_noinclude</span>
+<span class="kn">from</span> <span class="nn">matplotlib.cm</span> <span class="kn">import</span> <span class="n">ma</span><span class="p">,</span> <span class="n">datad</span><span class="p">,</span> <span class="n">cubehelix</span><span class="p">,</span> <span class="n">_generate_cmap</span>
+<span class="kn">from</span> <span class="nn">matplotlib.cm</span> <span class="kn">import</span> <span class="n">_reverser</span><span class="p">,</span> <span class="n">revcmap</span><span class="p">,</span> <span class="n">_reverse_cmap_spec</span><span class="p">,</span> <span class="n">ScalarMappable</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;cpt_tools&#39;</span><span class="p">,</span><span class="s">&#39;load_gmt&#39;</span><span class="p">,</span><span class="s">&#39;load_idl&#39;</span><span class="p">,</span><span class="s">&#39;load_kst&#39;</span><span class="p">,</span>
+            <span class="s">&#39;load_h5&#39;</span><span class="p">,</span><span class="s">&#39;load_gist&#39;</span><span class="p">,</span><span class="s">&#39;load_ij&#39;</span><span class="p">,</span><span class="s">&#39;load_imagej&#39;</span><span class="p">,</span>
+            <span class="s">&#39;load_ncl&#39;</span><span class="p">,</span><span class="s">&#39;load_grass&#39;</span><span class="p">,</span><span class="s">&#39;get_options&#39;</span><span class="p">,</span><span class="s">&#39;options&#39;</span><span class="p">]</span>
+
+<div class="viewcode-block" id="load_gmt"><a class="viewcode-back" href="../../../plot/cm.html#pysar.plot.cm.load_gmt">[docs]</a><span class="k">def</span> <span class="nf">load_gmt</span><span class="p">():</span>
+   <span class="kn">import</span> <span class="nn">gmt</span></div>
+<div class="viewcode-block" id="load_idl"><a class="viewcode-back" href="../../../plot/cm.html#pysar.plot.cm.load_idl">[docs]</a><span class="k">def</span> <span class="nf">load_idl</span><span class="p">():</span>
+   <span class="kn">import</span> <span class="nn">idl</span></div>
+<div class="viewcode-block" id="load_kst"><a class="viewcode-back" href="../../../plot/cm.html#pysar.plot.cm.load_kst">[docs]</a><span class="k">def</span> <span class="nf">load_kst</span><span class="p">():</span>
+   <span class="kn">import</span> <span class="nn">kst</span></div>
+<div class="viewcode-block" id="load_h5"><a class="viewcode-back" href="../../../plot/cm.html#pysar.plot.cm.load_h5">[docs]</a><span class="k">def</span> <span class="nf">load_h5</span><span class="p">():</span>
+   <span class="kn">import</span> <span class="nn">h5</span></div>
+<div class="viewcode-block" id="load_gist"><a class="viewcode-back" href="../../../plot/cm.html#pysar.plot.cm.load_gist">[docs]</a><span class="k">def</span> <span class="nf">load_gist</span><span class="p">():</span>
+   <span class="kn">import</span> <span class="nn">gist</span></div>
+<div class="viewcode-block" id="load_ij"><a class="viewcode-back" href="../../../plot/cm.html#pysar.plot.cm.load_ij">[docs]</a><span class="k">def</span> <span class="nf">load_ij</span><span class="p">():</span>
+   <span class="kn">import</span> <span class="nn">imagej</span> <span class="kn">as</span> <span class="nn">ij</span></div>
+<div class="viewcode-block" id="load_imagej"><a class="viewcode-back" href="../../../plot/cm.html#pysar.plot.cm.load_imagej">[docs]</a><span class="k">def</span> <span class="nf">load_imagej</span><span class="p">():</span>
+   <span class="kn">import</span> <span class="nn">imagej</span></div>
+<div class="viewcode-block" id="load_ncl"><a class="viewcode-back" href="../../../plot/cm.html#pysar.plot.cm.load_ncl">[docs]</a><span class="k">def</span> <span class="nf">load_ncl</span><span class="p">():</span>
+   <span class="kn">import</span> <span class="nn">ncl</span></div>
+<div class="viewcode-block" id="load_grass"><a class="viewcode-back" href="../../../plot/cm.html#pysar.plot.cm.load_grass">[docs]</a><span class="k">def</span> <span class="nf">load_grass</span><span class="p">():</span>
+   <span class="kn">import</span> <span class="nn">grass</span>
+
+<span class="c">###==========================================================================</span>
+</div>
+<div class="viewcode-block" id="get_options"><a class="viewcode-back" href="../../../plot/cm.html#pysar.plot.cm.get_options">[docs]</a><span class="k">def</span> <span class="nf">get_options</span><span class="p">():</span>
+   <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">   Print available colormaps</span>
+<span class="sd">   &#39;&#39;&#39;</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">cptdic</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</div>
+<div class="viewcode-block" id="options"><a class="viewcode-back" href="../../../plot/cm.html#pysar.plot.cm.options">[docs]</a><span class="k">def</span> <span class="nf">options</span><span class="p">():</span>
+   <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">   Print available colormaps</span>
+<span class="sd">   &#39;&#39;&#39;</span>
+   <span class="n">get_options</span><span class="p">()</span>
+
+<span class="c">###-----------------------------------------------------------</span>
+<span class="c">###-----------------------------------------------------------</span></div>
+<span class="k">try</span><span class="p">:</span>
+   <span class="n">t_cdict</span> <span class="o">=</span> <span class="n">_read_pkl</span><span class="p">()</span>
+   <span class="n">cmap_d</span> <span class="o">=</span> <span class="n">_cmap_d_from_dict</span><span class="p">(</span><span class="n">t_cdict</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+   <span class="n">mpl_cd</span> <span class="o">=</span> <span class="n">_get_matplotlib_dicts</span><span class="p">(</span><span class="n">mpldict</span><span class="o">=</span><span class="n">datad</span><span class="p">)</span>
+   <span class="n">t_cdic</span> <span class="o">=</span> <span class="n">_cdict_from_cpt</span><span class="p">()</span>
+   <span class="n">cmap_d</span> <span class="o">=</span> <span class="n">_cmap_d_from_dict</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">mpl_cd</span><span class="p">,</span><span class="o">**</span><span class="n">t_cdic</span><span class="p">))</span>
+   <span class="k">try</span><span class="p">:</span> <span class="c"># try to write the pickle file of functions to improve performance next time</span>
+      <span class="n">_write_pkl</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">mpl_cd</span><span class="p">,</span><span class="o">**</span><span class="n">t_cdic</span><span class="p">))</span>
+   <span class="k">except</span><span class="p">:</span>
+      <span class="k">pass</span> 
+<span class="nb">locals</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">cmap_d</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li><a href="../../../index.html">PySAR</a> &raquo;</li>
+
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Brent Minchew.
+      Last updated on Feb 20, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

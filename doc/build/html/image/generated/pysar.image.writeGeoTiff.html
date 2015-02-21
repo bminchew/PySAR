@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pysar.image.writeGeoTiff &mdash; PySAR 0.1.0</title>
+    
+    <link rel="stylesheet" href="../../_static/pysar.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="PySAR 0.1.0" href="../../index.html" />
+    <link rel="up" title="Image (pysar.image)" href="../image.html" />
+    <link rel="next" title="pysar.image.writeBinary" href="pysar.image.writeBinary.html" />
+    <link rel="prev" title="pysar.image.writeRaster" href="pysar.image.writeRaster.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pysar.image.writeBinary.html" title="pysar.image.writeBinary"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pysar.image.writeRaster.html" title="pysar.image.writeRaster"
+             accesskey="P">previous</a> |</li>
+<li><a href="../../index.html">PySAR</a> &raquo;</li>
+
+          <li><a href="../../toolbox.html" >PySAR</a> &raquo;</li>
+          <li><a href="../image.html" accesskey="U">Image (<tt class="docutils literal"><span class="pre">pysar.image</span></tt>)</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="pysar-image-writegeotiff">
+<h1>pysar.image.writeGeoTiff<a class="headerlink" href="#pysar-image-writegeotiff" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="pysar.image.writeGeoTiff">
+<tt class="descclassname">pysar.image.</tt><tt class="descname">writeGeoTiff</tt><big>(</big><em>z</em>, <em>filename</em>, <em>x=None</em>, <em>y=None</em>, <em>null=None</em>, <em>coords='EPSG:4326'</em><big>)</big><a class="headerlink" href="#pysar.image.writeGeoTiff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write binary data to a GeoTiff file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>z</strong> :  ndarray</p>
+<blockquote>
+<div><p>Data array</p>
+</div></blockquote>
+<p><strong>filename</strong> :  str</p>
+<blockquote>
+<div><p>Name of output file</p>
+</div></blockquote>
+<p><strong>x</strong> :  array-like</p>
+<blockquote>
+<div><p>2-element list: (top-left x value, x spacing)
+or array of x positions [(0,1)]</p>
+</div></blockquote>
+<p><strong>y</strong> :  array-like</p>
+<blockquote>
+<div><p>2-element list: (top-left y value, y spacing)
+or array of y positions [(z.shape[0]-1,-1)]</p>
+</div></blockquote>
+<p><strong>null</strong> :  scalar type(z)</p>
+<blockquote>
+<div><p>Null or no-data value [None]</p>
+</div></blockquote>
+<p><strong>coords</strong> :  str</p>
+<blockquote class="last">
+<div><p>Coordinate system (must be recognizable by GDAL) [EPSG:4326]</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Requires gdal for python</li>
+<li>Only supports single-band outputs</li>
+<li>If x or y are default or None, coords is set to None</li>
+</ul>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pysar.image.writeRaster.html"
+                        title="previous chapter">pysar.image.writeRaster</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pysar.image.writeBinary.html"
+                        title="next chapter">pysar.image.writeBinary</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/image/generated/pysar.image.writeGeoTiff.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<ul class="this-page-menu">
+  <li><a href="/numpy/docs/numpy-docs/image/generated/pysar.image.writeGeoTiff.rst">Edit page</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pysar.image.writeBinary.html" title="pysar.image.writeBinary"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pysar.image.writeRaster.html" title="pysar.image.writeRaster"
+             >previous</a> |</li>
+<li><a href="../../index.html">PySAR</a> &raquo;</li>
+
+          <li><a href="../../toolbox.html" >PySAR</a> &raquo;</li>
+          <li><a href="../image.html" >Image (<tt class="docutils literal"><span class="pre">pysar.image</span></tt>)</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Brent Minchew.
+      Last updated on Feb 20, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

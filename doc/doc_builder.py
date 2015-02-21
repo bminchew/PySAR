@@ -4,6 +4,7 @@
 Build documentation 
 '''
 import sys,os
+import shutil
 import subprocess
 
 doautogen = True  # apply sphinx-autogen...should normally be True
@@ -27,7 +28,6 @@ if doautogen:
 
 subprocess.call('make clean'.split())
 subprocess.call('make html'.split())
-
 
 '''
 oldstr = 'dt id='

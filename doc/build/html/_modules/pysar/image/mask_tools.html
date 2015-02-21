@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pysar.image.mask_tools &mdash; PySAR 0.1.0</title>
+    
+    <link rel="stylesheet" href="../../../_static/pysar.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="PySAR 0.1.0" href="../../../index.html" />
+    <link rel="up" title="pysar.image" href="../image.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li><a href="../../../index.html">PySAR</a> &raquo;</li>
+
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../image.html" accesskey="U">pysar.image</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for pysar.image.mask_tools</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">mask_tools.py  :  Tools for creating and manipulating masks </span>
+
+<span class="sd">Contents</span>
+<span class="sd">--------</span>
+<span class="sd">poly2mask(polygon,imdim,imtype=np.float32)</span>
+<span class="sd">xy2mask(polygon,imdim,imtype=np.float32)</span>
+<span class="sd">ll2mask(latlon,imdim,corner,spacing,imtype=np.float32)</span>
+<span class="sd">buffermask(mask,width,dx=1.,dy=1.)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;poly2mask&#39;</span><span class="p">,</span><span class="s">&#39;xy2mask&#39;</span><span class="p">,</span><span class="s">&#39;ll2mask&#39;</span><span class="p">,</span><span class="s">&#39;buffermask&#39;</span><span class="p">]</span>
+
+<span class="c">###==================================================================================</span>
+<div class="viewcode-block" id="poly2mask"><a class="viewcode-back" href="../../../image/mask_tools.html#pysar.image.mask_tools.poly2mask">[docs]</a><span class="k">def</span> <span class="nf">poly2mask</span><span class="p">(</span><span class="n">polygon</span><span class="p">,</span><span class="n">imdim</span><span class="p">,</span><span class="n">imtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">   poly2mask(polygon,imdim,imtype=np.float32)</span>
+
+<span class="sd">   Generate a region-of-interest mask from a polygon.  </span>
+
+<span class="sd">   Parameters</span>
+<span class="sd">   ----------</span>
+<span class="sd">   polygon     :     {int or float} list of tuples </span>
+<span class="sd">                     polygon vertices; format [(x0,y0),...,(xn,yn)]</span>
+<span class="sd">   imdim       :     {int} list, tuple, or ndarray</span>
+<span class="sd">                     image dimension (x,y) or (columns,rows)</span>
+<span class="sd">   imtype      :     {str or numpy type} (Optional)</span>
+<span class="sd">                     data type for output image [np.float32]</span>
+
+<span class="sd">   Output</span>
+<span class="sd">   ------</span>
+<span class="sd">   mask        :     ndarray</span>
+<span class="sd">                     mask array astype(imtype)</span>
+
+<span class="sd">   Notes</span>
+<span class="sd">   -----</span>
+<span class="sd">   *  Values inside polygon will be True or 1 depending on imtype</span>
+<span class="sd"> </span>
+<span class="sd">   &quot;&quot;&quot;</span>
+   <span class="k">try</span><span class="p">:</span>
+      <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageDraw</span>
+   <span class="k">except</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s">&#39;poly2mask.py requires PIL.&#39;</span><span class="p">)</span>
+
+   <span class="k">if</span> <span class="n">polygon</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">polygon</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>  <span class="n">polygon</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">polygon</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+   <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span> <span class="o">=</span> <span class="n">imdim</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">imdim</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+   <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">&#39;L&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span> 
+   <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">img</span><span class="p">)</span><span class="o">.</span><span class="n">polygon</span><span class="p">(</span><span class="n">polygon</span><span class="p">,</span> <span class="n">outline</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+   <span class="k">try</span><span class="p">:</span>
+      <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">imtype</span><span class="p">)</span>
+   <span class="k">except</span><span class="p">:</span>
+      <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+      <span class="k">try</span><span class="p">:</span>
+         <span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">imtype</span><span class="p">)</span>
+      <span class="k">except</span><span class="p">:</span>
+         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;imtype is not a valid data type&#39;</span><span class="p">)</span>
+   <span class="k">del</span> <span class="n">img</span>
+   <span class="k">return</span> <span class="n">mask</span> 
+   
+<span class="c">###==================================================================================</span></div>
+<div class="viewcode-block" id="ll2mask"><a class="viewcode-back" href="../../../image/mask_tools.html#pysar.image.mask_tools.ll2mask">[docs]</a><span class="k">def</span> <span class="nf">ll2mask</span><span class="p">(</span><span class="n">latlon</span><span class="p">,</span><span class="n">imdim</span><span class="p">,</span><span class="n">corner</span><span class="p">,</span><span class="n">spacing</span><span class="p">,</span><span class="n">imtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">   ll2mask(latlon,imdim,corner,spacing,imtype=np.float32)</span>
+
+<span class="sd">   Generate a region-of-interest mask from a polygon whose vertices are given in lat/lon.</span>
+
+<span class="sd">   Parameters</span>
+<span class="sd">   ----------</span>
+<span class="sd">   latlon      :  {int or float} list of tuples</span>
+<span class="sd">                  polygon vertices in degrees lat/lon; format: [(lat0,lon0),...,(latn,lonn)]</span>
+<span class="sd">   imdim       :  {int} list, tuple, or ndarray</span>
+<span class="sd">                  image dimension (x,y) or (columns,rows)</span>
+<span class="sd">   corner      :  {int or float} list, tuple, or ndarray</span>
+<span class="sd">                  lat and lon of one image corner; format: [lat,lon]</span>
+<span class="sd">   spacing     :  {int or float} list, tuple, or ndarray</span>
+<span class="sd">                  grid spacing (see notes below); format: [lat_space, lon_space]</span>
+<span class="sd">   imtype      :  {str or numpy type} (Optional)</span>
+<span class="sd">                  data type for output image [np.float32]</span>
+
+<span class="sd">   Output </span>
+<span class="sd">   ------</span>
+<span class="sd">   mask        :  ndarray</span>
+<span class="sd">                  mask array astype(imtype)</span>
+
+<span class="sd">   Notes</span>
+<span class="sd">   -----</span>
+<span class="sd">   *  Values inside polygon will be True or 1 depending on imtype</span>
+<span class="sd">   *  Spacing is sign-sensitive. The sign of spacing values defines the corner.  </span>
+<span class="sd">      Ex. [-lat_space,lon_space] is the upper left corner (i.e. stepping one pixel</span>
+<span class="sd">      in lat and lon from the corner means going south and east)  </span>
+
+<span class="sd">   &quot;&quot;&quot;</span>
+   <span class="n">polygon</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">latlon</span><span class="p">)</span>
+   <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">ent</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">latlon</span><span class="p">):</span>
+      <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">ent</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">corner</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">spacing</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+      <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">ent</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">corner</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">spacing</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+      <span class="n">polygon</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">poly2mask</span><span class="p">(</span><span class="n">polygon</span><span class="o">=</span><span class="n">polygon</span><span class="p">,</span><span class="n">imdim</span><span class="o">=</span><span class="n">imdim</span><span class="p">,</span><span class="n">imtype</span><span class="o">=</span><span class="n">imtype</span><span class="p">)</span>
+
+<span class="c">###==================================================================================</span></div>
+<div class="viewcode-block" id="xy2mask"><a class="viewcode-back" href="../../../image/mask_tools.html#pysar.image.mask_tools.xy2mask">[docs]</a><span class="k">def</span> <span class="nf">xy2mask</span><span class="p">(</span><span class="n">polygon</span><span class="p">,</span><span class="n">imdim</span><span class="p">,</span><span class="n">imtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">   xy2mask(polygon,imdim,imtype=np.float32)</span>
+
+<span class="sd">   Generate a region-of-interest mask from a polygon given in xy image coordinates.  </span>
+
+<span class="sd">   Parameters</span>
+<span class="sd">   ----------</span>
+<span class="sd">   polygon     :     {int or float} list of tuples </span>
+<span class="sd">                     polygon vertices; format [(x0,y0),...,(xn,yn)]</span>
+<span class="sd">   imdim       :     {int} list, tuple, or ndarray</span>
+<span class="sd">                     image dimension (x,y) or (columns,rows)</span>
+<span class="sd">   imtype      :     {str or numpy type} (Optional)</span>
+<span class="sd">                     data type for output image [np.float32]</span>
+
+<span class="sd">   Output</span>
+<span class="sd">   ------</span>
+<span class="sd">   mask        :     ndarray</span>
+<span class="sd">                     mask array astype(imtype)</span>
+
+<span class="sd">   Notes</span>
+<span class="sd">   -----</span>
+<span class="sd">   *  Values inside polygon will be True or 1 depending on imtype</span>
+<span class="sd"> </span>
+<span class="sd">   &quot;&quot;&quot;</span>
+   <span class="k">return</span> <span class="n">poly2mask</span><span class="p">(</span><span class="n">polygon</span><span class="o">=</span><span class="n">polygon</span><span class="p">,</span><span class="n">imdim</span><span class="o">=</span><span class="n">imdim</span><span class="p">,</span><span class="n">imtype</span><span class="o">=</span><span class="n">imtype</span><span class="p">)</span>
+
+<span class="c">###==================================================================================</span></div>
+<div class="viewcode-block" id="buffermask"><a class="viewcode-back" href="../../../image/mask_tools.html#pysar.image.mask_tools.buffermask">[docs]</a><span class="k">def</span> <span class="nf">buffermask</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">dx</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span><span class="n">dy</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    buffermask(mask,width,dx=1.,dy=1.)</span>
+
+<span class="sd">    Add or remove a buffer zone from a binary mask</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mask    :   ndarray</span>
+<span class="sd">                binary mask (ROI values assumd = 1)</span>
+<span class="sd">    width   :   float</span>
+<span class="sd">                width of buffer zone (&gt; 0 for outer buffer; &lt; 0 for inner)</span>
+<span class="sd">    dx      :   float</span>
+<span class="sd">                grid spacing in x direction [1]</span>
+<span class="sd">    dy      :   float</span>
+<span class="sd">                grid spacing in y direaction [1]</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="kn">from</span> <span class="nn">pysar.signal</span> <span class="kn">import</span> <span class="n">boxfilter</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">width</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">mask</span>
+
+    <span class="n">mtype</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">dtype</span>
+    <span class="k">if</span> <span class="n">mask</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">window</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">width</span><span class="o">//</span><span class="n">dx</span><span class="p">))</span>
+        <span class="n">fmask</span> <span class="o">=</span> <span class="n">boxfilter</span><span class="o">.</span><span class="n">boxcar1d</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span><span class="n">window</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">mask</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">window</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">width</span><span class="o">//</span><span class="n">dx</span><span class="p">)),</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">width</span><span class="o">//</span><span class="n">dy</span><span class="p">))]</span>
+        <span class="n">fmask</span> <span class="o">=</span> <span class="n">boxfilter</span><span class="o">.</span><span class="n">boxcar2d</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span><span class="n">window</span><span class="p">)</span> 
+ 
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">width</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">onemask</span> <span class="o">=</span> <span class="n">fmask</span> <span class="o">&gt;</span> <span class="mf">0.99</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">onemask</span> <span class="o">=</span> <span class="n">fmask</span> <span class="o">&gt;</span> <span class="mf">0.01</span>
+    <span class="n">fmask</span><span class="p">[</span><span class="n">onemask</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
+    <span class="n">fmask</span><span class="p">[</span><span class="o">-</span><span class="n">onemask</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="k">return</span> <span class="n">fmask</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">mtype</span><span class="p">)</span>
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li><a href="../../../index.html">PySAR</a> &raquo;</li>
+
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../image.html" >pysar.image</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Brent Minchew.
+      Last updated on Feb 20, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

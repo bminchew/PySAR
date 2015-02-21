@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>sardecomp_fd &mdash; PySAR 0.1.0</title>
+    
+    <link rel="stylesheet" href="../_static/pysar.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="PySAR 0.1.0" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li><a href="../index.html">PySAR</a> &raquo;</li>
+ 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="sardecomp-fd">
+<span id="id1"></span><h1>sardecomp_fd<a class="headerlink" href="#sardecomp-fd" title="Permalink to this headline">¶</a></h1>
+<p>Freeman-Durden 3-component polarimetric decomposition</p>
+<span class="target" id="module-sardecomp_fd"></span><p>sardecomp_fd.py  :   Freeman-Durden 3-component decomposition (Freeman and Durden, 1998)</p>
+<p>usage:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sardecomp_fd.py filename[s] [options] 
+</pre></div>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p>filename[s]       :  input filename or filenames (see notes for more info)</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">-c <var>columns</var></span></kbd></td>
+<td>:  int  &#8211;  
+image width (only needed if -f is given)</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-f <var>window</var></span></kbd></td>
+<td>:  int or comma-separated list of ints (no brackets)  &#8211;   
+filter window size; square if only one value is given</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-o <var>prefix</var></span></kbd></td>
+<td>:  str  &#8211;  
+prefix for output files [same as input prefix]</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Only one filename is needed if all files follow a convention such that:</p>
+<div class="highlight-python"><div class="highlight"><pre>&lt; S_HH S_HH* &gt;   --&gt;  &lt;prefix&gt;hhhh&lt;extension&gt; *or* &lt;prefix&gt;HHHH&lt;extension&gt;
+&lt; S_HH S_VV* &gt;   --&gt;  &lt;prefix&gt;hhvv&lt;extension&gt; *or* &lt;prefix&gt;HHVV&lt;extension&gt;
+</pre></div>
+</div>
+</li>
+</ul>
+<p>and so on for the diagonal and co-polarized off-diagonal channels of the 
+coherencey matrix C (aka C_3) (see next note for a list of required channels)</p>
+<ul class="simple">
+<li>If all filenames are given, they should be in order hhhh, vvvv, hvhv, hhvv</li>
+<li>Cross-polarized power (hvhv) should <em>not</em> be multiplied by 2</li>
+<li>Input files are assumed to be headerless, single-precision (float) binary</li>
+<li>Image width is only needed if -f is called</li>
+<li>It is common for Freeman-Decomposition to give non-physical negative powers [ref. 2].</li>
+</ul>
+<p>This is not a bug in the code. The user should also carefully consider the assumptions
+inherent in this decomposition scheme [ref. 1 and 2] and whether those assumptions are
+valid for the current problem.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p>[1] Freeman, A. and Durden, S., &#8220;A three-component scattering model for polarimetric SAR data&#8221;, <em>IEEE Trans. Geosci. Remote Sensing</em>, vol. 36, no. 3, pp. 963-973, May 1998.</p>
+<p>[2] van Zyl, J. and Yunjin, K., <em>Synthetic Aperture Radar Polarimetry</em>, Wiley, Hoboken, NJ, 288 pages, 2011.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">sardecomp_fd</a><ul>
+<li><a class="reference internal" href="#parameters">Parameters</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+<li><a class="reference internal" href="#notes">Notes</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/polsar/sardecomp_fd.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<ul class="this-page-menu">
+  <li><a href="/numpy/docs/numpy-docs/polsar/sardecomp_fd.rst">Edit page</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li><a href="../index.html">PySAR</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Brent Minchew.
+      Last updated on Feb 20, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

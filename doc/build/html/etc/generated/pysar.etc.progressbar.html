@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pysar.etc.progressbar &mdash; PySAR 0.1.0</title>
+    
+    <link rel="stylesheet" href="../../_static/pysar.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="PySAR 0.1.0" href="../../index.html" />
+    <link rel="up" title="Etc (pysar.etc)" href="../etc.html" />
+    <link rel="next" title="pysar.etc.nrprint" href="pysar.etc.nrprint.html" />
+    <link rel="prev" title="pysar.etc.cptError" href="pysar.etc.cptError.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pysar.etc.nrprint.html" title="pysar.etc.nrprint"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pysar.etc.cptError.html" title="pysar.etc.cptError"
+             accesskey="P">previous</a> |</li>
+<li><a href="../../index.html">PySAR</a> &raquo;</li>
+
+          <li><a href="../../toolbox.html" >PySAR</a> &raquo;</li>
+          <li><a href="../etc.html" accesskey="U">Etc (<tt class="docutils literal"><span class="pre">pysar.etc</span></tt>)</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="pysar-etc-progressbar">
+<h1>pysar.etc.progressbar<a class="headerlink" href="#pysar-etc-progressbar" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="pysar.etc.progressbar">
+<tt class="descclassname">pysar.etc.</tt><tt class="descname">progressbar</tt><big>(</big><em>index</em>, <em>length</em>, <em>modval=2</em>, <em>prevbar=None</em><big>)</big><a class="headerlink" href="#pysar.etc.progressbar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints a progress bar to the screen</p>
+<p>ex.  [=====&gt;      ] 50%</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>index</strong> :     int or float</p>
+<blockquote>
+<div><p>index value</p>
+</div></blockquote>
+<p><strong>length</strong> :     int or float</p>
+<blockquote>
+<div><p>length of iteration or loop (100% = 100*index/length)</p>
+</div></blockquote>
+<p><strong>modval</strong> :     int</p>
+<blockquote>
+<div><p>length of prog bar in characters = 100//modval [default = 2]</p>
+</div></blockquote>
+<p><strong>prevbar</strong> :     string or None</p>
+<blockquote class="last">
+<div><dl class="docutils">
+<dt>previous output string. This could save time as it won&#8217;t</dt>
+<dd><p class="first last">print to the screen unless the new progress bar is 
+different from prevbar [default = None; prints every bar]</p>
+</dd>
+</dl>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pysar.etc.cptError.html"
+                        title="previous chapter">pysar.etc.cptError</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pysar.etc.nrprint.html"
+                        title="next chapter">pysar.etc.nrprint</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/etc/generated/pysar.etc.progressbar.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<ul class="this-page-menu">
+  <li><a href="/numpy/docs/numpy-docs/etc/generated/pysar.etc.progressbar.rst">Edit page</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pysar.etc.nrprint.html" title="pysar.etc.nrprint"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pysar.etc.cptError.html" title="pysar.etc.cptError"
+             >previous</a> |</li>
+<li><a href="../../index.html">PySAR</a> &raquo;</li>
+
+          <li><a href="../../toolbox.html" >PySAR</a> &raquo;</li>
+          <li><a href="../etc.html" >Etc (<tt class="docutils literal"><span class="pre">pysar.etc</span></tt>)</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Brent Minchew.
+      Last updated on Feb 20, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

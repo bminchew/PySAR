@@ -1,0 +1,344 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pysar.plot.cm.cpt_tools &mdash; PySAR 0.1.0</title>
+    
+    <link rel="stylesheet" href="../../../../_static/pysar.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="PySAR 0.1.0" href="../../../../index.html" />
+    <link rel="up" title="pysar.plot.cm" href="../cm.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li><a href="../../../../index.html">PySAR</a> &raquo;</li>
+
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../cm.html" accesskey="U">pysar.plot.cm</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for pysar.plot.cm.cpt_tools</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Work with cpt files in Python</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">cPickle</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="kn">as</span> <span class="nn">mpl</span> 
+<span class="kn">import</span> <span class="nn">matplotlib.cbook</span> <span class="kn">as</span> <span class="nn">cbook</span>
+<span class="kn">import</span> <span class="nn">matplotlib.colors</span> <span class="kn">as</span> <span class="nn">colors</span>
+<span class="kn">from</span> <span class="nn">_cpt_defs</span> <span class="kn">import</span> <span class="n">preload</span><span class="p">,</span> <span class="n">cptfldr</span><span class="p">,</span> <span class="n">cptdic</span><span class="p">,</span> <span class="n">specialcpt</span><span class="p">,</span> <span class="n">mpl_noinclude</span>
+<span class="kn">from</span> <span class="nn">matplotlib.cm</span> <span class="kn">import</span> <span class="n">ma</span><span class="p">,</span> <span class="n">datad</span><span class="p">,</span> <span class="n">cubehelix</span><span class="p">,</span> <span class="n">_generate_cmap</span>
+<span class="kn">from</span> <span class="nn">matplotlib.cm</span> <span class="kn">import</span> <span class="n">_reverser</span><span class="p">,</span> <span class="n">revcmap</span><span class="p">,</span> <span class="n">_reverse_cmap_spec</span><span class="p">,</span> <span class="n">ScalarMappable</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;cptError&#39;</span><span class="p">,</span><span class="s">&#39;_stitch_gmt_hsv&#39;</span><span class="p">,</span><span class="s">&#39;cpt2python&#39;</span><span class="p">,</span><span class="s">&#39;_get_cm_from_cpt&#39;</span><span class="p">,</span>
+         <span class="s">&#39;_get_cm_from_pkl&#39;</span><span class="p">,</span><span class="s">&#39;get_cmap&#39;</span><span class="p">,</span><span class="s">&#39;cpt2cmap&#39;</span><span class="p">,</span><span class="s">&#39;_read_pkl&#39;</span><span class="p">,</span><span class="s">&#39;_write_pkl&#39;</span><span class="p">,</span>
+         <span class="s">&#39;_read_json&#39;</span><span class="p">,</span><span class="s">&#39;_write_json&#39;</span><span class="p">,</span><span class="s">&#39;_cmap_d_from_cpt&#39;</span><span class="p">,</span><span class="s">&#39;_cmap_d_from_dict&#39;</span><span class="p">,</span>
+         <span class="s">&#39;_cdict_from_cpt&#39;</span><span class="p">,</span><span class="s">&#39;_get_matplotlib_cmaps&#39;</span><span class="p">,</span><span class="s">&#39;_get_matplotlib_dicts&#39;</span><span class="p">]</span>
+
+<span class="c">###==========================================================================</span>
+<div class="viewcode-block" id="cptError"><a class="viewcode-back" href="../../../../plot/cpt_tools.html#pysar.plot.cm.cpt_tools.cptError">[docs]</a><span class="k">class</span> <span class="nc">cptError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+   <span class="k">pass</span>
+
+<span class="c">###==========================================================================</span></div>
+<span class="k">def</span> <span class="nf">_stitch_gmt_hsv</span><span class="p">(</span><span class="n">colstring</span><span class="p">,</span><span class="n">splitter</span><span class="o">=</span><span class="s">&#39;-&#39;</span><span class="p">):</span>
+   <span class="n">sp</span> <span class="o">=</span> <span class="n">colstring</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">splitter</span><span class="p">)</span>
+   <span class="k">if</span> <span class="n">splitter</span> <span class="o">==</span> <span class="s">&#39;-&#39;</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+      <span class="n">temp</span> <span class="o">=</span> <span class="n">sp</span>
+      <span class="n">sp</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="p">[],</span> <span class="mi">0</span>
+      <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">temp</span><span class="p">):</span>
+         <span class="k">if</span> <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;e&#39;</span> <span class="ow">or</span> <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;E&#39;</span><span class="p">:</span>
+            <span class="n">sp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span>
+         <span class="k">else</span><span class="p">:</span>
+            <span class="n">sp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+   <span class="k">return</span> <span class="n">sp</span>
+
+
+<div class="viewcode-block" id="cpt2python"><a class="viewcode-back" href="../../../../plot/cpt_tools.html#pysar.plot.cm.cpt_tools.cpt2python">[docs]</a><span class="k">def</span> <span class="nf">cpt2python</span><span class="p">(</span><span class="n">cptfile</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">   Convert GMT-stype CPT file to python colormap.  This routine is modified from a </span>
+<span class="sd">   routine contained in the scipy cookbook. </span>
+<span class="sd">   &quot;&quot;&quot;</span>
+   <span class="n">fid</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">cptfile</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">)</span>
+   <span class="n">reads</span> <span class="o">=</span> <span class="n">fid</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+   <span class="n">fid</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+   <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">reads</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+   <span class="n">r</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+   <span class="n">colormod</span> <span class="o">=</span> <span class="s">&#39;RGB&#39;</span>
+   <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+   <span class="k">for</span> <span class="n">read</span> <span class="ow">in</span> <span class="n">reads</span><span class="p">:</span>
+      <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">read</span><span class="o">.</span><span class="n">lstrip</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+         <span class="n">row</span> <span class="o">=</span> <span class="n">read</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+         <span class="k">if</span> <span class="n">read</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;#&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s">&#39;COLOR_MODEL&#39;</span> <span class="ow">in</span> <span class="n">read</span><span class="p">:</span> <span class="n">colormod</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+         <span class="k">elif</span> <span class="s">&#39;B&#39;</span> <span class="o">!=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="s">&#39;F&#39;</span> <span class="o">!=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="s">&#39;N&#39;</span> <span class="o">!=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="s">&#39;/&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="s">&#39;-&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+               <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+               <span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+               <span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+               <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+               <span class="n">xt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+               <span class="n">rt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+               <span class="n">gt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+               <span class="n">bt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+               <span class="k">if</span> <span class="s">&#39;-&#39;</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                  <span class="n">spl</span> <span class="o">=</span> <span class="s">&#39;-&#39;</span>
+                  <span class="n">colormod</span> <span class="o">=</span> <span class="s">&#39;HSV&#39;</span>
+               <span class="k">else</span><span class="p">:</span>
+                  <span class="n">spl</span> <span class="o">=</span> <span class="s">&#39;/&#39;</span>
+               <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+               <span class="n">rs</span> <span class="o">=</span> <span class="n">_stitch_gmt_hsv</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">splitter</span><span class="o">=</span><span class="n">spl</span><span class="p">)</span>
+               <span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">rs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+               <span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">rs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+               <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">rs</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+               <span class="n">xt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+               <span class="n">rs</span> <span class="o">=</span> <span class="n">_stitch_gmt_hsv</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">splitter</span><span class="o">=</span><span class="n">spl</span><span class="p">)</span>
+               <span class="n">rt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">rs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+               <span class="n">gt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">rs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+               <span class="n">bt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">rs</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+               <span class="k">raise</span> <span class="n">cptError</span><span class="p">(</span><span class="s">&#39;Unsupported cpt format...revise file to form x1 r1 g1 b1 x2 r2 g2 b2&#39;</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+   <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">xt</span><span class="p">,</span> <span class="n">rt</span><span class="p">,</span> <span class="n">gt</span><span class="p">,</span> <span class="n">bt</span>
+   <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+   <span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:</span><span class="n">i</span><span class="p">],</span> <span class="n">r</span><span class="p">[:</span><span class="n">i</span><span class="p">],</span> <span class="n">g</span><span class="p">[:</span><span class="n">i</span><span class="p">],</span> <span class="n">b</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
+
+   <span class="k">if</span> <span class="n">colormod</span> <span class="o">==</span> <span class="s">&#39;HSV&#39;</span> <span class="ow">or</span> <span class="n">colormod</span> <span class="o">==</span> <span class="s">&#39;hsv&#39;</span><span class="p">:</span>
+      <span class="kn">import</span> <span class="nn">colorsys</span>
+      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">)):</span>
+         <span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">colorsys</span><span class="o">.</span><span class="n">hsv_to_rgb</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="mf">360.</span><span class="p">,</span><span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+   <span class="k">elif</span> <span class="n">colormod</span> <span class="o">==</span> <span class="s">&#39;RGB&#39;</span> <span class="ow">or</span> <span class="n">colormod</span> <span class="o">==</span> <span class="s">&#39;rgb&#39;</span><span class="p">:</span>
+      <span class="n">r</span> <span class="o">/=</span> <span class="mf">255.</span><span class="p">;</span> <span class="n">g</span> <span class="o">/=</span> <span class="mf">255.</span><span class="p">;</span> <span class="n">b</span> <span class="o">/=</span> <span class="mf">255.</span>
+   <span class="k">else</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s"> color system is not supported&#39;</span> <span class="o">%</span> <span class="n">colormod</span><span class="p">)</span>
+
+   <span class="n">x</span> <span class="o">-=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+   <span class="n">x</span> <span class="o">/=</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+   <span class="n">red</span><span class="p">,</span> <span class="n">blue</span><span class="p">,</span> <span class="n">green</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
+      <span class="n">red</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+      <span class="n">blue</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+      <span class="n">green</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+   <span class="n">cd</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;red&#39;</span> <span class="p">:</span> <span class="n">red</span><span class="p">,</span> <span class="s">&#39;green&#39;</span> <span class="p">:</span> <span class="n">green</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span> <span class="p">:</span> <span class="n">blue</span><span class="p">}</span>
+   <span class="k">return</span> <span class="n">cd</span>
+
+
+<span class="c">###-----------------------------------------------------------</span></div>
+<span class="k">def</span> <span class="nf">_get_cm_from_cpt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">cmapname</span><span class="o">=</span><span class="s">&#39;colormap&#39;</span><span class="p">,</span><span class="n">lutsize</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">inverse</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">lutsize</span><span class="p">:</span>
+      <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="kn">as</span> <span class="nn">mpl</span> 
+      <span class="n">lutsize</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">&#39;image.lut&#39;</span><span class="p">]</span> 
+   <span class="n">cdict</span> <span class="o">=</span> <span class="n">cpt2python</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+   <span class="k">if</span> <span class="n">inverse</span><span class="p">:</span> <span class="n">cdict</span> <span class="o">=</span> <span class="n">_reverse_cmap_spec</span><span class="p">(</span><span class="n">cdict</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">colors</span><span class="o">.</span><span class="n">LinearSegmentedColormap</span><span class="p">(</span><span class="n">cmapname</span><span class="p">,</span><span class="n">cdict</span><span class="p">,</span><span class="n">lutsize</span><span class="p">)</span> 
+
+<span class="k">def</span> <span class="nf">_get_cm_from_pkl</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">cmapname</span><span class="o">=</span><span class="s">&#39;colormap&#39;</span><span class="p">,</span><span class="n">lutsize</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">inverse</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">lutsize</span><span class="p">:</span>
+      <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="kn">as</span> <span class="nn">mpl</span> 
+      <span class="n">lutsize</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">&#39;image.lut&#39;</span><span class="p">]</span>
+   <span class="n">pkl_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;rb&#39;</span><span class="p">)</span>
+   <span class="n">cdict</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">pkl_file</span><span class="p">)</span>
+   <span class="n">pkl_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+   <span class="k">if</span> <span class="n">inverse</span><span class="p">:</span> <span class="n">cdict</span> <span class="o">=</span> <span class="n">_reverse_cmap_spec</span><span class="p">(</span><span class="n">cdict</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">colors</span><span class="o">.</span><span class="n">LinearSegmentedColormap</span><span class="p">(</span><span class="n">cmapname</span><span class="p">,</span><span class="n">cdict</span><span class="p">,</span><span class="n">lutsize</span><span class="p">)</span>
+
+<span class="c">###-----------------------------------------------------------</span>
+<div class="viewcode-block" id="get_cmap"><a class="viewcode-back" href="../../../../plot/cpt_tools.html#pysar.plot.cm.cpt_tools.get_cmap">[docs]</a><span class="k">def</span> <span class="nf">get_cmap</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">lut</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+   <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">cmap_d</span><span class="p">:</span>
+      <span class="k">if</span> <span class="n">lut</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+         <span class="k">return</span> <span class="n">cmap_d</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+      <span class="k">else</span><span class="p">:</span>
+         <span class="n">nm</span><span class="p">,</span> <span class="n">inverse</span> <span class="o">=</span> <span class="n">name</span><span class="p">,</span> <span class="bp">False</span>
+         <span class="k">if</span> <span class="n">name</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span> <span class="o">==</span> <span class="s">&#39;_r&#39;</span><span class="p">:</span> 
+            <span class="n">nm</span><span class="p">,</span> <span class="n">inverse</span> <span class="o">=</span> <span class="n">name</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="bp">True</span>
+         <span class="k">return</span> <span class="n">_get_cm_from_cpt</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">cptfldr</span><span class="o">+</span><span class="n">cptdic</span><span class="p">[</span><span class="n">nm</span><span class="p">],</span><span class="n">cmapname</span><span class="o">=</span><span class="n">nm</span><span class="p">,</span>
+                     <span class="n">lutsize</span><span class="o">=</span><span class="n">lut</span><span class="p">,</span><span class="n">inverse</span><span class="o">=</span><span class="n">inverse</span><span class="p">)</span>
+<span class="c">###-----------------------------------------------------------</span></div>
+<div class="viewcode-block" id="cpt2cmap"><a class="viewcode-back" href="../../../../plot/cpt_tools.html#pysar.plot.cm.cpt_tools.cpt2cmap">[docs]</a><span class="k">def</span> <span class="nf">cpt2cmap</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">cmapname</span><span class="o">=</span><span class="s">&#39;colormap&#39;</span><span class="p">,</span><span class="n">lut</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">inverse</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">lut</span><span class="p">:</span>
+      <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="kn">as</span> <span class="nn">mpl</span> 
+      <span class="n">lut</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">&#39;image.lut&#39;</span><span class="p">]</span>
+   <span class="n">cdict</span> <span class="o">=</span> <span class="n">cpt2python</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+   <span class="k">if</span> <span class="n">inverse</span><span class="p">:</span> <span class="n">cdict</span> <span class="o">=</span> <span class="n">_reverse_cmap_spec</span><span class="p">(</span><span class="n">cdict</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">colors</span><span class="o">.</span><span class="n">LinearSegmentedColormap</span><span class="p">(</span><span class="n">cmapname</span><span class="p">,</span><span class="n">cdict</span><span class="p">,</span><span class="n">lut</span><span class="p">)</span>
+
+<span class="c">###----------------------------------------------------------</span></div>
+<span class="k">def</span> <span class="nf">_read_pkl</span><span class="p">():</span>
+   <span class="n">pkl_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">cptfldr</span><span class="o">+</span><span class="s">&#39;cmaps.pkl&#39;</span><span class="p">,</span> <span class="s">&#39;rb&#39;</span><span class="p">)</span>
+   <span class="n">cmapdict</span> <span class="o">=</span> <span class="n">cPickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">pkl_file</span><span class="p">)</span>
+   <span class="n">pkl_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+   <span class="k">return</span> <span class="n">cmapdict</span> 
+
+<span class="k">def</span> <span class="nf">_write_pkl</span><span class="p">(</span><span class="n">cmapdict</span><span class="p">):</span>
+   <span class="n">pkl_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">cptfldr</span><span class="o">+</span><span class="s">&#39;cmaps.pkl&#39;</span><span class="p">,</span> <span class="s">&#39;wb&#39;</span><span class="p">)</span>
+   <span class="n">cPickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">cmapdict</span><span class="p">,</span><span class="n">pkl_file</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">pkl_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">_read_json</span><span class="p">():</span>
+   <span class="kn">import</span> <span class="nn">json</span>
+   <span class="n">json_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">cptfldr</span><span class="o">+</span><span class="s">&#39;cmaps.json&#39;</span><span class="p">,</span> <span class="s">&#39;rb&#39;</span><span class="p">)</span>
+   <span class="n">cmapdict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
+   <span class="n">json_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+   <span class="k">return</span> <span class="n">cmapdict</span>
+
+<span class="k">def</span> <span class="nf">_write_json</span><span class="p">(</span><span class="n">cmapdict</span><span class="p">):</span>
+   <span class="kn">import</span> <span class="nn">json</span>
+   <span class="n">json_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">cptfldr</span><span class="o">+</span><span class="s">&#39;cmaps.pkl&#39;</span><span class="p">,</span> <span class="s">&#39;wb&#39;</span><span class="p">)</span>
+   <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">cmapdict</span><span class="p">,</span><span class="n">json_file</span><span class="p">)</span>
+   <span class="n">json_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c">###----------------------------------------------------------</span>
+<span class="k">def</span> <span class="nf">_cmap_d_from_cpt</span><span class="p">():</span>
+   <span class="n">cmap_d</span> <span class="o">=</span> <span class="p">{}</span>
+   <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">cptdic</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+      <span class="n">cmap_d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">_get_cm_from_cpt</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">cptfldr</span><span class="o">+</span><span class="n">v</span><span class="p">,</span><span class="n">cmapname</span><span class="o">=</span><span class="n">k</span><span class="p">,</span>
+               <span class="n">lutsize</span><span class="o">=</span><span class="n">lutsize</span><span class="p">,</span><span class="n">inverse</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+      <span class="n">cmap_d</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="s">&#39;_r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_get_cm_from_cpt</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">cptfldr</span><span class="o">+</span><span class="n">v</span><span class="p">,</span><span class="n">cmapname</span><span class="o">=</span><span class="n">k</span><span class="p">,</span>
+               <span class="n">lutsize</span><span class="o">=</span><span class="n">lutsize</span><span class="p">,</span><span class="n">inverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">cmap_d</span>
+
+<span class="k">def</span> <span class="nf">_cmap_d_from_dict</span><span class="p">(</span><span class="n">indict</span><span class="p">,</span><span class="n">lutsize</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+   <span class="k">if</span> <span class="n">lutsize</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+      <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="kn">as</span> <span class="nn">mpl</span>
+      <span class="n">lutsize</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">&#39;image.lut&#39;</span><span class="p">]</span>
+   <span class="n">cmap_d</span> <span class="o">=</span> <span class="p">{}</span>
+   <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">indict</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+      <span class="k">if</span> <span class="s">&#39;red&#39;</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
+         <span class="n">cmap_d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">LinearSegmentedColormap</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">lutsize</span><span class="p">)</span>
+      <span class="k">else</span><span class="p">:</span>
+         <span class="n">cmap_d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">LinearSegmentedColormap</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">lutsize</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">cmap_d</span>
+
+
+<span class="k">def</span> <span class="nf">_cdict_from_cpt</span><span class="p">():</span>
+   <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="kn">as</span> <span class="nn">mpl</span>
+   <span class="n">lutsize</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">&#39;image.lut&#39;</span><span class="p">]</span>
+   <span class="n">cdict</span> <span class="o">=</span> <span class="p">{}</span>
+   <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">cptdic</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+      <span class="n">cdict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">cpt2python</span><span class="p">(</span><span class="n">cptfldr</span><span class="o">+</span><span class="n">v</span><span class="p">)</span>
+      <span class="n">cdict</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="s">&#39;_r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_reverse_cmap_spec</span><span class="p">(</span><span class="n">cdict</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+   <span class="k">return</span> <span class="n">cdict</span>
+
+
+<span class="c">###----------------------------------------------------------</span>
+<span class="k">def</span> <span class="nf">_get_matplotlib_cmaps</span><span class="p">(</span><span class="n">mpldict</span><span class="p">):</span>
+   <span class="n">lutsize</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">&#39;image.lut&#39;</span><span class="p">]</span>
+   <span class="n">tempdic</span> <span class="o">=</span> <span class="p">{}</span>
+   <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">mpldict</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+      <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mpl_noinclude</span><span class="p">:</span>
+         <span class="n">tempdic</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">_generate_cmap</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">lutsize</span><span class="p">)</span>
+      <span class="k">else</span><span class="p">:</span>
+         <span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+         <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+         <span class="n">t_cmap</span> <span class="o">=</span> <span class="n">_generate_cmap</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">lutsize</span><span class="p">)</span>
+         <span class="n">t_cmapents</span> <span class="o">=</span> <span class="n">t_cmap</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+         <span class="n">t_cdict</span> <span class="o">=</span> <span class="p">{}</span>
+         <span class="k">for</span> <span class="n">ki</span><span class="p">,</span><span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">((</span><span class="s">&#39;red&#39;</span><span class="p">,</span><span class="s">&#39;green&#39;</span><span class="p">,</span><span class="s">&#39;blue&#39;</span><span class="p">)):</span>
+            <span class="n">t_cdict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">t_cmapents</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">ki</span><span class="p">],</span> <span class="n">t_cmapents</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">ki</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">]</span>
+         <span class="n">tempdic</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">LinearSegmentedColormap</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">t_cdict</span><span class="p">,</span><span class="n">lutsize</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">tempdic</span>
+
+<span class="k">def</span> <span class="nf">_get_matplotlib_dicts</span><span class="p">(</span><span class="n">mpldict</span><span class="p">):</span>
+   <span class="n">lutsize</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">&#39;image.lut&#39;</span><span class="p">]</span>
+   <span class="n">tempdic</span> <span class="o">=</span> <span class="p">{}</span>
+   <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">mpldict</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+      <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mpl_noinclude</span><span class="p">:</span>
+         <span class="n">tempdic</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+      <span class="k">else</span><span class="p">:</span>
+         <span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+         <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+         <span class="n">t_cmap</span> <span class="o">=</span> <span class="n">_generate_cmap</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">lutsize</span><span class="p">)</span>
+         <span class="n">t_cmapents</span> <span class="o">=</span> <span class="n">t_cmap</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+         <span class="n">t_cdict</span> <span class="o">=</span> <span class="p">{}</span>
+         <span class="k">for</span> <span class="n">ki</span><span class="p">,</span><span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">((</span><span class="s">&#39;red&#39;</span><span class="p">,</span><span class="s">&#39;green&#39;</span><span class="p">,</span><span class="s">&#39;blue&#39;</span><span class="p">)):</span>
+            <span class="n">t_cdict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">t_cmapents</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">ki</span><span class="p">],</span> <span class="n">t_cmapents</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">ki</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">]</span>
+         <span class="n">tempdic</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">t_cdict</span>
+   <span class="k">return</span> <span class="n">tempdic</span>
+
+<span class="c">###-----------------------------------------------------------</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li><a href="../../../../index.html">PySAR</a> &raquo;</li>
+
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../cm.html" >pysar.plot.cm</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Brent Minchew.
+      Last updated on Feb 20, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

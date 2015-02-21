@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Functions &mdash; PySAR 0.1.0</title>
+    
+    <link rel="stylesheet" href="../_static/pysar.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="PySAR 0.1.0" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li><a href="../index.html">PySAR</a> &raquo;</li>
+ 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <span class="target" id="module-pysar.signal.boxfilter"><span id="boxfilter"></span></span><p>Boxcar filter</p>
+<div class="section" id="functions">
+<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h1>
+<p>boxcar1d(data,window,null=None,nullset=None)
+boxcar2d(data,window,null=None,nullset=None,thread=&#8217;auto&#8217;,numthrd=8,tdthrsh=1e5)</p>
+<dl class="function">
+<dt id="pysar.signal.boxfilter.boxcar1d">
+<tt class="descclassname">pysar.signal.boxfilter.</tt><tt class="descname">boxcar1d</tt><big>(</big><em>data</em>, <em>window</em>, <em>null=None</em>, <em>nullset=None</em><big>)</big><a class="reference internal" href="../_modules/pysar/signal/boxfilter.html#boxcar1d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.signal.boxfilter.boxcar1d" title="Permalink to this definition">¶</a></dt>
+<dd><p>1d boxcar filter</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>data</strong> :  array</p>
+<blockquote>
+<div><p>1D array of data to be filtered</p>
+</div></blockquote>
+<p><strong>window</strong> :  int</p>
+<blockquote>
+<div><p>Filter window size in discrete points</p>
+</div></blockquote>
+<p><strong>null</strong> :  float or complex</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Null value in image.  This creates an internal boolean array and </dt>
+<dd><p class="first last">replaces null values after filtering.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>nullset</strong> :  float or complex</p>
+<blockquote class="last">
+<div><dl class="docutils">
+<dt>Set given null value to zero before filtering and restore to original</dt>
+<dd><p class="first last">when filtering is complete.  Only valid if null is provided.</p>
+</dd>
+</dl>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pysar.signal.boxfilter.boxcar2d">
+<tt class="descclassname">pysar.signal.boxfilter.</tt><tt class="descname">boxcar2d</tt><big>(</big><em>data</em>, <em>window</em>, <em>null=None</em>, <em>nullset=None</em>, <em>thread='auto'</em>, <em>numthrd=8</em>, <em>tdthrsh=1e5</em><big>)</big><a class="reference internal" href="../_modules/pysar/signal/boxfilter.html#boxcar2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.signal.boxfilter.boxcar2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d boxcar filter</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>data</strong> :      array</p>
+<blockquote>
+<div><p>2D array of data to be filtered</p>
+</div></blockquote>
+<p><strong>window</strong> :    int or list</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Filter window size in discrete points</dt>
+<dd><p class="first last">scalar values use a square window
+lists should be in order [across, down]</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>null</strong> :      float or complex</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Null value in image.  This creates an internal boolean array and </dt>
+<dd><p class="first last">replaces null values after filtering.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>nullset</strong> :   float or complex</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Set given null value to nullset before filtering and restore to original</dt>
+<dd><p class="first last">when filtering is complete.  Only valid if null is provided.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>thread</strong> :   string</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Multi-threading options:  [&#8216;yes&#8217;,&#8217;no&#8217;,&#8217;auto&#8217;].  &#8216;auto&#8217; decides based on </dt>
+<dd><p class="first last">the size of data array</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>numthrd</strong> :   int</p>
+<blockquote>
+<div><p>Number of threads.  Only valid if thread != &#8216;no&#8217;</p>
+</div></blockquote>
+<p><strong>tdthrsh</strong> :   int</p>
+<blockquote class="last">
+<div><dl class="docutils">
+<dt>Threshold for &#8216;auto&#8217; threading.  Filter is threaded if </dt>
+<dd><p class="first last">number of elements in data &gt; tdthrsh</p>
+</dd>
+</dl>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/signal/boxfilter.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<ul class="this-page-menu">
+  <li><a href="/numpy/docs/numpy-docs/signal/boxfilter.rst">Edit page</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li><a href="../index.html">PySAR</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Brent Minchew.
+      Last updated on Feb 20, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

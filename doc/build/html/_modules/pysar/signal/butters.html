@@ -1,0 +1,339 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pysar.signal.butters &mdash; PySAR 0.1.0</title>
+    
+    <link rel="stylesheet" href="../../../_static/pysar.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="PySAR 0.1.0" href="../../../index.html" />
+    <link rel="up" title="pysar.signal" href="../signal.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li><a href="../../../index.html">PySAR</a> &raquo;</li>
+
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../signal.html" accesskey="U">pysar.signal</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for pysar.signal.butters</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Butterworth filtering routines </span>
+
+<span class="sd">Contents</span>
+<span class="sd">--------</span>
+<span class="sd">butter(data,low,high,dt=None,df=None,order=4,zero_phase=False)       :  General Butterworth filter</span>
+<span class="sd">bandpass(data,low,high,dt=None,df=None,order=4,zero_phase=False)     :  Bandpass</span>
+<span class="sd">bandreject(data,low,high,dt=None,df=None,order=4,zero_phase=False)   :  Bandreject</span>
+<span class="sd">lowpass(data,high,dt=None,df=None,order=4,zero_phase=False)          :  Lowpass</span>
+<span class="sd">highpass(data,high,dt=None,df=None,order=4,zero_phase=False)         :  Highpass</span>
+
+<span class="sd">taper(data,percent)                                                  :  Basic cosine taper</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">_xapiir</span> <span class="kn">import</span> <span class="n">callxapiir</span>
+<span class="kn">from</span> <span class="nn">special</span> <span class="kn">import</span> <span class="n">taper</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;taper&#39;</span><span class="p">,</span> <span class="s">&#39;butter&#39;</span><span class="p">,</span><span class="s">&#39;bandpass&#39;</span><span class="p">,</span><span class="s">&#39;bandreject&#39;</span><span class="p">,</span><span class="s">&#39;lowpass&#39;</span><span class="p">,</span><span class="s">&#39;highpass&#39;</span><span class="p">]</span>
+
+<span class="c">###===================================================================================</span>
+<div class="viewcode-block" id="butter"><a class="viewcode-back" href="../../../signal/butters.html#pysar.signal.butters.butter">[docs]</a><span class="k">def</span> <span class="nf">butter</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">low</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">high</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">zero_phase</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">reject</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">   Butterworth filter </span>
+
+<span class="sd">   butter(data,low=None,high=None,dt=None,df=None,order=4,zero_phase=False,reject=False)</span>
+<span class="sd">   </span>
+<span class="sd">   Parameters</span>
+<span class="sd">   ----------</span>
+<span class="sd">      data :      array</span>
+<span class="sd">                  input data vector (real-valued)</span>
+<span class="sd">      low  :      float</span>
+<span class="sd">                  min frequency in passband [Hz] (default = None --&gt; lowpass filter)</span>
+<span class="sd">      high :      float</span>
+<span class="sd">                  max frequency in passband [Hz] (default = None --&gt; highpass filter)</span>
+<span class="sd">      dt   :      float</span>
+<span class="sd">                  sampling interval [sec]</span>
+<span class="sd">      df   :      float</span>
+<span class="sd">                  sampling frequency [Hz]</span>
+<span class="sd">      order :     int</span>
+<span class="sd">                  filter order (default = 4; max = 10)</span>
+<span class="sd">      zero_phase: bool</span>
+<span class="sd">                  True to run the filter fwd and rev for 0 phase shift (default = False)</span>
+<span class="sd">      reject :    bool</span>
+<span class="sd">                  True initializes a band reject instead of bandpass filter (default = False)</span>
+
+<span class="sd">   Output</span>
+<span class="sd">   ------</span>
+<span class="sd">      F :         array {same size and type as data}</span>
+<span class="sd">                  filtered data </span>
+
+<span class="sd">   Notes</span>
+<span class="sd">   -----</span>
+<span class="sd">      * dt or df must be defined (dt has priority)</span>
+<span class="sd">      * low and/or high must be defined</span>
+<span class="sd">         - if only low is defined, highpass filter is applied</span>
+<span class="sd">         - if only high is defined, lowpass filter is applied</span>
+<span class="sd">         - if low and high are defined, bandpass filter is applied unless reject==True</span>
+<span class="sd">      * if reject == True, both high and low must be defined </span>
+
+<span class="sd">   &quot;&quot;&quot;</span>
+   
+   <span class="n">tp</span> <span class="o">=</span> <span class="s">&#39;BP&#39;</span>
+   <span class="n">passes</span> <span class="o">=</span> <span class="mi">1</span>
+   <span class="n">nsamps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">dt</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">df</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;dt or df must be defined&quot;</span><span class="p">)</span>
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">low</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">high</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;low and/or high must be defined&quot;</span><span class="p">)</span>
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">nsamps</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;data is a scalar&quot;</span><span class="p">)</span>
+
+   <span class="k">if</span> <span class="n">dt</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>  <span class="n">dt</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">df</span>
+   <span class="k">if</span> <span class="n">zero_phase</span><span class="p">:</span>  <span class="n">passes</span> <span class="o">=</span> <span class="mi">2</span>
+   <span class="k">if</span> <span class="n">reject</span><span class="p">:</span> 
+      <span class="k">if</span> <span class="ow">not</span> <span class="n">low</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">high</span><span class="p">:</span> 
+         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;low and high must be defined for bandreject&#39;</span><span class="p">)</span>
+      <span class="n">tp</span> <span class="o">=</span> <span class="s">&#39;BR&#39;</span>
+
+   <span class="k">if</span> <span class="n">low</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">high</span><span class="p">:</span>
+      <span class="n">tp</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="s">&#39;HP&#39;</span><span class="p">,</span> <span class="mf">1.</span>
+   <span class="k">elif</span> <span class="ow">not</span> <span class="n">low</span> <span class="ow">and</span> <span class="n">high</span><span class="p">:</span>
+      <span class="n">tp</span><span class="p">,</span> <span class="n">low</span> <span class="o">=</span> <span class="s">&#39;LP&#39;</span><span class="p">,</span> <span class="mf">1.</span>
+
+   <span class="n">data</span> <span class="o">=</span> <span class="n">callxapiir</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">nsamps</span><span class="p">,</span><span class="s">&#39;BU&#39;</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="n">order</span><span class="p">,</span><span class="n">tp</span><span class="p">,</span><span class="n">low</span><span class="p">,</span><span class="n">high</span><span class="p">,</span><span class="n">dt</span><span class="p">,</span><span class="n">passes</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">data</span>
+
+<span class="c">###===================================================================================</span></div>
+<div class="viewcode-block" id="bandpass"><a class="viewcode-back" href="../../../signal/butters.html#pysar.signal.butters.bandpass">[docs]</a><span class="k">def</span> <span class="nf">bandpass</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">low</span><span class="p">,</span><span class="n">high</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">zero_phase</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">   Butterworth bandpass filter </span>
+
+<span class="sd">   bandpass(data,low,high,dt=None,df=None,order=4,zero_phase=False)</span>
+<span class="sd">   </span>
+<span class="sd">   Parameters</span>
+<span class="sd">   ----------</span>
+<span class="sd">      data :      array</span>
+<span class="sd">                  input data vector (real-valued)</span>
+<span class="sd">      low  :      float</span>
+<span class="sd">                  min frequency in passband [Hz] (default = None --&gt; lowpass filter)</span>
+<span class="sd">      high :      float</span>
+<span class="sd">                  max frequency in passband [Hz] (default = None --&gt; highpass filter)</span>
+<span class="sd">      dt   :      float</span>
+<span class="sd">                  sampling interval [sec]</span>
+<span class="sd">      df   :      float</span>
+<span class="sd">                  sampling frequency [Hz]</span>
+<span class="sd">      order :     int</span>
+<span class="sd">                  filter order (default = 4; max = 10)</span>
+<span class="sd">      zero_phase: bool</span>
+<span class="sd">                  True to run the filter fwd and rev for 0 phase shift (default = False)</span>
+
+<span class="sd">   Output</span>
+<span class="sd">   ------</span>
+<span class="sd">      F :         array {same size and type as data}</span>
+<span class="sd">                  filtered data </span>
+<span class="sd"> </span>
+<span class="sd">   Notes</span>
+<span class="sd">   -----</span>
+<span class="sd">      * dt or df must be defined (dt has priority)</span>
+
+<span class="sd">   &quot;&quot;&quot;</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">low</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">high</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;low and high must be defined for bandpass&#39;</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">butter</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span><span class="n">low</span><span class="o">=</span><span class="n">low</span><span class="p">,</span><span class="n">high</span><span class="o">=</span><span class="n">high</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span><span class="n">zero_phase</span><span class="o">=</span><span class="n">zero_phase</span><span class="p">)</span>
+
+<span class="c">###===================================================================================</span></div>
+<div class="viewcode-block" id="lowpass"><a class="viewcode-back" href="../../../signal/butters.html#pysar.signal.butters.lowpass">[docs]</a><span class="k">def</span> <span class="nf">lowpass</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">high</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">zero_phase</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">   Butterworth lowpass filter </span>
+
+<span class="sd">   butter.lowpass(data,high,dt=None,df=None,order=4,zero_phase=False)</span>
+<span class="sd">   </span>
+<span class="sd">   Parameters</span>
+<span class="sd">   ----------</span>
+<span class="sd">      data :      array</span>
+<span class="sd">                  input data vector (real-valued)</span>
+<span class="sd">      high :      float</span>
+<span class="sd">                  max frequency in passband [Hz] </span>
+<span class="sd">      dt   :      float</span>
+<span class="sd">                  sampling interval [sec]</span>
+<span class="sd">      df   :      float</span>
+<span class="sd">                  sampling frequency [Hz]</span>
+<span class="sd">      order :     int</span>
+<span class="sd">                  filter order (default = 4; max = 10)</span>
+<span class="sd">      zero_phase: bool</span>
+<span class="sd">                  True to run the filter fwd and rev for 0 phase shift (default = False)</span>
+
+<span class="sd">   Output</span>
+<span class="sd">   ------</span>
+<span class="sd">      F :         array {same size and type as data}</span>
+<span class="sd">                  filtered data </span>
+
+<span class="sd">   Notes</span>
+<span class="sd">   -----</span>
+<span class="sd">      * dt or df must be defined (dt has priority)</span>
+
+<span class="sd">   &quot;&quot;&quot;</span>
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">high</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;high must be defined for lowpass filter&#39;</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">butter</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span><span class="n">high</span><span class="o">=</span><span class="n">high</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span><span class="n">zero_phase</span><span class="o">=</span><span class="n">zero_phase</span><span class="p">)</span> 
+
+<span class="c">###===================================================================================</span></div>
+<div class="viewcode-block" id="highpass"><a class="viewcode-back" href="../../../signal/butters.html#pysar.signal.butters.highpass">[docs]</a><span class="k">def</span> <span class="nf">highpass</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">low</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">zero_phase</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">   Butterworth highpass filter </span>
+
+<span class="sd">   highpass(data,low,dt=None,df=None,order=4,zero_phase=False)</span>
+<span class="sd">   </span>
+<span class="sd">   Parameters</span>
+<span class="sd">   ----------</span>
+<span class="sd">      data :      array</span>
+<span class="sd">                  input data vector (real-valued)</span>
+<span class="sd">      low  :      float</span>
+<span class="sd">                  min frequency in passband [Hz] </span>
+<span class="sd">      dt   :      float</span>
+<span class="sd">                  sampling interval [sec]</span>
+<span class="sd">      df   :      float</span>
+<span class="sd">                  sampling frequency [Hz]</span>
+<span class="sd">      order :     int</span>
+<span class="sd">                  filter order (default = 4; max = 10)</span>
+<span class="sd">      zero_phase: bool</span>
+<span class="sd">                  True to run the filter fwd and rev for 0 phase shift (default = False)</span>
+
+<span class="sd">   Output</span>
+<span class="sd">   ------</span>
+<span class="sd">      F :         array {same size and type as data}</span>
+<span class="sd">                  filtered data </span>
+
+<span class="sd">   Notes</span>
+<span class="sd">   -----</span>
+<span class="sd">      * dt or df must be defined (dt has priority)</span>
+
+<span class="sd">   &quot;&quot;&quot;</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">low</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;low must be defined for highpass filter&#39;</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">butter</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span><span class="n">low</span><span class="o">=</span><span class="n">low</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span><span class="n">zero_phase</span><span class="o">=</span><span class="n">zero_phase</span><span class="p">)</span> 
+
+<span class="c">###===================================================================================</span></div>
+<div class="viewcode-block" id="bandreject"><a class="viewcode-back" href="../../../signal/butters.html#pysar.signal.butters.bandreject">[docs]</a><span class="k">def</span> <span class="nf">bandreject</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">low</span><span class="p">,</span><span class="n">high</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">zero_phase</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">   Butterworth bandreject filter </span>
+
+<span class="sd">   bandreject(data,low,high,dt=None,df=None,order=4,zero_phase=False)</span>
+<span class="sd">  </span>
+<span class="sd">   Parameters</span>
+<span class="sd">   ----------</span>
+<span class="sd">      data :      array</span>
+<span class="sd">                  input data vector (real-valued)</span>
+<span class="sd">      low  :      float</span>
+<span class="sd">                  min frequency in passband [Hz] (default = None --&gt; lowpass filter)</span>
+<span class="sd">      high :      float</span>
+<span class="sd">                  max frequency in passband [Hz] (default = None --&gt; highpass filter)</span>
+<span class="sd">      dt   :      float</span>
+<span class="sd">                  sampling interval [sec]</span>
+<span class="sd">      df   :      float</span>
+<span class="sd">                  sampling frequency [Hz]</span>
+<span class="sd">      order :     int</span>
+<span class="sd">                  filter order (default = 4; max = 10)</span>
+<span class="sd">      zero_phase: bool</span>
+<span class="sd">                  True to run the filter fwd and rev for 0 phase shift (default = False)</span>
+
+<span class="sd">   Output</span>
+<span class="sd">   ------</span>
+<span class="sd">      F :         array {same size and type as data}</span>
+<span class="sd">                  filtered data </span>
+
+<span class="sd">   Notes</span>
+<span class="sd">   -----</span>
+<span class="sd">      * dt or df must be defined (dt has priority)</span>
+<span class="sd">      * low and/or high must be defined</span>
+<span class="sd">         - if only low is defined, highpass filter is applied</span>
+<span class="sd">         - if only high is defined, lowpass filter is applied</span>
+<span class="sd">         - if low and high are defined, bandpass filter is applied unless reject==True</span>
+<span class="sd">      * if reject == True, both high and low must be defined </span>
+<span class="sd"> </span>
+<span class="sd">   &quot;&quot;&quot;</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">low</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">high</span><span class="p">:</span> 
+      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;low and high must be defined for bandreject&#39;</span><span class="p">)</span>
+   <span class="n">data</span> <span class="o">=</span> <span class="n">butter</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span><span class="n">low</span><span class="o">=</span><span class="n">low</span><span class="p">,</span><span class="n">high</span><span class="o">=</span><span class="n">high</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span>
+               <span class="n">zero_phase</span><span class="o">=</span><span class="n">zero_phase</span><span class="p">,</span><span class="n">reject</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">data</span>
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li><a href="../../../index.html">PySAR</a> &raquo;</li>
+
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../signal.html" >pysar.signal</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Brent Minchew.
+      Last updated on Feb 20, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

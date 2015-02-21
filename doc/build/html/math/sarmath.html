@@ -1,0 +1,556 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>sarmath &mdash; PySAR 0.1.0</title>
+    
+    <link rel="stylesheet" href="../_static/pysar.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="PySAR 0.1.0" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li><a href="../index.html">PySAR</a> &raquo;</li>
+ 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="sarmath">
+<span id="id1"></span><h1>sarmath<a class="headerlink" href="#sarmath" title="Permalink to this headline">¶</a></h1>
+<p>Basic math functions</p>
+<span class="target" id="module-sarmath"></span><p>Basic mathematical operations for SAR data in pseudo reverse Polish notation</p>
+<p>Usage forms (entry_i can be a file or number; output file is required only for array outputs):</p>
+<div class="highlight-rst"><div class="highlight"><pre>$ sarmath.py entry_1 [entry_2] [entry_3] -function_1 [entry_i] [-function_2 ... -function_n] [= output_file]
+
+$ sarmath.py entry_1 operator entry_2 [-function_1 ... -function_n] [= output_file]
+</pre></div>
+</div>
+<div class="section" id="operators">
+<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>+, -, /</td>
+<td>add, subract, divide</td>
+</tr>
+<tr class="row-even"><td>x, ., &#8216;*&#8217;</td>
+<td>multiplication (&#8216;*&#8217; must be given as a string on Linux systems)</td>
+</tr>
+<tr class="row-odd"><td>^</td>
+<td>raise entry_1 to power entry_2</td>
+</tr>
+<tr class="row-even"><td>%</td>
+<td>mod entry_1 by entry_2</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="docutils">
+<dt>symbols:  f = file; r = float (double); i = int; c = complex</dt>
+<dd>adapt means the output corresponds to the input type
+a &#8211;&gt; entry_1, b &#8211;&gt; entry_2, and so on</dd>
+</dl>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="41%" />
+<col width="26%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+<th class="head">Input</th>
+<th class="head">Output</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Arithmetic</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>add</td>
+<td>addition</td>
+<td>2 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-even"><td>sub</td>
+<td>subtraction</td>
+<td>2 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-odd"><td>mult</td>
+<td>multiplication</td>
+<td>2 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-even"><td>div</td>
+<td>division</td>
+<td>2 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>Common</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>hypot</td>
+<td>sqrt(a**2 + b**2 [+c**2])</td>
+<td>2[3] x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-even"><td>pow</td>
+<td>a**b</td>
+<td>2 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-odd"><td>root</td>
+<td>a**(1/b)</td>
+<td>2 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-even"><td>sqrt</td>
+<td>sqrt(a)</td>
+<td>1 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-odd"><td>abs</td>
+<td>abs(a)</td>
+<td>1 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-even"><td>mod</td>
+<td>a % b (a.k.a. mod(a,b))</td>
+<td>2 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-odd"><td>amp</td>
+<td>abs(a)</td>
+<td>1 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-even"><td>power</td>
+<td>abs(a)**2</td>
+<td>1 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-odd"><td>phase</td>
+<td>arctan2(a,b) [-pi,pi]</td>
+<td>2 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-even"><td>addphz</td>
+<td>a*exp(+i*b)</td>
+<td>2 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-odd"><td>subphz</td>
+<td>a*exp(-i*b)</td>
+<td>2 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-even"><td></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Statistic</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>max</td>
+<td>max(a)</td>
+<td>1 x fric</td>
+<td>float</td>
+</tr>
+<tr class="row-odd"><td>min</td>
+<td>min(a)</td>
+<td>1 x fric</td>
+<td>float</td>
+</tr>
+<tr class="row-even"><td>mean</td>
+<td>mean(a)</td>
+<td>1 x fric</td>
+<td>float</td>
+</tr>
+<tr class="row-odd"><td>med</td>
+<td>median(a)</td>
+<td>1 x fric</td>
+<td>float</td>
+</tr>
+<tr class="row-even"><td>std</td>
+<td>std(a) (std. dev.)</td>
+<td>1 x fric</td>
+<td>float</td>
+</tr>
+<tr class="row-odd"><td>var</td>
+<td>var(a) (variance)</td>
+<td>1 x fric</td>
+<td>float</td>
+</tr>
+<tr class="row-even"><td>xmult</td>
+<td>a * conj(b)</td>
+<td>2 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-odd"><td>xcor</td>
+<td>xmult/(abs(a)abs(b))</td>
+<td>2 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-even"><td>xcor_amp</td>
+<td><a href="#id2"><span class="problematic" id="id3">|xcor|</span></a></td>
+<td>2 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-odd"><td>xcor_phase</td>
+<td>arg(xcor)</td>
+<td>2 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-even"><td></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Logarithm</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>log</td>
+<td>log(a) (natural log)</td>
+<td>1 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-odd"><td>log10</td>
+<td>log10(a) (base 10 log)</td>
+<td>1 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-even"><td>log_b</td>
+<td>log(a)/log(b) (base = b)</td>
+<td>2 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-odd"><td>exp</td>
+<td>exp(a)</td>
+<td>1 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-even"><td>10pow</td>
+<td>10**a</td>
+<td>1 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-odd"><td>dB</td>
+<td>10*log10(a)</td>
+<td>1 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-even"><td>dBi</td>
+<td>10**(a/10)</td>
+<td>1 x fric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>Comparison</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>gt</td>
+<td>mask( a &gt;  b )</td>
+<td>1 x f, 1 x ric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-even"><td>ge</td>
+<td>mask( a &gt;= b )</td>
+<td>1 x f, 1 x ric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-odd"><td>lt</td>
+<td>mask( a &lt;  b )</td>
+<td>1 x f, 1 x ric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-even"><td>le</td>
+<td>mask( a &lt;= b )</td>
+<td>1 x f, 1 x ric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-odd"><td>eq</td>
+<td>mask( a == b )</td>
+<td>1 x f, 1 x ric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-even"><td>ne</td>
+<td>mask( a != b )</td>
+<td>1 x f, 1 x ric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-odd"><td>isnan</td>
+<td>mask( isnan(a) )</td>
+<td>1 x f, 1 x ric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-even"><td>notnan</td>
+<td>mask( -isnan(a) )</td>
+<td>1 x f, 1 x ric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>Conversion</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>null2nan</td>
+<td>a[a==b] = nan</td>
+<td>1x f, 1x ric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-even"><td>nan2null</td>
+<td>a[isnan(a)] = b</td>
+<td>1x f, 1x ric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-odd"><td>inf2null</td>
+<td>a[isinf(a)] = b</td>
+<td>1x f, 1x ric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-even"><td>num2null</td>
+<td>a[a==b] = c</td>
+<td>1x f, 2x ric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-odd"><td>null2null</td>
+<td>a[a==b] = c</td>
+<td>1x f, 2x ric</td>
+<td>adapt</td>
+</tr>
+<tr class="row-even"><td></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Enumerate</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>num_null</td>
+<td>sum( a ==  b )</td>
+<td>1x f, 1x ric</td>
+<td>int</td>
+</tr>
+<tr class="row-odd"><td>num_nan</td>
+<td>sum( a ==  nan )</td>
+<td>1 x fric</td>
+<td>int</td>
+</tr>
+<tr class="row-even"><td>num_inf</td>
+<td>sum( a == <a href="#id4"><span class="problematic" id="id5">|inf|</span></a>)</td>
+<td>1 x fric</td>
+<td>int</td>
+</tr>
+<tr class="row-odd"><td>num_neginf</td>
+<td>sum( a == -inf )</td>
+<td>1 x fric</td>
+<td>int</td>
+</tr>
+<tr class="row-even"><td>num_posinf</td>
+<td>sum( a ==  inf )</td>
+<td>1 x fric</td>
+<td>int</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul>
+<li><p class="first">all files must be headerless binary</p>
+</li>
+<li><dl class="first docutils">
+<dt>default file type is single-precision floating point (32-bit); </dt>
+<dd><p class="first last">append type to filename for other types</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>append type or columns to any file as a comma separated list </dt>
+<dd><p class="first last">with no whitespace (ex. file1,type,cols)</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">all operations are element-wise unless otherwise specified</p>
+</li>
+<li><dl class="first docutils">
+<dt>operations are carried out in the order given (i.e. sarmath.py</dt>
+<dd><p class="first last">does not adhere to standard order of operations)</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Add 2 files:</p>
+<div class="highlight-rst"><div class="highlight"><pre>$ sarmath.py file_1 + file_2 = file_3
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-rst"><div class="highlight"><pre>$ sarmath.py file_1 file_2 -add = file_3
+</pre></div>
+</div>
+<p>Multiply a file by 2:</p>
+<div class="highlight-rst"><div class="highlight"><pre>$ sarmath.py file_1 x 2 = file_out
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-rst"><div class="highlight"><pre>$ sarmath.py file_1 2 -mult = file_out
+</pre></div>
+</div>
+<p>Divide two files, cube the quotient, and then multipy by 5:</p>
+<div class="highlight-rst"><div class="highlight"><pre>$ sarmath file_1 / file_2 3 -pow 5 -mult = file_out
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-rst"><div class="highlight"><pre>$ sarmath file_1 file_2 -div 3 -pow 5 -mult = file_out
+</pre></div>
+</div>
+<p>Get the max absolute value of the above example (note the lack of an output file):</p>
+<div class="highlight-rst"><div class="highlight"><pre>$ sarmath file_1 / file_2 3 -pow 5 -mult -abs -max 
+</pre></div>
+</div>
+<p>Magnitude of a single-precision complex-valued data file:</p>
+<div class="highlight-rst"><div class="highlight"><pre>$ sarmath file_1,complex -abs = file_out
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">sarmath</a><ul>
+<li><a class="reference internal" href="#operators">Operators</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#notes">Notes</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/math/sarmath.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<ul class="this-page-menu">
+  <li><a href="/numpy/docs/numpy-docs/math/sarmath.rst">Edit page</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li><a href="../index.html">PySAR</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Brent Minchew.
+      Last updated on Feb 20, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

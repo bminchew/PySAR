@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pysar.image.looks &mdash; PySAR 0.1.0</title>
+    
+    <link rel="stylesheet" href="../../../_static/pysar.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="PySAR 0.1.0" href="../../../index.html" />
+    <link rel="up" title="pysar.image" href="../image.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li><a href="../../../index.html">PySAR</a> &raquo;</li>
+
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../image.html" accesskey="U">pysar.image</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for pysar.image.looks</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Look routine</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">getopt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">_looks_mod</span>
+<span class="kn">from</span> <span class="nn">pysar.utils.gen_tools</span> <span class="kn">import</span> <span class="n">typecomplex</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;look&#39;</span><span class="p">,</span><span class="s">&#39;look2D&#39;</span><span class="p">]</span>
+
+<div class="viewcode-block" id="look"><a class="viewcode-back" href="../../../image/looks.html#pysar.image.looks.look">[docs]</a><span class="k">def</span> <span class="nf">look</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">win</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">   Incoherent averaging (looking) routine</span>
+
+<span class="sd">   Parameters</span>
+<span class="sd">   ----------</span>
+<span class="sd">   data : 2D array</span>
+<span class="sd">      Input data</span>
+<span class="sd">   win : int or list</span>
+<span class="sd">      Filter window size in pixels</span>
+<span class="sd">      scalar values use a square window</span>
+<span class="sd">      list should be in order [across, down]</span>
+<span class="sd">   null : float or complex</span>
+<span class="sd">      Null value to exclude from filter window</span>
+<span class="sd">   verbose : int</span>
+<span class="sd">      1 = print line counter to screen; 0 = don&#39;t</span>
+
+<span class="sd">   Output</span>
+<span class="sd">   ------</span>
+<span class="sd">   D : 2D array</span>
+<span class="sd">      Filtered data</span>
+<span class="sd">   &quot;&quot;&quot;</span>
+   <span class="n">out</span> <span class="o">=</span> <span class="n">look2D</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span><span class="n">win</span><span class="o">=</span><span class="n">win</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="n">null</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">out</span>
+</div>
+<div class="viewcode-block" id="look2D"><a class="viewcode-back" href="../../../image/looks.html#pysar.image.looks.look2D">[docs]</a><span class="k">def</span> <span class="nf">look2D</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">win</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">   Incoherent averaging (looking) routine</span>
+
+<span class="sd">   Parameters</span>
+<span class="sd">   ----------</span>
+<span class="sd">   data : 2D array</span>
+<span class="sd">      Input data</span>
+<span class="sd">   win : int or list</span>
+<span class="sd">      Filter window size in pixels</span>
+<span class="sd">      scalar values use a square window</span>
+<span class="sd">      list should be in order [across, down]</span>
+<span class="sd">   null : float or complex</span>
+<span class="sd">      Null value to exclude from filter window</span>
+<span class="sd">   verbose : int</span>
+<span class="sd">      1 = print line counter to screen; 0 = don&#39;t</span>
+
+<span class="sd">   Output</span>
+<span class="sd">   ------</span>
+<span class="sd">   D : 2D array</span>
+<span class="sd">      Filtered data</span>
+<span class="sd">   &quot;&quot;&quot;</span>
+   <span class="k">try</span><span class="p">:</span>
+      <span class="n">a</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">win</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+         <span class="n">d0</span><span class="p">,</span> <span class="n">d1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">win</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">win</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+      <span class="k">elif</span> <span class="n">a</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+         <span class="n">d0</span><span class="p">,</span> <span class="n">d1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">win</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">win</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+      <span class="k">else</span><span class="p">:</span>
+         <span class="k">print</span><span class="p">(</span><span class="s">&#39;Incorrect window:  must be list length 1 or 2&#39;</span><span class="p">)</span>
+         <span class="k">return</span> <span class="bp">None</span>
+   <span class="k">except</span><span class="p">:</span>
+      <span class="n">d0</span><span class="p">,</span> <span class="n">d1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">win</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">win</span><span class="p">)</span>      
+
+   <span class="k">if</span> <span class="n">null</span><span class="p">:</span>
+      <span class="n">donul</span> <span class="o">=</span> <span class="mi">1</span>
+   <span class="k">else</span><span class="p">:</span>
+      <span class="n">donul</span><span class="p">,</span> <span class="n">null</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.87654321e200</span>
+
+   <span class="n">shp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+   <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+   <span class="n">dtyp</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span>
+
+   <span class="n">outlen</span><span class="p">,</span> <span class="n">inlen</span> <span class="o">=</span> <span class="p">(</span><span class="n">shp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">//</span><span class="n">d1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">shp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">//</span><span class="n">d0</span><span class="p">),</span> <span class="n">shp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">shp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+   <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">:</span>
+      <span class="n">out</span> <span class="o">=</span> <span class="n">_looks_mod</span><span class="o">.</span><span class="n">look2d_real</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">shp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">d1</span><span class="p">,</span><span class="n">d0</span><span class="p">,</span><span class="n">outlen</span><span class="p">,</span><span class="n">donul</span><span class="p">,</span><span class="n">null</span><span class="p">,</span><span class="n">verbose</span><span class="p">)</span>
+   <span class="k">elif</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">:</span>
+      <span class="n">out</span> <span class="o">=</span> <span class="n">_looks_mod</span><span class="o">.</span><span class="n">look2d_double</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">shp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">d1</span><span class="p">,</span><span class="n">d0</span><span class="p">,</span><span class="n">outlen</span><span class="p">,</span><span class="n">donul</span><span class="p">,</span><span class="n">null</span><span class="p">,</span><span class="n">verbose</span><span class="p">)</span>
+   <span class="k">elif</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">complex64</span><span class="p">:</span>
+      <span class="n">out</span> <span class="o">=</span> <span class="n">_looks_mod</span><span class="o">.</span><span class="n">look2d_cmplx</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">shp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">d1</span><span class="p">,</span><span class="n">d0</span><span class="p">,</span><span class="n">outlen</span><span class="p">,</span><span class="n">donul</span><span class="p">,</span><span class="n">null</span><span class="p">,</span><span class="n">verbose</span><span class="p">)</span>    
+   <span class="k">elif</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">:</span>
+      <span class="n">out</span> <span class="o">=</span> <span class="n">_looks_mod</span><span class="o">.</span><span class="n">look2d_dcmplx</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">shp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">d1</span><span class="p">,</span><span class="n">d0</span><span class="p">,</span><span class="n">outlen</span><span class="p">,</span><span class="n">donul</span><span class="p">,</span><span class="n">null</span><span class="p">,</span><span class="n">verbose</span><span class="p">)</span>    
+   <span class="k">else</span><span class="p">:</span>
+      <span class="k">print</span><span class="p">(</span><span class="s">&#39;Unsupported data type...defaulting to float or complex&#39;</span><span class="p">)</span>
+      <span class="n">dtyp</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span>
+      <span class="k">if</span> <span class="n">typecomplex</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+         <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">complex64</span><span class="p">)</span>
+         <span class="n">out</span> <span class="o">=</span> <span class="n">_looks_mod</span><span class="o">.</span><span class="n">look2d_cmplx</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">shp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">d1</span><span class="p">,</span><span class="n">d0</span><span class="p">,</span><span class="n">outlen</span><span class="p">,</span><span class="n">donul</span><span class="p">,</span><span class="n">null</span><span class="p">,</span><span class="n">verbose</span><span class="p">)</span>
+      <span class="k">else</span><span class="p">:</span>
+         <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+         <span class="n">out</span> <span class="o">=</span> <span class="n">_looks_mod</span><span class="o">.</span><span class="n">look2d_real</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">shp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">d1</span><span class="p">,</span><span class="n">d0</span><span class="p">,</span><span class="n">outlen</span><span class="p">,</span><span class="n">donul</span><span class="p">,</span><span class="n">null</span><span class="p">,</span><span class="n">verbose</span><span class="p">)</span>
+      <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtyp</span><span class="p">)</span>
+
+   <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">shp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">//</span><span class="n">d0</span><span class="p">)</span>
+
+
+
+      
+         
+  
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li><a href="../../../index.html">PySAR</a> &raquo;</li>
+
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../image.html" >pysar.image</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Brent Minchew.
+      Last updated on Feb 20, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

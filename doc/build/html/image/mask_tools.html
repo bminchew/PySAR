@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>mask_tools &mdash; PySAR 0.1.0</title>
+    
+    <link rel="stylesheet" href="../_static/pysar.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="PySAR 0.1.0" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li><a href="../index.html">PySAR</a> &raquo;</li>
+ 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="mask-tools">
+<span id="id1"></span><h1>mask_tools<a class="headerlink" href="#mask-tools" title="Permalink to this headline">¶</a></h1>
+<p>Convert polynomial to mask</p>
+<span class="target" id="module-pysar.image.mask_tools"></span><p>mask_tools.py  :  Tools for creating and manipulating masks</p>
+<div class="section" id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<p>poly2mask(polygon,imdim,imtype=np.float32)
+xy2mask(polygon,imdim,imtype=np.float32)
+ll2mask(latlon,imdim,corner,spacing,imtype=np.float32)
+buffermask(mask,width,dx=1.,dy=1.)</p>
+<dl class="function">
+<dt id="pysar.image.mask_tools.poly2mask">
+<tt class="descclassname">pysar.image.mask_tools.</tt><tt class="descname">poly2mask</tt><big>(</big><em>polygon</em>, <em>imdim</em>, <em>imtype=np.float32</em><big>)</big><a class="reference internal" href="../_modules/pysar/image/mask_tools.html#poly2mask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.image.mask_tools.poly2mask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a region-of-interest mask from a polygon.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>polygon</strong> :     {int or float} list of tuples</p>
+<blockquote>
+<div><p>polygon vertices; format [(x0,y0),...,(xn,yn)]</p>
+</div></blockquote>
+<p><strong>imdim</strong> :     {int} list, tuple, or ndarray</p>
+<blockquote>
+<div><p>image dimension (x,y) or (columns,rows)</p>
+</div></blockquote>
+<p><strong>imtype</strong> :     {str or numpy type} (Optional)</p>
+<blockquote class="last">
+<div><p>data type for output image [np.float32]</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Values inside polygon will be True or 1 depending on imtype</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="pysar.image.mask_tools.xy2mask">
+<tt class="descclassname">pysar.image.mask_tools.</tt><tt class="descname">xy2mask</tt><big>(</big><em>polygon</em>, <em>imdim</em>, <em>imtype=np.float32</em><big>)</big><a class="reference internal" href="../_modules/pysar/image/mask_tools.html#xy2mask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.image.mask_tools.xy2mask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a region-of-interest mask from a polygon given in xy image coordinates.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>polygon</strong> :     {int or float} list of tuples</p>
+<blockquote>
+<div><p>polygon vertices; format [(x0,y0),...,(xn,yn)]</p>
+</div></blockquote>
+<p><strong>imdim</strong> :     {int} list, tuple, or ndarray</p>
+<blockquote>
+<div><p>image dimension (x,y) or (columns,rows)</p>
+</div></blockquote>
+<p><strong>imtype</strong> :     {str or numpy type} (Optional)</p>
+<blockquote class="last">
+<div><p>data type for output image [np.float32]</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Values inside polygon will be True or 1 depending on imtype</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="pysar.image.mask_tools.ll2mask">
+<tt class="descclassname">pysar.image.mask_tools.</tt><tt class="descname">ll2mask</tt><big>(</big><em>latlon</em>, <em>imdim</em>, <em>corner</em>, <em>spacing</em>, <em>imtype=np.float32</em><big>)</big><a class="reference internal" href="../_modules/pysar/image/mask_tools.html#ll2mask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.image.mask_tools.ll2mask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a region-of-interest mask from a polygon whose vertices are given in lat/lon.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>latlon</strong> :  {int or float} list of tuples</p>
+<blockquote>
+<div><p>polygon vertices in degrees lat/lon; format: [(lat0,lon0),...,(latn,lonn)]</p>
+</div></blockquote>
+<p><strong>imdim</strong> :  {int} list, tuple, or ndarray</p>
+<blockquote>
+<div><p>image dimension (x,y) or (columns,rows)</p>
+</div></blockquote>
+<p><strong>corner</strong> :  {int or float} list, tuple, or ndarray</p>
+<blockquote>
+<div><p>lat and lon of one image corner; format: [lat,lon]</p>
+</div></blockquote>
+<p><strong>spacing</strong> :  {int or float} list, tuple, or ndarray</p>
+<blockquote>
+<div><p>grid spacing (see notes below); format: [lat_space, lon_space]</p>
+</div></blockquote>
+<p><strong>imtype</strong> :  {str or numpy type} (Optional)</p>
+<blockquote class="last">
+<div><p>data type for output image [np.float32]</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Values inside polygon will be True or 1 depending on imtype</li>
+<li>Spacing is sign-sensitive. The sign of spacing values defines the corner.  
+Ex. [-lat_space,lon_space] is the upper left corner (i.e. stepping one pixel
+in lat and lon from the corner means going south and east)</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="pysar.image.mask_tools.buffermask">
+<tt class="descclassname">pysar.image.mask_tools.</tt><tt class="descname">buffermask</tt><big>(</big><em>mask</em>, <em>width</em>, <em>dx=1.</em>, <em>dy=1.</em><big>)</big><a class="reference internal" href="../_modules/pysar/image/mask_tools.html#buffermask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.image.mask_tools.buffermask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add or remove a buffer zone from a binary mask</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>mask</strong> :   ndarray</p>
+<blockquote>
+<div><p>binary mask (ROI values assumd = 1)</p>
+</div></blockquote>
+<p><strong>width</strong> :   float</p>
+<blockquote>
+<div><p>width of buffer zone (&gt; 0 for outer buffer; &lt; 0 for inner)</p>
+</div></blockquote>
+<p><strong>dx</strong> :   float</p>
+<blockquote>
+<div><p>grid spacing in x direction [1]</p>
+</div></blockquote>
+<p><strong>dy</strong> :   float</p>
+<blockquote class="last">
+<div><p>grid spacing in y direaction [1]</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">mask_tools</a><ul>
+<li><a class="reference internal" href="#contents">Contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/image/mask_tools.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<ul class="this-page-menu">
+  <li><a href="/numpy/docs/numpy-docs/image/mask_tools.rst">Edit page</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li><a href="../index.html">PySAR</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Brent Minchew.
+      Last updated on Feb 20, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>sarphase_detrend &mdash; PySAR 0.1.0</title>
+    
+    <link rel="stylesheet" href="../_static/pysar.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="PySAR 0.1.0" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li><a href="../index.html">PySAR</a> &raquo;</li>
+ 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="sarphase-detrend">
+<span id="id1"></span><h1>sarphase_detrend<a class="headerlink" href="#sarphase-detrend" title="Permalink to this headline">¶</a></h1>
+<p>Fit and remove a 2D polynomial from an image</p>
+<span class="target" id="module-sarphase_detrend"></span><dl class="docutils">
+<dt>sarphase_detrend.py <span class="classifier-delimiter">:</span> <span class="classifier">Fits a surface to an (masked) image and then removes the surface</span></dt>
+<dd>from the entire image</dd>
+</dl>
+<p>usage:</p>
+<div class="highlight-rst"><div class="highlight"><pre>$ sarphase_detrend.py image_file cols [options]
+</pre></div>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p>image_file           :  image file 
+cols                 :  number of columns (or samples) in the image</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">-o <var>order</var></span></kbd></td>
+<td>:  polynomial order for the fitted surface [1]</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-c <var>cor_file</var></span></kbd></td>
+<td>:  correlation filename; optionally append minimum correlation threshold [0.3]</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-m <var>mask_file</var></span></kbd></td>
+<td>:  mask filename; optionally append value to exclude [1]</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-f <var>out_file</var></span></kbd></td>
+<td>:  output filename [image_file + .flat]</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-s <var>bool</var></span></kbd></td>
+<td>:  output best-fit surface [False]</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-n <var>value</var></span></kbd></td>
+<td>:  data null value [0]</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-w <var>bool</var></span></kbd></td>
+<td>:  weight data by correlation values prior to fitting (see notes) [True]</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-p <var>norm</var></span></kbd></td>
+<td>:  L^p norm {1 or 2} [2]</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-x <var>factor</var></span></kbd></td>
+<td>:  column decimation factor [30]</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-y <var>factor</var></span></kbd></td>
+<td>:  row decimation factor [column decimation factor]</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>values should be appended with a comma with no spaces on either side</li>
+<li>weighting is only applied if correlation file is given</li>
+<li>correlation threshold is not considered if weighting is applied (i.e. unless &#8216;-w False&#8217; is given)</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">sarphase_detrend</a><ul>
+<li><a class="reference internal" href="#parameters">Parameters</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+<li><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/insar/sarphase_detrend.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<ul class="this-page-menu">
+  <li><a href="/numpy/docs/numpy-docs/insar/sarphase_detrend.rst">Edit page</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+<li><a href="../index.html">PySAR</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Brent Minchew.
+      Last updated on Feb 20, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

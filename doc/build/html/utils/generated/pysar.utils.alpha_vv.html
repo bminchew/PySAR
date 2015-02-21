@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pysar.utils.alpha_vv &mdash; PySAR 0.1.0</title>
+    
+    <link rel="stylesheet" href="../../_static/pysar.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="PySAR 0.1.0" href="../../index.html" />
+    <link rel="up" title="Utils (pysar.utils)" href="../utils.html" />
+    <link rel="next" title="pysar.utils.d2r" href="pysar.utils.d2r.html" />
+    <link rel="prev" title="pysar.utils.alpha_hh" href="pysar.utils.alpha_hh.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pysar.utils.d2r.html" title="pysar.utils.d2r"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pysar.utils.alpha_hh.html" title="pysar.utils.alpha_hh"
+             accesskey="P">previous</a> |</li>
+<li><a href="../../index.html">PySAR</a> &raquo;</li>
+
+          <li><a href="../../toolbox.html" >PySAR</a> &raquo;</li>
+          <li><a href="../utils.html" accesskey="U">Utils (<tt class="docutils literal"><span class="pre">pysar.utils</span></tt>)</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="pysar-utils-alpha-vv">
+<h1>pysar.utils.alpha_vv<a class="headerlink" href="#pysar-utils-alpha-vv" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="pysar.utils.alpha_vv">
+<tt class="descclassname">pysar.utils.</tt><tt class="descname">alpha_vv</tt><big>(</big><em>eps</em>, <em>theta</em>, <em>units='deg'</em><big>)</big><a class="headerlink" href="#pysar.utils.alpha_vv" title="Permalink to this definition">¶</a></dt>
+<dd><p>VV Bragg scattering coefficient for an untilted plane</p>
+<blockquote>
+<div>alpha_vv = (eps - 1.)*(sis - eps*(1+sis))/(eps*ci + sqr)**2</div></blockquote>
+<p>where sqr = sqrt(eps - sin^2(theta)), ci = cosd(theta), sis = sind^2(theta).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>eps</strong> :  complex, float, or ndarray</p>
+<blockquote>
+<div><p>relative permittivity (dielectric constant)</p>
+</div></blockquote>
+<p><strong>theta</strong> :  complex, float, or ndarray</p>
+<blockquote>
+<div><p>incidence angle in units</p>
+</div></blockquote>
+<p><strong>units</strong> :  str</p>
+<blockquote class="last">
+<div><p>incidence angle units: {&#8216;deg&#8217; or &#8216;rad&#8217;} [&#8216;deg&#8217;]</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>If both eps and theta are arrays, they must have the same shape. Output will be element-wise.</li>
+</ul>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pysar.utils.alpha_hh.html"
+                        title="previous chapter">pysar.utils.alpha_hh</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pysar.utils.d2r.html"
+                        title="next chapter">pysar.utils.d2r</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/utils/generated/pysar.utils.alpha_vv.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<ul class="this-page-menu">
+  <li><a href="/numpy/docs/numpy-docs/utils/generated/pysar.utils.alpha_vv.rst">Edit page</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pysar.utils.d2r.html" title="pysar.utils.d2r"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pysar.utils.alpha_hh.html" title="pysar.utils.alpha_hh"
+             >previous</a> |</li>
+<li><a href="../../index.html">PySAR</a> &raquo;</li>
+
+          <li><a href="../../toolbox.html" >PySAR</a> &raquo;</li>
+          <li><a href="../utils.html" >Utils (<tt class="docutils literal"><span class="pre">pysar.utils</span></tt>)</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Brent Minchew.
+      Last updated on Feb 20, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
