@@ -18,6 +18,14 @@ Boxcar filters (:mod:`pysar.signal.boxfilter`)
    boxcar1d          1D filter
    boxcar2d          2D filter
 
+Median filters (:mod:`pysar.signal.medfilter`)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. autosummary::
+   :toctree: generated/
+
+   medfilt2d         2D median filter
+
 Butterworth filters (:mod:`pysar.signal.butters`)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -48,11 +56,13 @@ import sys,os
 import numpy as np
 
 import boxfilter
+import medfilter
 import butters
 import special
  
-__all__ = ['boxfilter','butters','special']
+__all__ = ['boxfilter','medfilter','butters','special']
 
 from boxfilter import *
+from medfilter import *
 from butters import *
 from special import *   

@@ -60,7 +60,7 @@
 <span class="c">###===========================================================================</span>
 <div class="viewcode-block" id="progressbar"><a class="viewcode-back" href="../../../etc/misc.html#pysar.etc.misc.progressbar">[docs]</a><span class="k">def</span> <span class="nf">progressbar</span><span class="p">(</span><span class="n">index</span><span class="p">,</span><span class="n">length</span><span class="p">,</span><span class="n">modval</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">prevbar</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
    <span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">   Prints a progress bar to the screen</span>
+<span class="sd">   Prints a wget-like progress bar to the screen</span>
 
 <span class="sd">   ex.  [=====&gt;      ] 50%</span>
 
@@ -92,7 +92,8 @@
             <span class="n">prog</span> <span class="o">+=</span> <span class="s">&#39;&gt;&#39;</span> 
             <span class="n">point</span> <span class="o">=</span> <span class="bp">False</span>
          <span class="k">else</span><span class="p">:</span>
-            <span class="n">prog</span> <span class="o">+=</span> <span class="s">&#39; &#39;</span> 
+            <span class="n">prog</span> <span class="o">+=</span> <span class="s">&#39;=&#39;</span> 
+            <span class="n">percent</span> <span class="o">=</span> <span class="mi">100</span>
    <span class="n">prog</span> <span class="o">+=</span> <span class="s">&#39;]&#39;</span> 
    <span class="k">if</span> <span class="n">prevbar</span> <span class="o">!=</span> <span class="n">prog</span><span class="p">:</span>
       <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s"> </span><span class="si">%3d%%</span><span class="se">\r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">prog</span><span class="p">,</span><span class="n">percent</span><span class="p">))</span>
@@ -155,7 +156,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2014, Brent Minchew.
-      Last updated on Feb 20, 2015.
+      Last updated on Mar 11, 2015.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
