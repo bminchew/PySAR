@@ -10,6 +10,20 @@ from math import pi
 __all__ = ['d2r','r2d','acosd','arccosd','asind','arcsind','cosd','sind',
             'iscomplex','anycomplex','allcomplex','typecomplex']
 ###---------------------------------------------------------------------------------------------
+def is_power2(n):
+   '''
+   Test if n is a power of 2
+   '''
+   try:
+      check = isinstance(n,(int,long))
+   except NameError:
+      check = isinstance(n,int)
+   if not check:
+      return False
+   else:
+      return n != 0 and n & n-1 == 0
+
+###---------------------------------------------------------------------------------------------
 def d2r(n):
    """ 
    degrees to radians 

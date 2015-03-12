@@ -42,9 +42,8 @@ from pysar.etc.excepts import InputError
 def main():
    pars = Params()
 
-   fid = open(pars.infile,'r')
-   data = np.fromfile(fid,dtype=pars.dtype).reshape(-1,pars.cols)
-   fid.close()
+   with open(pars.infile,'r') as fid:
+      data = np.fromfile(fid,dtype=pars.dtype).reshape(-1,pars.cols)
 
    out = boxfilter.boxcar2d(data=data,window=pars.win,null=pars.null,
                nullset=pars.nullset,thread='auto',numthrd=8,tdthrsh=1e5)
@@ -53,9 +52,8 @@ def main():
       nullmask = np.abs(out - pars.null) < 1.e-7
       out[nullmask] = np.nan
 
-   fid = open(pars.outfile,'w')
-   out.flatten().tofile(fid)
-   fid.close()
+   with open(pars.outfile,'w') as fid:
+      out.flatten().tofile(fid)
 
 class Params():
    def __init__(self):

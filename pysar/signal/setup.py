@@ -65,6 +65,16 @@ def configuration(parent_package='',top_path=None):
             library_dirs=[],
             include_dirs=[npdir,'filter_modules'],
             extra_compile_args=CFLAGS) 
+   config.add_library('medfiltpack',
+            sources=['filter_modules/medfilt.cpp'],
+            headers=['filter_modules/medfilt.h'],
+            extra_compile_args=CFLAGS)
+   config.add_extension('_medfilt_modc',sources=['filter_modules/medfilt_modc.cpp'],
+            depends=['filter_modules/medfilt.h'],
+            libraries=['medfiltpack'],
+            library_dirs=[],
+            include_dirs=[npdir,'filter_modules'],
+            extra_compile_args=CFLAGS)
    config.add_extension('_xapiir_sub',sources=['filter_modules/xapiir_sub.f'],
             libraries=[],
             library_dirs=[],

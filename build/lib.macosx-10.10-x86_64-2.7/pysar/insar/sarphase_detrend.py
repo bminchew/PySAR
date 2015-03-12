@@ -49,13 +49,7 @@ def main(args):
 ###==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==###
 class DeTrend():
    def __init__(self,args):
-      try:
-         opts, args = getopt.gnu_getopt(args, 'f:o:p:c:m:n:x:y:w:s:')
-      except getopt.GetoptError as err:
-         print(str(err))
-         s = raw_input('do you wish to continue? [y or n]:  ')
-         if 'n' in s.lower():
-            sys.exit()
+      opts, args = getopt.gnu_getopt(args, 'f:o:p:c:m:n:x:y:w:s:')
 
       self.unwf  = args[0]
       self.cols  = np.int32(args[1])
@@ -118,15 +112,19 @@ class DeTrend():
    ###--------------------------------------###
    def read_data(self):
       print('reading data files')
+      eps = np.finfo(np.float32).eps 
+      ceps = 1. - eps
       # read in correlation data and mask values less than threshold 
       if self.corf is not None:
          fid = open(self.corf,'r')
-         data = np.fromfile(fid, dtype=np.float32).reshape(-1,self.cols)
+         data = np.fromfile(fid, dtype=np.float32).reshape(-1,self.cols) 
          fid.close()
          
          if self.wbool:   # if weighting = True, set cor threshold so that all correlation values are included
             self.cthresh = 0.
             self.corarr = data.copy()
+            self.corarr[self.corarr < eps] = eps
+            self.corarr[self.corarr > ceps] = ceps 
          self.mask = data > self.cthresh
       else:
          self.wbool = False
@@ -148,11 +146,11 @@ class DeTrend():
       fid.close()
 
       if self.maskf is not None:
-         self.mask *= np.abs(self.unw - self.null) > 1.e-7
+         self.mask *= np.abs(self.unw - self.null) > eps
       elif self.corf is not None:
-         self.mask *= np.abs(self.unw - self.null) > 1.e-7
+         self.mask *= np.abs(self.unw - self.null) > eps
       else:
-         self.mask = np.abs(self.unw - self.null) > 1.e-7
+         self.mask = np.abs(self.unw - self.null) > eps
 
       self.lines = np.shape(self.unw)[0]
       print('done reading')
