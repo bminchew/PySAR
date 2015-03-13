@@ -124,7 +124,7 @@ def setup_package():
          'Topic :: Scientific/Engineering'],
          configuration=configuration)
    finally:
-      print(' ')
+      print('')
       #del sys.path[0]    ### part of Python3 upgrade
       #os.chdir(old_path)
 
