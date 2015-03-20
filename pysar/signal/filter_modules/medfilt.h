@@ -9,6 +9,7 @@
 #include <vector>
 #include <pthread.h>
 #include <cmath>
+#include <limits>
 
 #ifndef STRUCT_MEDFILT_PROBLEM
 #define STRUCT_MEDFILT_PROBLEM
