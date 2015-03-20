@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pysar.signal.medfilt2d &mdash; PySAR 0.1.0</title>
+    
+    <link rel="stylesheet" href="../../_static/pysar.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="PySAR 0.1.0" href="../../index.html" />
+    <link rel="up" title="Signal (pysar.signal)" href="../signal.html" />
+    <link rel="next" title="pysar.signal.butter" href="pysar.signal.butter.html" />
+    <link rel="prev" title="pysar.signal.boxcar2d" href="pysar.signal.boxcar2d.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pysar.signal.butter.html" title="pysar.signal.butter"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pysar.signal.boxcar2d.html" title="pysar.signal.boxcar2d"
+             accesskey="P">previous</a> |</li>
+<li><a href="../../index.html">PySAR</a> &raquo;</li>
+
+          <li><a href="../../toolbox.html" >PySAR</a> &raquo;</li>
+          <li><a href="../signal.html" accesskey="U">Signal (<tt class="docutils literal"><span class="pre">pysar.signal</span></tt>)</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="pysar-signal-medfilt2d">
+<h1>pysar.signal.medfilt2d<a class="headerlink" href="#pysar-signal-medfilt2d" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="pysar.signal.medfilt2d">
+<tt class="descclassname">pysar.signal.</tt><tt class="descname">medfilt2d</tt><big>(</big><em>data</em>, <em>window</em>, <em>null=None</em>, <em>numthrd=8</em><big>)</big><a class="headerlink" href="#pysar.signal.medfilt2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d median filter</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>data</strong> :   2d array</p>
+<blockquote>
+<div><p>array to be filtered</p>
+</div></blockquote>
+<p><strong>window</strong> :   int or 2-element array-like (x,y)</p>
+<blockquote>
+<div><p>window size for filter. If int, window is square.</p>
+</div></blockquote>
+<p><strong>null</strong> :   float</p>
+<blockquote>
+<div><p>null value to exclude from filter [None]</p>
+</div></blockquote>
+<p><strong>numthrd</strong> :   int</p>
+<blockquote class="last">
+<div><p>number of pthreads [8]</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pysar.signal.boxcar2d.html"
+                        title="previous chapter">pysar.signal.boxcar2d</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pysar.signal.butter.html"
+                        title="next chapter">pysar.signal.butter</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/signal/generated/pysar.signal.medfilt2d.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<ul class="this-page-menu">
+  <li><a href="/numpy/docs/numpy-docs/signal/generated/pysar.signal.medfilt2d.rst">Edit page</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pysar.signal.butter.html" title="pysar.signal.butter"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pysar.signal.boxcar2d.html" title="pysar.signal.boxcar2d"
+             >previous</a> |</li>
+<li><a href="../../index.html">PySAR</a> &raquo;</li>
+
+          <li><a href="../../toolbox.html" >PySAR</a> &raquo;</li>
+          <li><a href="../signal.html" >Signal (<tt class="docutils literal"><span class="pre">pysar.signal</span></tt>)</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Brent Minchew.
+      Last updated on Mar 11, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
