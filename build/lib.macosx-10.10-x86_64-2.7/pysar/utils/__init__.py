@@ -35,6 +35,14 @@ General tools (:mod:`pysar.utils.gen_tools`)
    allcomplex        Tests for all complex values in an array
    typecomplex       Tests for any valid type of complex value
 
+Geographic tools (:mod:`pysar.utils.geo_tools`)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. autosummary::
+    :toctree: generated/
+
+   radius_lat        Planet radius at latitude  
+
 Scripts
 -------
 
@@ -43,5 +51,6 @@ None
 import sys,os
 import numpy as np
 from gen_tools import *
+from geo_tools import *
 from sartools import *
 
