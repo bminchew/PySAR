@@ -209,7 +209,7 @@
         <span class="n">window</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">width</span><span class="o">//</span><span class="n">dx</span><span class="p">)),</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">width</span><span class="o">//</span><span class="n">dy</span><span class="p">))]</span>
         <span class="n">fmask</span> <span class="o">=</span> <span class="n">boxfilter</span><span class="o">.</span><span class="n">boxcar2d</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span><span class="n">window</span><span class="p">)</span> 
  
-    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">width</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">width</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">onemask</span> <span class="o">=</span> <span class="n">fmask</span> <span class="o">&gt;</span> <span class="mf">0.99</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">onemask</span> <span class="o">=</span> <span class="n">fmask</span> <span class="o">&gt;</span> <span class="mf">0.01</span>
@@ -259,7 +259,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2014, Brent Minchew.
-      Last updated on Mar 11, 2015.
+      Last updated on Aug 17, 2015.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>

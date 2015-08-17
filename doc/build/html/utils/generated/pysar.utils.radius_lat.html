@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pysar.image.buffermask &mdash; PySAR 0.1.0</title>
+    <title>pysar.utils.radius_lat &mdash; PySAR 0.1.0</title>
     
     <link rel="stylesheet" href="../../_static/pysar.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -23,10 +23,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="PySAR 0.1.0" href="../../index.html" />
-    <link rel="up" title="Image (pysar.image)" href="../image.html" />
-    <link rel="next" title="pysar.image.writeHDF5" href="pysar.image.writeHDF5.html" />
-    <link rel="prev" title="pysar.image.xy2mask" href="pysar.image.xy2mask.html" /> 
+    <link rel="top" title="PySAR 0.1.0" href="../../index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -38,16 +35,8 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="pysar.image.writeHDF5.html" title="pysar.image.writeHDF5"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="pysar.image.xy2mask.html" title="pysar.image.xy2mask"
-             accesskey="P">previous</a> |</li>
 <li><a href="../../index.html">PySAR</a> &raquo;</li>
-
-          <li><a href="../../toolbox.html" >PySAR</a> &raquo;</li>
-          <li><a href="../image.html" accesskey="U">Image (<tt class="docutils literal"><span class="pre">pysar.image</span></tt>)</a> &raquo;</li> 
+ 
       </ul>
     </div>  
 
@@ -56,31 +45,23 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="pysar-image-buffermask">
-<h1>pysar.image.buffermask<a class="headerlink" href="#pysar-image-buffermask" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="pysar-utils-radius-lat">
+<h1>pysar.utils.radius_lat<a class="headerlink" href="#pysar-utils-radius-lat" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
-<dt id="pysar.image.buffermask">
-<tt class="descclassname">pysar.image.</tt><tt class="descname">buffermask</tt><big>(</big><em>mask</em>, <em>width</em>, <em>dx=1.</em>, <em>dy=1.</em><big>)</big><a class="headerlink" href="#pysar.image.buffermask" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add or remove a buffer zone from a binary mask</p>
+<dt id="pysar.utils.radius_lat">
+<tt class="descclassname">pysar.utils.</tt><tt class="descname">radius_lat</tt><big>(</big><em>latitude</em>, <em>a=6378.137</em>, <em>b=6356.7523</em><big>)</big><a class="headerlink" href="#pysar.utils.radius_lat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the radius of a planet at a given latitude</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>mask</strong> :   ndarray</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>latitude</strong> :       float or array-like</p>
 <blockquote>
-<div><p>binary mask (ROI values assumd = 1)</p>
+<div><p>Geodetic latitude in degrees</p>
 </div></blockquote>
-<p><strong>width</strong> :   float</p>
-<blockquote>
-<div><p>width of buffer zone (&gt; 0 for outer buffer; &lt; 0 for inner)</p>
-</div></blockquote>
-<p><strong>dx</strong> :   float</p>
-<blockquote>
-<div><p>grid spacing in x direction [1]</p>
-</div></blockquote>
-<p><strong>dy</strong> :   float</p>
+<p><strong>a,b</strong> :       float</p>
 <blockquote class="last">
-<div><p>grid spacing in y direaction [1]</p>
+<div><p>semi-major and semi-minor axis [Earth values]</p>
 </div></blockquote>
 </td>
 </tr>
@@ -96,19 +77,13 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="pysar.image.xy2mask.html"
-                        title="previous chapter">pysar.image.xy2mask</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="pysar.image.writeHDF5.html"
-                        title="next chapter">pysar.image.writeHDF5</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="../../_sources/image/generated/pysar.image.buffermask.txt"
+    <li><a href="../../_sources/utils/generated/pysar.utils.radius_lat.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <ul class="this-page-menu">
-  <li><a href="/numpy/docs/numpy-docs/image/generated/pysar.image.buffermask.rst">Edit page</a></li>
+  <li><a href="/numpy/docs/numpy-docs/utils/generated/pysar.utils.radius_lat.rst">Edit page</a></li>
 </ul>
 
 <div id="searchbox" style="display: none">
@@ -138,16 +113,8 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="pysar.image.writeHDF5.html" title="pysar.image.writeHDF5"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="pysar.image.xy2mask.html" title="pysar.image.xy2mask"
-             >previous</a> |</li>
 <li><a href="../../index.html">PySAR</a> &raquo;</li>
-
-          <li><a href="../../toolbox.html" >PySAR</a> &raquo;</li>
-          <li><a href="../image.html" >Image (<tt class="docutils literal"><span class="pre">pysar.image</span></tt>)</a> &raquo;</li> 
+ 
       </ul>
     </div>
     <div class="footer">
