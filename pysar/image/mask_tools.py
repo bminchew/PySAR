@@ -158,7 +158,7 @@ def buffermask(mask,width,dx=1.,dy=1.):
         window = [int(np.abs(width//dx)), int(np.abs(width//dy))]
         fmask = boxfilter.boxcar2d(mask.astype(np.float32),window) 
  
-    if np.sign(width) == -1:
+    if np.sign(width) < 0:
         onemask = fmask > 0.99
     else:
         onemask = fmask > 0.01
