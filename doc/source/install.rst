@@ -4,14 +4,14 @@
 Getting Started
 ===============
 
-PySAR does not currently support Python 3.
+PySAR does not currently support Python 3, but will soon.
 
 Download
 --------
 
 .. code-block:: bash
 
-   $ git clone from somewhere 
+   $ git clone https://github.com/bminchew/PySAR 
 
 Installation
 ------------
