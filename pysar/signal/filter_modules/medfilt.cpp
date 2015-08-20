@@ -44,12 +44,13 @@ void* f_medfilter2d(void* arg) {
             }
          } else if (k == 1) {
             outval = chip[0];
-         } else if (k % 2 == 0) {
-            std::partial_sort(chip.begin(),chip.begin()+kh,chip.begin()+k);
-            outval = 0.5*(chip[kh-1]+chip[kh]);
          } else {
             std::nth_element(chip.begin(),chip.begin()+kh,chip.begin()+k);
-            outval = chip[kh];
+            if (k % 2 == 0) {
+                outval = 0.5*(*std::max_element(chip.begin(),chip.begin()+kh-1)+chip[kh]);
+            } else {
+                outval = chip[kh];
+            }
          }
          s->pr->outarr[i*cols+j] = outval;
       }
@@ -99,12 +100,13 @@ void* d_medfilter2d(void* arg) {
             }
          } else if (k == 1) {
             outval = chip[0];
-         } else if (k % 2 == 0) {
-            std::partial_sort(chip.begin(),chip.begin()+kh,chip.begin()+k);
-            outval = 0.5*(chip[kh-1]+chip[kh]);
          } else {
             std::nth_element(chip.begin(),chip.begin()+kh,chip.begin()+k);
-            outval = chip[kh];
+            if (k % 2 == 0) {
+                outval = 0.5*(*std::max_element(chip.begin(),chip.begin()+kh-1)+chip[kh]);
+            } else {
+                outval = chip[kh];
+            }
          }
          s->pr->d_outarr[i*cols+j] = outval;
       }
