@@ -15,8 +15,8 @@ Install
 -------
 python setup.py install [--prefix=/some/install/directory] 
 
-Requiremented packages
-----------------------
+Required packages
+-----------------
 - Python 2.6 or greater 
 - Numpy 1.6 or greater
 - Scipy 1.10 or greater
