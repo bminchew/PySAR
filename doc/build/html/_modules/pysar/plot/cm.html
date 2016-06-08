@@ -24,28 +24,18 @@
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <link rel="top" title="PySAR 0.1.0" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" /> 
-  </head>
-  <body>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-<li><a href="../../../index.html">PySAR</a> &raquo;</li>
+    <link rel="up" title="Module code" href="../../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
 
-          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
-      </ul>
-    </div>  
+  </head>
+  <body role="document">  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <h1>Source code for pysar.plot.cm</h1><div class="highlight"><pre>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -110,24 +100,24 @@
 <div class="viewcode-block" id="load_ncl"><a class="viewcode-back" href="../../../plot/cm.html#pysar.plot.cm.load_ncl">[docs]</a><span class="k">def</span> <span class="nf">load_ncl</span><span class="p">():</span>
    <span class="kn">import</span> <span class="nn">ncl</span></div>
 <div class="viewcode-block" id="load_grass"><a class="viewcode-back" href="../../../plot/cm.html#pysar.plot.cm.load_grass">[docs]</a><span class="k">def</span> <span class="nf">load_grass</span><span class="p">():</span>
-   <span class="kn">import</span> <span class="nn">grass</span>
+   <span class="kn">import</span> <span class="nn">grass</span></div>
 
 <span class="c">###==========================================================================</span>
-</div>
+
 <div class="viewcode-block" id="get_options"><a class="viewcode-back" href="../../../plot/cm.html#pysar.plot.cm.get_options">[docs]</a><span class="k">def</span> <span class="nf">get_options</span><span class="p">():</span>
    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">   Print available colormaps</span>
 <span class="sd">   &#39;&#39;&#39;</span>
-   <span class="k">print</span><span class="p">(</span><span class="n">cptdic</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-</div>
+   <span class="k">print</span><span class="p">(</span><span class="n">cptdic</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
 <div class="viewcode-block" id="options"><a class="viewcode-back" href="../../../plot/cm.html#pysar.plot.cm.options">[docs]</a><span class="k">def</span> <span class="nf">options</span><span class="p">():</span>
    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">   Print available colormaps</span>
 <span class="sd">   &#39;&#39;&#39;</span>
-   <span class="n">get_options</span><span class="p">()</span>
+   <span class="n">get_options</span><span class="p">()</span></div>
 
 <span class="c">###-----------------------------------------------------------</span>
-<span class="c">###-----------------------------------------------------------</span></div>
+<span class="c">###-----------------------------------------------------------</span>
 <span class="k">try</span><span class="p">:</span>
    <span class="n">t_cdict</span> <span class="o">=</span> <span class="n">_read_pkl</span><span class="p">()</span>
    <span class="n">cmap_d</span> <span class="o">=</span> <span class="n">_cmap_d_from_dict</span><span class="p">(</span><span class="n">t_cdict</span><span class="p">)</span>
@@ -140,15 +130,29 @@
    <span class="k">except</span><span class="p">:</span>
       <span class="k">pass</span> 
 <span class="nb">locals</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">cmap_d</span><span class="p">)</span>
+
+
+
+
+
+
 </pre></div>
 
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
 
-<div id="searchbox" style="display: none">
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
       <input type="text" name="q" />
@@ -166,24 +170,17 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-<li><a href="../../../index.html">PySAR</a> &raquo;</li>
-
-          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
-      </ul>
-    </div>
     <div class="footer">
-        &copy; Copyright 2014, Brent Minchew.
-      Last updated on Aug 20, 2015.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      &copy;2014, Brent Minchew.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
     </div>
+
+    
+
+    
   </body>
 </html>

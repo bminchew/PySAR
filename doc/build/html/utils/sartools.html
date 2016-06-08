@@ -23,27 +23,18 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="PySAR 0.1.0" href="../index.html" /> 
+    <link rel="top" title="PySAR 0.1.0" href="../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
   </head>
-  <body>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-<li><a href="../index.html">PySAR</a> &raquo;</li>
- 
-      </ul>
-    </div>  
+  <body role="document">  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="sartools">
 <span id="id1"></span><h1>sartools<a class="headerlink" href="#sartools" title="Permalink to this headline">¶</a></h1>
@@ -51,7 +42,7 @@
 <span class="target" id="module-pysar.utils.sartools"></span><p>SAR-specific tools</p>
 <dl class="function">
 <dt id="pysar.utils.sartools.inc2range">
-<tt class="descclassname">pysar.utils.sartools.</tt><tt class="descname">inc2range</tt><big>(</big><em>inc</em>, <em>h=12495.</em>, <em>rho_0=13450.4278</em>, <em>Re=6371000.</em>, <em>xlook=3.</em>, <em>xspace=1.665514</em>, <em>units='deg'</em><big>)</big><a class="reference internal" href="../_modules/pysar/utils/sartools.html#inc2range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.utils.sartools.inc2range" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pysar.utils.sartools.</code><code class="descname">inc2range</code><span class="sig-paren">(</span><em>inc</em>, <em>h=12495.</em>, <em>rho_0=13450.4278</em>, <em>Re=6371000.</em>, <em>xlook=3.</em>, <em>xspace=1.665514</em>, <em>units='deg'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysar/utils/sartools.html#inc2range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.utils.sartools.inc2range" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes range bin for a given incidence angle</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -93,7 +84,7 @@
 
 <dl class="function">
 <dt id="pysar.utils.sartools.range2inc">
-<tt class="descclassname">pysar.utils.sartools.</tt><tt class="descname">range2inc</tt><big>(</big><em>r</em>, <em>h=12495.</em>, <em>rho_0=13450.4278</em>, <em>Re=6371000.</em>, <em>xlook=3.</em>, <em>xspace=1.665514</em>, <em>units='deg'</em><big>)</big><a class="reference internal" href="../_modules/pysar/utils/sartools.html#range2inc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.utils.sartools.range2inc" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pysar.utils.sartools.</code><code class="descname">range2inc</code><span class="sig-paren">(</span><em>r</em>, <em>h=12495.</em>, <em>rho_0=13450.4278</em>, <em>Re=6371000.</em>, <em>xlook=3.</em>, <em>xspace=1.665514</em>, <em>units='deg'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysar/utils/sartools.html#range2inc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.utils.sartools.range2inc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes incidence angle for a given range bin</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -135,7 +126,7 @@
 
 <dl class="function">
 <dt id="pysar.utils.sartools.alpha_hh">
-<tt class="descclassname">pysar.utils.sartools.</tt><tt class="descname">alpha_hh</tt><big>(</big><em>eps</em>, <em>theta</em>, <em>units='deg'</em><big>)</big><a class="reference internal" href="../_modules/pysar/utils/sartools.html#alpha_hh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.utils.sartools.alpha_hh" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pysar.utils.sartools.</code><code class="descname">alpha_hh</code><span class="sig-paren">(</span><em>eps</em>, <em>theta</em>, <em>units='deg'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysar/utils/sartools.html#alpha_hh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.utils.sartools.alpha_hh" title="Permalink to this definition">¶</a></dt>
 <dd><p>HH Bragg scattering coefficient for an untilted plane</p>
 <blockquote>
 <div>alpha_hh = (cos(theta) - sqr)/(cos(theta) + sqr)</div></blockquote>
@@ -168,7 +159,7 @@
 
 <dl class="function">
 <dt id="pysar.utils.sartools.alpha_vv">
-<tt class="descclassname">pysar.utils.sartools.</tt><tt class="descname">alpha_vv</tt><big>(</big><em>eps</em>, <em>theta</em>, <em>units='deg'</em><big>)</big><a class="reference internal" href="../_modules/pysar/utils/sartools.html#alpha_vv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.utils.sartools.alpha_vv" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pysar.utils.sartools.</code><code class="descname">alpha_vv</code><span class="sig-paren">(</span><em>eps</em>, <em>theta</em>, <em>units='deg'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysar/utils/sartools.html#alpha_vv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.utils.sartools.alpha_vv" title="Permalink to this definition">¶</a></dt>
 <dd><p>VV Bragg scattering coefficient for an untilted plane</p>
 <blockquote>
 <div>alpha_vv = (eps - 1.)*(sis - eps*(1+sis))/(eps*ci + sqr)**2</div></blockquote>
@@ -205,18 +196,26 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/utils/sartools.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/utils/sartools.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
 <ul class="this-page-menu">
   <li><a href="/numpy/docs/numpy-docs/utils/sartools.rst">Edit page</a></li>
 </ul>
 
-<div id="searchbox" style="display: none">
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
@@ -234,23 +233,20 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-<li><a href="../index.html">PySAR</a> &raquo;</li>
- 
-      </ul>
-    </div>
     <div class="footer">
-        &copy; Copyright 2014, Brent Minchew.
-      Last updated on Aug 20, 2015.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      &copy;2014, Brent Minchew.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+      |
+      <a href="../_sources/utils/sartools.txt"
+          rel="nofollow">Page source</a>
     </div>
+
+    
+
+    
   </body>
 </html>

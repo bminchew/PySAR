@@ -24,29 +24,18 @@
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <link rel="top" title="PySAR 0.1.0" href="../../../index.html" />
-    <link rel="up" title="pysar.signal" href="../signal.html" /> 
-  </head>
-  <body>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-<li><a href="../../../index.html">PySAR</a> &raquo;</li>
+    <link rel="up" title="Module code" href="../../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
 
-          <li><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li><a href="../signal.html" accesskey="U">pysar.signal</a> &raquo;</li> 
-      </ul>
-    </div>  
+  </head>
+  <body role="document">  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <h1>Source code for pysar.signal.conefilter</h1><div class="highlight"><pre>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -63,7 +52,7 @@
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;conefilter2d&#39;</span><span class="p">]</span>
 
-<div class="viewcode-block" id="conefilter2d"><a class="viewcode-back" href="../../../signal/conefilter.html#pysar.signal.conefilter.conefilter2d">[docs]</a><span class="k">def</span> <span class="nf">conefilter2d</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">window</span><span class="p">,</span><span class="n">dx</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span><span class="n">dy</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">numthrd</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
+<div class="viewcode-block" id="conefilter2d"><a class="viewcode-back" href="../../../signal/special.html#pysar.signal.conefilter.conefilter2d">[docs]</a><span class="k">def</span> <span class="nf">conefilter2d</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">window</span><span class="p">,</span><span class="n">dx</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span><span class="n">dy</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">numthrd</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">   conefilter2d(data,window,dx=1.,dy=1.,null=None)</span>
 
@@ -151,18 +140,26 @@
    <span class="k">if</span> <span class="n">anyinf</span><span class="p">:</span>
       <span class="n">data</span><span class="p">[</span><span class="n">infmask</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
 
-   <span class="k">return</span> <span class="n">data</span>
+   <span class="k">return</span> <span class="n">data</span></div>
 
- </div>
+ 
 </pre></div>
 
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
 
-<div id="searchbox" style="display: none">
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
       <input type="text" name="q" />
@@ -180,25 +177,17 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-<li><a href="../../../index.html">PySAR</a> &raquo;</li>
-
-          <li><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li><a href="../signal.html" >pysar.signal</a> &raquo;</li> 
-      </ul>
-    </div>
     <div class="footer">
-        &copy; Copyright 2014, Brent Minchew.
-      Last updated on Aug 20, 2015.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      &copy;2014, Brent Minchew.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
     </div>
+
+    
+
+    
   </body>
 </html>

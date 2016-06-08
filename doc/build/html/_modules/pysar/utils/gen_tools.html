@@ -24,29 +24,18 @@
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <link rel="top" title="PySAR 0.1.0" href="../../../index.html" />
-    <link rel="up" title="pysar.utils" href="../utils.html" /> 
-  </head>
-  <body>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-<li><a href="../../../index.html">PySAR</a> &raquo;</li>
+    <link rel="up" title="Module code" href="../../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
 
-          <li><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li><a href="../utils.html" accesskey="U">pysar.utils</a> &raquo;</li> 
-      </ul>
-    </div>  
+  </head>
+  <body role="document">  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <h1>Source code for pysar.utils.gen_tools</h1><div class="highlight"><pre>
 <span class="sd">&#39;&#39;&#39;</span>
@@ -75,19 +64,19 @@
       <span class="k">return</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">&amp;</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span>
 
 <span class="c">###---------------------------------------------------------------------------------------------</span>
-<div class="viewcode-block" id="d2r"><a class="viewcode-back" href="../../../utils/gen_tools.html#pysar.utils.gen_tools.d2r">[docs]</a><span class="k">def</span> <span class="nf">d2r</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<div class="viewcode-block" id="d2r"><a class="viewcode-back" href="../../../utils/generated/pysar.utils.d2r.html#pysar.utils.gen_tools.d2r">[docs]</a><span class="k">def</span> <span class="nf">d2r</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
    <span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">   degrees to radians </span>
 <span class="sd">   &quot;&quot;&quot;</span>
-   <span class="k">return</span> <span class="n">n</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="mf">180.</span>
-<span class="c">###---------------------------------------------------------------------------------------------</span></div>
-<div class="viewcode-block" id="r2d"><a class="viewcode-back" href="../../../utils/gen_tools.html#pysar.utils.gen_tools.r2d">[docs]</a><span class="k">def</span> <span class="nf">r2d</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+   <span class="k">return</span> <span class="n">n</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="mf">180.</span></div>
+<span class="c">###---------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="r2d"><a class="viewcode-back" href="../../../utils/generated/pysar.utils.r2d.html#pysar.utils.gen_tools.r2d">[docs]</a><span class="k">def</span> <span class="nf">r2d</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
    <span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">   radians to degrees</span>
 <span class="sd">   &quot;&quot;&quot;</span>
-   <span class="k">return</span> <span class="n">n</span><span class="o">*</span><span class="mf">180.</span><span class="o">/</span><span class="n">pi</span>
-<span class="c">###---------------------------------------------------------------------------------------------</span></div>
-<div class="viewcode-block" id="acosd"><a class="viewcode-back" href="../../../utils/gen_tools.html#pysar.utils.gen_tools.acosd">[docs]</a><span class="k">def</span> <span class="nf">acosd</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+   <span class="k">return</span> <span class="n">n</span><span class="o">*</span><span class="mf">180.</span><span class="o">/</span><span class="n">pi</span></div>
+<span class="c">###---------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="acosd"><a class="viewcode-back" href="../../../utils/generated/pysar.utils.acosd.html#pysar.utils.gen_tools.acosd">[docs]</a><span class="k">def</span> <span class="nf">acosd</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
    <span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">   t [degrees] = arccos(n)</span>
 <span class="sd">   &quot;&quot;&quot;</span>
@@ -96,9 +85,9 @@
    <span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">   t [degrees] = arccos(n)</span>
 <span class="sd">   &quot;&quot;&quot;</span>
-   <span class="k">return</span> <span class="n">acosd</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-<span class="c">###---------------------------------------------------------------------------------------------</span></div>
-<div class="viewcode-block" id="asind"><a class="viewcode-back" href="../../../utils/gen_tools.html#pysar.utils.gen_tools.asind">[docs]</a><span class="k">def</span> <span class="nf">asind</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+   <span class="k">return</span> <span class="n">acosd</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></div>
+<span class="c">###---------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="asind"><a class="viewcode-back" href="../../../utils/generated/pysar.utils.asind.html#pysar.utils.gen_tools.asind">[docs]</a><span class="k">def</span> <span class="nf">asind</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
    <span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">   t [degrees] = arcsin(n)</span>
 <span class="sd">   &quot;&quot;&quot;</span>
@@ -107,41 +96,41 @@
    <span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">   t [degrees] = arcsin(n) </span>
 <span class="sd">   &quot;&quot;&quot;</span>
-   <span class="k">return</span> <span class="n">asind</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-<span class="c">###---------------------------------------------------------------------------------------------</span></div>
-<div class="viewcode-block" id="cosd"><a class="viewcode-back" href="../../../utils/gen_tools.html#pysar.utils.gen_tools.cosd">[docs]</a><span class="k">def</span> <span class="nf">cosd</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+   <span class="k">return</span> <span class="n">asind</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></div>
+<span class="c">###---------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="cosd"><a class="viewcode-back" href="../../../utils/generated/pysar.utils.cosd.html#pysar.utils.gen_tools.cosd">[docs]</a><span class="k">def</span> <span class="nf">cosd</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
    <span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">   t = cos(n [degrees])</span>
 <span class="sd">   &quot;&quot;&quot;</span>
-   <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">d2r</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
-<span class="c">###---------------------------------------------------------------------------------------------</span></div>
-<div class="viewcode-block" id="sind"><a class="viewcode-back" href="../../../utils/gen_tools.html#pysar.utils.gen_tools.sind">[docs]</a><span class="k">def</span> <span class="nf">sind</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+   <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">d2r</span><span class="p">(</span><span class="n">n</span><span class="p">))</span></div>
+<span class="c">###---------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="sind"><a class="viewcode-back" href="../../../utils/generated/pysar.utils.sind.html#pysar.utils.gen_tools.sind">[docs]</a><span class="k">def</span> <span class="nf">sind</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
    <span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">   t = sin(n [degrees])</span>
 <span class="sd">   &quot;&quot;&quot;</span>
-   <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">d2r</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
-
-<span class="c">###---------------------------------------------------------------------------------------------</span></div>
-<div class="viewcode-block" id="iscomplex"><a class="viewcode-back" href="../../../utils/gen_tools.html#pysar.utils.gen_tools.iscomplex">[docs]</a><span class="k">def</span> <span class="nf">iscomplex</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-   <span class="sd">&quot;&quot;&quot;Tests for complexity...returns np.iscomplex(n)</span>
-<span class="sd">   &quot;&quot;&quot;</span>
-   <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">iscomplex</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">d2r</span><span class="p">(</span><span class="n">n</span><span class="p">))</span></div>
 
 <span class="c">###---------------------------------------------------------------------------------------------</span>
-</div>
-<div class="viewcode-block" id="anycomplex"><a class="viewcode-back" href="../../../utils/gen_tools.html#pysar.utils.gen_tools.anycomplex">[docs]</a><span class="k">def</span> <span class="nf">anycomplex</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<div class="viewcode-block" id="iscomplex"><a class="viewcode-back" href="../../../utils/generated/pysar.utils.iscomplex.html#pysar.utils.gen_tools.iscomplex">[docs]</a><span class="k">def</span> <span class="nf">iscomplex</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot;Tests for complexity...returns np.iscomplex(n)</span>
+<span class="sd">   &quot;&quot;&quot;</span>
+   <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">iscomplex</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></div>
+
+<span class="c">###---------------------------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="anycomplex"><a class="viewcode-back" href="../../../utils/generated/pysar.utils.anycomplex.html#pysar.utils.gen_tools.anycomplex">[docs]</a><span class="k">def</span> <span class="nf">anycomplex</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
    <span class="sd">&quot;&quot;&quot; Tests for any complexity</span>
 <span class="sd">   &quot;&quot;&quot;</span>
-   <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">iscomplex</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+   <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">iscomplex</span><span class="p">(</span><span class="n">n</span><span class="p">))</span></div>
 
-<span class="c">###---------------------------------------------------------------------------------------------</span></div>
-<div class="viewcode-block" id="allcomplex"><a class="viewcode-back" href="../../../utils/gen_tools.html#pysar.utils.gen_tools.allcomplex">[docs]</a><span class="k">def</span> <span class="nf">allcomplex</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="c">###---------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="allcomplex"><a class="viewcode-back" href="../../../utils/generated/pysar.utils.allcomplex.html#pysar.utils.gen_tools.allcomplex">[docs]</a><span class="k">def</span> <span class="nf">allcomplex</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
    <span class="sd">&quot;&quot;&quot; Tests for all complexity</span>
 <span class="sd">   &quot;&quot;&quot;</span>
-   <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">iscomplex</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+   <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">iscomplex</span><span class="p">(</span><span class="n">n</span><span class="p">))</span></div>
 
-<span class="c">###---------------------------------------------------------------------------------------------</span></div>
-<div class="viewcode-block" id="typecomplex"><a class="viewcode-back" href="../../../utils/gen_tools.html#pysar.utils.gen_tools.typecomplex">[docs]</a><span class="k">def</span> <span class="nf">typecomplex</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="c">###---------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="typecomplex"><a class="viewcode-back" href="../../../utils/generated/pysar.utils.typecomplex.html#pysar.utils.gen_tools.typecomplex">[docs]</a><span class="k">def</span> <span class="nf">typecomplex</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
    <span class="sd">&quot;&quot;&quot; tests for any type complex</span>
 <span class="sd">   &quot;&quot;&quot;</span>
    <span class="n">nx</span> <span class="o">=</span> <span class="n">_nx</span><span class="o">.</span><span class="n">asanyarray</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
@@ -151,10 +140,18 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
 
-<div id="searchbox" style="display: none">
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
       <input type="text" name="q" />
@@ -172,25 +169,17 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-<li><a href="../../../index.html">PySAR</a> &raquo;</li>
-
-          <li><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li><a href="../utils.html" >pysar.utils</a> &raquo;</li> 
-      </ul>
-    </div>
     <div class="footer">
-        &copy; Copyright 2014, Brent Minchew.
-      Last updated on Aug 20, 2015.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      &copy;2014, Brent Minchew.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
     </div>
+
+    
+
+    
   </body>
 </html>

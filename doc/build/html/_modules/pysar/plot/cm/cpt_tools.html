@@ -24,29 +24,18 @@
     <script type="text/javascript" src="../../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
     <link rel="top" title="PySAR 0.1.0" href="../../../../index.html" />
-    <link rel="up" title="pysar.plot.cm" href="../cm.html" /> 
-  </head>
-  <body>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-<li><a href="../../../../index.html">PySAR</a> &raquo;</li>
+    <link rel="up" title="pysar.plot.cm" href="../cm.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
 
-          <li><a href="../../../index.html" >Module code</a> &raquo;</li>
-          <li><a href="../cm.html" accesskey="U">pysar.plot.cm</a> &raquo;</li> 
-      </ul>
-    </div>  
+  </head>
+  <body role="document">  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <h1>Source code for pysar.plot.cm.cpt_tools</h1><div class="highlight"><pre>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -71,9 +60,9 @@
 
 <span class="c">###==========================================================================</span>
 <div class="viewcode-block" id="cptError"><a class="viewcode-back" href="../../../../plot/cpt_tools.html#pysar.plot.cm.cpt_tools.cptError">[docs]</a><span class="k">class</span> <span class="nc">cptError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-   <span class="k">pass</span>
+   <span class="k">pass</span></div>
 
-<span class="c">###==========================================================================</span></div>
+<span class="c">###==========================================================================</span>
 <span class="k">def</span> <span class="nf">_stitch_gmt_hsv</span><span class="p">(</span><span class="n">colstring</span><span class="p">,</span><span class="n">splitter</span><span class="o">=</span><span class="s">&#39;-&#39;</span><span class="p">):</span>
    <span class="n">sp</span> <span class="o">=</span> <span class="n">colstring</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">splitter</span><span class="p">)</span>
    <span class="k">if</span> <span class="n">splitter</span> <span class="o">==</span> <span class="s">&#39;-&#39;</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
@@ -89,7 +78,7 @@
    <span class="k">return</span> <span class="n">sp</span>
 
 
-<div class="viewcode-block" id="cpt2python"><a class="viewcode-back" href="../../../../plot/cpt_tools.html#pysar.plot.cm.cpt_tools.cpt2python">[docs]</a><span class="k">def</span> <span class="nf">cpt2python</span><span class="p">(</span><span class="n">cptfile</span><span class="p">):</span>
+<div class="viewcode-block" id="cpt2python"><a class="viewcode-back" href="../../../../plot/generated/pysar.plot.cm.cpt2python.html#pysar.plot.cm.cpt_tools.cpt2python">[docs]</a><span class="k">def</span> <span class="nf">cpt2python</span><span class="p">(</span><span class="n">cptfile</span><span class="p">):</span>
    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">   Convert GMT-stype CPT file to python colormap.  This routine is modified from a </span>
 <span class="sd">   routine contained in the scipy cookbook. </span>
@@ -158,10 +147,10 @@
       <span class="n">blue</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
       <span class="n">green</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
    <span class="n">cd</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;red&#39;</span> <span class="p">:</span> <span class="n">red</span><span class="p">,</span> <span class="s">&#39;green&#39;</span> <span class="p">:</span> <span class="n">green</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span> <span class="p">:</span> <span class="n">blue</span><span class="p">}</span>
-   <span class="k">return</span> <span class="n">cd</span>
+   <span class="k">return</span> <span class="n">cd</span></div>
 
 
-<span class="c">###-----------------------------------------------------------</span></div>
+<span class="c">###-----------------------------------------------------------</span>
 <span class="k">def</span> <span class="nf">_get_cm_from_cpt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">cmapname</span><span class="o">=</span><span class="s">&#39;colormap&#39;</span><span class="p">,</span><span class="n">lutsize</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">inverse</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
    <span class="k">if</span> <span class="ow">not</span> <span class="n">lutsize</span><span class="p">:</span>
       <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="kn">as</span> <span class="nn">mpl</span> 
@@ -190,17 +179,17 @@
          <span class="k">if</span> <span class="n">name</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span> <span class="o">==</span> <span class="s">&#39;_r&#39;</span><span class="p">:</span> 
             <span class="n">nm</span><span class="p">,</span> <span class="n">inverse</span> <span class="o">=</span> <span class="n">name</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="bp">True</span>
          <span class="k">return</span> <span class="n">_get_cm_from_cpt</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">cptfldr</span><span class="o">+</span><span class="n">cptdic</span><span class="p">[</span><span class="n">nm</span><span class="p">],</span><span class="n">cmapname</span><span class="o">=</span><span class="n">nm</span><span class="p">,</span>
-                     <span class="n">lutsize</span><span class="o">=</span><span class="n">lut</span><span class="p">,</span><span class="n">inverse</span><span class="o">=</span><span class="n">inverse</span><span class="p">)</span>
-<span class="c">###-----------------------------------------------------------</span></div>
-<div class="viewcode-block" id="cpt2cmap"><a class="viewcode-back" href="../../../../plot/cpt_tools.html#pysar.plot.cm.cpt_tools.cpt2cmap">[docs]</a><span class="k">def</span> <span class="nf">cpt2cmap</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">cmapname</span><span class="o">=</span><span class="s">&#39;colormap&#39;</span><span class="p">,</span><span class="n">lut</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">inverse</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+                     <span class="n">lutsize</span><span class="o">=</span><span class="n">lut</span><span class="p">,</span><span class="n">inverse</span><span class="o">=</span><span class="n">inverse</span><span class="p">)</span></div>
+<span class="c">###-----------------------------------------------------------</span>
+<div class="viewcode-block" id="cpt2cmap"><a class="viewcode-back" href="../../../../plot/generated/pysar.plot.cm.cpt2cmap.html#pysar.plot.cm.cpt_tools.cpt2cmap">[docs]</a><span class="k">def</span> <span class="nf">cpt2cmap</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">cmapname</span><span class="o">=</span><span class="s">&#39;colormap&#39;</span><span class="p">,</span><span class="n">lut</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">inverse</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
    <span class="k">if</span> <span class="ow">not</span> <span class="n">lut</span><span class="p">:</span>
       <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="kn">as</span> <span class="nn">mpl</span> 
       <span class="n">lut</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">&#39;image.lut&#39;</span><span class="p">]</span>
    <span class="n">cdict</span> <span class="o">=</span> <span class="n">cpt2python</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
    <span class="k">if</span> <span class="n">inverse</span><span class="p">:</span> <span class="n">cdict</span> <span class="o">=</span> <span class="n">_reverse_cmap_spec</span><span class="p">(</span><span class="n">cdict</span><span class="p">)</span>
-   <span class="k">return</span> <span class="n">colors</span><span class="o">.</span><span class="n">LinearSegmentedColormap</span><span class="p">(</span><span class="n">cmapname</span><span class="p">,</span><span class="n">cdict</span><span class="p">,</span><span class="n">lut</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">colors</span><span class="o">.</span><span class="n">LinearSegmentedColormap</span><span class="p">(</span><span class="n">cmapname</span><span class="p">,</span><span class="n">cdict</span><span class="p">,</span><span class="n">lut</span><span class="p">)</span></div>
 
-<span class="c">###----------------------------------------------------------</span></div>
+<span class="c">###----------------------------------------------------------</span>
 <span class="k">def</span> <span class="nf">_read_pkl</span><span class="p">():</span>
    <span class="n">pkl_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">cptfldr</span><span class="o">+</span><span class="s">&#39;cmaps.pkl&#39;</span><span class="p">,</span> <span class="s">&#39;rb&#39;</span><span class="p">)</span>
    <span class="n">cmapdict</span> <span class="o">=</span> <span class="n">cPickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">pkl_file</span><span class="p">)</span>
@@ -294,15 +283,26 @@
    <span class="k">return</span> <span class="n">tempdic</span>
 
 <span class="c">###-----------------------------------------------------------</span>
+
 </pre></div>
 
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">Module code</a><ul>
+  <li><a href="../cm.html">pysar.plot.cm</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
 
-<div id="searchbox" style="display: none">
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../../search.html" method="get">
       <input type="text" name="q" />
@@ -320,25 +320,17 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-<li><a href="../../../../index.html">PySAR</a> &raquo;</li>
-
-          <li><a href="../../../index.html" >Module code</a> &raquo;</li>
-          <li><a href="../cm.html" >pysar.plot.cm</a> &raquo;</li> 
-      </ul>
-    </div>
     <div class="footer">
-        &copy; Copyright 2014, Brent Minchew.
-      Last updated on Aug 20, 2015.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      &copy;2014, Brent Minchew.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
     </div>
+
+    
+
+    
   </body>
 </html>

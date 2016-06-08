@@ -23,27 +23,18 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="PySAR 0.1.0" href="../index.html" /> 
+    <link rel="top" title="PySAR 0.1.0" href="../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
   </head>
-  <body>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-<li><a href="../index.html">PySAR</a> &raquo;</li>
- 
-      </ul>
-    </div>  
+  <body role="document">  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <span class="target" id="module-pysar.signal.butters"><span id="butters"></span></span><p>Butterworth filtering routines</p>
 <div class="section" id="contents">
@@ -56,7 +47,7 @@ highpass(data,high,dt=None,df=None,order=4,zero_phase=False)         :  Highpass
 <p>taper(data,percent)                                                  :  Basic cosine taper</p>
 <dl class="function">
 <dt id="pysar.signal.butters.taper">
-<tt class="descclassname">pysar.signal.butters.</tt><tt class="descname">taper</tt><big>(</big><em>data</em>, <em>percent=3</em><big>)</big><a class="headerlink" href="#pysar.signal.butters.taper" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pysar.signal.butters.</code><code class="descname">taper</code><span class="sig-paren">(</span><em>data</em>, <em>percent=3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysar/signal/special.html#taper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.signal.butters.taper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cosine taper</p>
 <p>taper(data,percent)</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -79,7 +70,7 @@ highpass(data,high,dt=None,df=None,order=4,zero_phase=False)         :  Highpass
 
 <dl class="function">
 <dt id="pysar.signal.butters.butter">
-<tt class="descclassname">pysar.signal.butters.</tt><tt class="descname">butter</tt><big>(</big><em>data</em>, <em>low=None</em>, <em>high=None</em>, <em>dt=None</em>, <em>df=None</em>, <em>order=4</em>, <em>zero_phase=False</em>, <em>reject=False</em><big>)</big><a class="reference internal" href="../_modules/pysar/signal/butters.html#butter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.signal.butters.butter" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pysar.signal.butters.</code><code class="descname">butter</code><span class="sig-paren">(</span><em>data</em>, <em>low=None</em>, <em>high=None</em>, <em>dt=None</em>, <em>df=None</em>, <em>order=4</em>, <em>zero_phase=False</em>, <em>reject=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysar/signal/butters.html#butter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.signal.butters.butter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Butterworth filter</p>
 <p>butter(data,low=None,high=None,dt=None,df=None,order=4,zero_phase=False,reject=False)</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -140,7 +131,7 @@ highpass(data,high,dt=None,df=None,order=4,zero_phase=False)         :  Highpass
 
 <dl class="function">
 <dt id="pysar.signal.butters.bandpass">
-<tt class="descclassname">pysar.signal.butters.</tt><tt class="descname">bandpass</tt><big>(</big><em>data</em>, <em>low</em>, <em>high</em>, <em>dt=None</em>, <em>df=None</em>, <em>order=4</em>, <em>zero_phase=False</em><big>)</big><a class="reference internal" href="../_modules/pysar/signal/butters.html#bandpass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.signal.butters.bandpass" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pysar.signal.butters.</code><code class="descname">bandpass</code><span class="sig-paren">(</span><em>data</em>, <em>low</em>, <em>high</em>, <em>dt=None</em>, <em>df=None</em>, <em>order=4</em>, <em>zero_phase=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysar/signal/butters.html#bandpass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.signal.butters.bandpass" title="Permalink to this definition">¶</a></dt>
 <dd><p>Butterworth bandpass filter</p>
 <p>bandpass(data,low,high,dt=None,df=None,order=4,zero_phase=False)</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -185,7 +176,7 @@ highpass(data,high,dt=None,df=None,order=4,zero_phase=False)         :  Highpass
 
 <dl class="function">
 <dt id="pysar.signal.butters.bandreject">
-<tt class="descclassname">pysar.signal.butters.</tt><tt class="descname">bandreject</tt><big>(</big><em>data</em>, <em>low</em>, <em>high</em>, <em>dt=None</em>, <em>df=None</em>, <em>order=4</em>, <em>zero_phase=False</em><big>)</big><a class="reference internal" href="../_modules/pysar/signal/butters.html#bandreject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.signal.butters.bandreject" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pysar.signal.butters.</code><code class="descname">bandreject</code><span class="sig-paren">(</span><em>data</em>, <em>low</em>, <em>high</em>, <em>dt=None</em>, <em>df=None</em>, <em>order=4</em>, <em>zero_phase=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysar/signal/butters.html#bandreject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.signal.butters.bandreject" title="Permalink to this definition">¶</a></dt>
 <dd><p>Butterworth bandreject filter</p>
 <p>bandreject(data,low,high,dt=None,df=None,order=4,zero_phase=False)</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -243,7 +234,7 @@ highpass(data,high,dt=None,df=None,order=4,zero_phase=False)         :  Highpass
 
 <dl class="function">
 <dt id="pysar.signal.butters.lowpass">
-<tt class="descclassname">pysar.signal.butters.</tt><tt class="descname">lowpass</tt><big>(</big><em>data</em>, <em>high</em>, <em>dt=None</em>, <em>df=None</em>, <em>order=4</em>, <em>zero_phase=False</em><big>)</big><a class="reference internal" href="../_modules/pysar/signal/butters.html#lowpass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.signal.butters.lowpass" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pysar.signal.butters.</code><code class="descname">lowpass</code><span class="sig-paren">(</span><em>data</em>, <em>high</em>, <em>dt=None</em>, <em>df=None</em>, <em>order=4</em>, <em>zero_phase=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysar/signal/butters.html#lowpass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.signal.butters.lowpass" title="Permalink to this definition">¶</a></dt>
 <dd><p>Butterworth lowpass filter</p>
 <p>butter.lowpass(data,high,dt=None,df=None,order=4,zero_phase=False)</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -285,7 +276,7 @@ highpass(data,high,dt=None,df=None,order=4,zero_phase=False)         :  Highpass
 
 <dl class="function">
 <dt id="pysar.signal.butters.highpass">
-<tt class="descclassname">pysar.signal.butters.</tt><tt class="descname">highpass</tt><big>(</big><em>data</em>, <em>low</em>, <em>dt=None</em>, <em>df=None</em>, <em>order=4</em>, <em>zero_phase=False</em><big>)</big><a class="reference internal" href="../_modules/pysar/signal/butters.html#highpass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.signal.butters.highpass" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pysar.signal.butters.</code><code class="descname">highpass</code><span class="sig-paren">(</span><em>data</em>, <em>low</em>, <em>dt=None</em>, <em>df=None</em>, <em>order=4</em>, <em>zero_phase=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysar/signal/butters.html#highpass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.signal.butters.highpass" title="Permalink to this definition">¶</a></dt>
 <dd><p>Butterworth highpass filter</p>
 <p>highpass(data,low,dt=None,df=None,order=4,zero_phase=False)</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -331,18 +322,26 @@ highpass(data,high,dt=None,df=None,order=4,zero_phase=False)         :  Highpass
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/signal/butters.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/signal/butters.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
 <ul class="this-page-menu">
   <li><a href="/numpy/docs/numpy-docs/signal/butters.rst">Edit page</a></li>
 </ul>
 
-<div id="searchbox" style="display: none">
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
@@ -360,23 +359,20 @@ highpass(data,high,dt=None,df=None,order=4,zero_phase=False)         :  Highpass
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-<li><a href="../index.html">PySAR</a> &raquo;</li>
- 
-      </ul>
-    </div>
     <div class="footer">
-        &copy; Copyright 2014, Brent Minchew.
-      Last updated on Aug 20, 2015.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      &copy;2014, Brent Minchew.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+      |
+      <a href="../_sources/signal/butters.txt"
+          rel="nofollow">Page source</a>
     </div>
+
+    
+
+    
   </body>
 </html>

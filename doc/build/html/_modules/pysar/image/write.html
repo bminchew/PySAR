@@ -24,29 +24,18 @@
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <link rel="top" title="PySAR 0.1.0" href="../../../index.html" />
-    <link rel="up" title="pysar.image" href="../image.html" /> 
-  </head>
-  <body>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-<li><a href="../../../index.html">PySAR</a> &raquo;</li>
+    <link rel="up" title="Module code" href="../../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
 
-          <li><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li><a href="../image.html" accesskey="U">pysar.image</a> &raquo;</li> 
-      </ul>
-    </div>  
+  </head>
+  <body role="document">  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <h1>Source code for pysar.image.write</h1><div class="highlight"><pre>
 <span class="sd">&#39;&#39;&#39;</span>
@@ -60,7 +49,7 @@
             <span class="s">&#39;writeGeoTiff&#39;</span><span class="p">,</span><span class="s">&#39;writeBinary&#39;</span><span class="p">,</span><span class="s">&#39;writeMultiBand2d&#39;</span><span class="p">]</span>
 
 <span class="c">###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=</span>
-<div class="viewcode-block" id="writeHDF5"><a class="viewcode-back" href="../../../image/write.html#pysar.image.write.writeHDF5">[docs]</a><span class="k">def</span> <span class="nf">writeHDF5</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">filename</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">dataname</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="writeHDF5"><a class="viewcode-back" href="../../../image/write.html#pysar.image.writeHDF5">[docs]</a><span class="k">def</span> <span class="nf">writeHDF5</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">filename</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">dataname</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">   Write binary data to an HDF5 file</span>
 
@@ -130,10 +119,10 @@
    <span class="k">except</span><span class="p">:</span>
       <span class="k">raise</span>
    <span class="k">finally</span><span class="p">:</span>
-      <span class="n">fn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+      <span class="n">fn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
-<span class="c">###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=</span></div>
-<div class="viewcode-block" id="writeRaster"><a class="viewcode-back" href="../../../image/write.html#pysar.image.write.writeRaster">[docs]</a><span class="k">def</span> <span class="nf">writeRaster</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">filename</span><span class="p">,</span><span class="n">filetype</span><span class="o">=</span><span class="s">&#39;GTiff&#39;</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">coords</span><span class="o">=</span><span class="s">&#39;EPSG:4326&#39;</span><span class="p">):</span>
+<span class="c">###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=</span>
+<div class="viewcode-block" id="writeRaster"><a class="viewcode-back" href="../../../image/write.html#pysar.image.writeRaster">[docs]</a><span class="k">def</span> <span class="nf">writeRaster</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">filename</span><span class="p">,</span><span class="n">filetype</span><span class="o">=</span><span class="s">&#39;GTiff&#39;</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">coords</span><span class="o">=</span><span class="s">&#39;EPSG:4326&#39;</span><span class="p">):</span>
    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">   Write binary data to a raster file</span>
 
@@ -220,10 +209,10 @@
    <span class="k">except</span><span class="p">:</span>
       <span class="k">raise</span>
    <span class="k">finally</span><span class="p">:</span>
-      <span class="n">rast</span><span class="p">,</span> <span class="n">band</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span>
+      <span class="n">rast</span><span class="p">,</span> <span class="n">band</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span></div>
 
-<span class="c">###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=</span></div>
-<div class="viewcode-block" id="writeGeoTiff"><a class="viewcode-back" href="../../../image/write.html#pysar.image.write.writeGeoTiff">[docs]</a><span class="k">def</span> <span class="nf">writeGeoTiff</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">filename</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">coords</span><span class="o">=</span><span class="s">&#39;EPSG:4326&#39;</span><span class="p">):</span>
+<span class="c">###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=</span>
+<div class="viewcode-block" id="writeGeoTiff"><a class="viewcode-back" href="../../../image/write.html#pysar.image.writeGeoTiff">[docs]</a><span class="k">def</span> <span class="nf">writeGeoTiff</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">filename</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">coords</span><span class="o">=</span><span class="s">&#39;EPSG:4326&#39;</span><span class="p">):</span>
    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">   Write binary data to a GeoTiff file</span>
 
@@ -252,10 +241,10 @@
 <span class="sd">   *  Only supports single-band outputs</span>
 <span class="sd">   *  If x or y are default or None, coords is set to None</span>
 <span class="sd">   &#39;&#39;&#39;</span>
-   <span class="n">writeRaster</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span><span class="n">filetype</span><span class="o">=</span><span class="s">&#39;GTiff&#39;</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="n">null</span><span class="p">,</span><span class="n">coords</span><span class="o">=</span><span class="n">coords</span><span class="p">)</span>
+   <span class="n">writeRaster</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span><span class="n">filetype</span><span class="o">=</span><span class="s">&#39;GTiff&#39;</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="n">null</span><span class="p">,</span><span class="n">coords</span><span class="o">=</span><span class="n">coords</span><span class="p">)</span></div>
 
-<span class="c">###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=</span></div>
-<div class="viewcode-block" id="writeNetCDF"><a class="viewcode-back" href="../../../image/write.html#pysar.image.write.writeNetCDF">[docs]</a><span class="k">def</span> <span class="nf">writeNetCDF</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">filename</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">xunit</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">yunit</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">zunit</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+<span class="c">###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=</span>
+<div class="viewcode-block" id="writeNetCDF"><a class="viewcode-back" href="../../../image/write.html#pysar.image.writeNetCDF">[docs]</a><span class="k">def</span> <span class="nf">writeNetCDF</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">filename</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">xunit</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">yunit</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">zunit</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
          <span class="n">dataname</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">ncform</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">maxio</span><span class="o">=</span><span class="mf">1.e8</span><span class="p">):</span>
    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">   Write binary data to a NetCDF file</span>
@@ -382,10 +371,10 @@
    <span class="k">except</span><span class="p">:</span>
       <span class="k">raise</span>
    <span class="k">finally</span><span class="p">:</span>
-      <span class="n">fn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+      <span class="n">fn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
-<span class="c">###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=</span></div>
-<div class="viewcode-block" id="writeBinary"><a class="viewcode-back" href="../../../image/write.html#pysar.image.write.writeBinary">[docs]</a><span class="k">def</span> <span class="nf">writeBinary</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">filename</span><span class="p">):</span>
+<span class="c">###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=</span>
+<div class="viewcode-block" id="writeBinary"><a class="viewcode-back" href="../../../image/write.html#pysar.image.writeBinary">[docs]</a><span class="k">def</span> <span class="nf">writeBinary</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">filename</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Write 2D data to a headerless binary file</span>
 
@@ -399,10 +388,10 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;data must be a numpy array&#39;</span><span class="p">)</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fid</span><span class="p">:</span>
-        <span class="n">data</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">.</span><span class="n">tofile</span><span class="p">(</span><span class="n">fid</span><span class="p">)</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">.</span><span class="n">tofile</span><span class="p">(</span><span class="n">fid</span><span class="p">)</span></div>
 
-<span class="c">###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=</span></div>
-<div class="viewcode-block" id="writeMultiBand2d"><a class="viewcode-back" href="../../../image/write.html#pysar.image.write.writeMultiBand2d">[docs]</a><span class="k">def</span> <span class="nf">writeMultiBand2d</span><span class="p">(</span><span class="n">datalist</span><span class="p">,</span><span class="n">filename</span><span class="p">,</span><span class="n">inter</span><span class="o">=</span><span class="s">&#39;bil&#39;</span><span class="p">):</span>
+<span class="c">###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=</span>
+<div class="viewcode-block" id="writeMultiBand2d"><a class="viewcode-back" href="../../../image/write.html#pysar.image.writeMultiBand2d">[docs]</a><span class="k">def</span> <span class="nf">writeMultiBand2d</span><span class="p">(</span><span class="n">datalist</span><span class="p">,</span><span class="n">filename</span><span class="p">,</span><span class="n">inter</span><span class="o">=</span><span class="s">&#39;bil&#39;</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Write 2D data to multiband headerless binary file </span>
 <span class="sd">    </span>
@@ -462,9 +451,9 @@
         <span class="n">fn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">memmap</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s">&#39;w+&#39;</span><span class="p">,</span><span class="n">shape</span><span class="o">=</span><span class="n">shp</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bands</span><span class="p">):</span>
             <span class="n">fn</span><span class="p">[:,</span><span class="n">i</span><span class="p">::</span><span class="n">bands</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="k">del</span> <span class="n">fn</span>  <span class="c">### this should flush memory to file</span>
+    <span class="k">del</span> <span class="n">fn</span>  <span class="c">### this should flush memory to file</span></div>
 
-<span class="c">###========================================================================</span></div>
+<span class="c">###========================================================================</span>
 <span class="k">class</span> <span class="nc">_npdtype2gdaldtype</span><span class="p">():</span>
    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
       <span class="bp">self</span><span class="o">.</span><span class="n">gdal2numpy</span> <span class="o">=</span> <span class="p">{</span>   <span class="s">&#39;GDT_Byte&#39;</span>      <span class="p">:</span>   <span class="s">&#39;uint8&#39;</span><span class="p">,</span>
@@ -486,15 +475,25 @@
       <span class="bp">self</span><span class="o">.</span><span class="n">numpy_dtypes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">numpy2gdal</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>     
       
          
+
+
 </pre></div>
 
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
 
-<div id="searchbox" style="display: none">
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
       <input type="text" name="q" />
@@ -512,25 +511,17 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-<li><a href="../../../index.html">PySAR</a> &raquo;</li>
-
-          <li><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li><a href="../image.html" >pysar.image</a> &raquo;</li> 
-      </ul>
-    </div>
     <div class="footer">
-        &copy; Copyright 2014, Brent Minchew.
-      Last updated on Aug 20, 2015.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      &copy;2014, Brent Minchew.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
     </div>
+
+    
+
+    
   </body>
 </html>

@@ -40,5 +40,5 @@ def greatCircDist(lat0,lon0,lat,lon,a=6378.137,b=6356.7523):
     d2r = np.pi/180.
     Re = radius_lat(lat0,a=a,b=b)
     dist = 2.*Re*np.arcsin(np.sqrt(np.sin(0.5*d2r*(lat-lat0))**2 +
-                            np.cos(d2r*lat0)*np.cos(d2r*lat)*np.sin(0.5*d2r*(lon-lon0))**2))
+                np.cos(d2r*lat0)*np.cos(d2r*lat)*np.sin(0.5*d2r*(lon-lon0))**2))
     return dist 
