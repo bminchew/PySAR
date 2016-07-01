@@ -82,7 +82,7 @@ def writeHDF5(z,filename,x=None,y=None,dataname=None):
       fn.close()
 
 ###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-def writeRaster(z,filename,filetype='GTiff',x=None,y=None,null=None,coords='EPSG:4326'):
+def writeRaster(z,filename,filetype='GTiff',x=None,y=None,null=None,coords=None,epsg=4326):
    '''
    Write binary data to a raster file
 
@@ -104,7 +104,9 @@ def writeRaster(z,filename,filetype='GTiff',x=None,y=None,null=None,coords='EPSG
    null     :  scalar type(z)
                Null or no-data value [None]
    coords   :  str
-               Coordinate system (must be recognizable by GDAL) [EPSG:4326]
+               Coordinate system (must be recognizable by GDAL) [None]
+   epsg     :  int
+               EPSG-defined coordinate system [4326]
 
    Notes
    -----
@@ -160,6 +162,16 @@ def writeRaster(z,filename,filetype='GTiff',x=None,y=None,null=None,coords='EPSG
          srs = osr.SpatialReference()
          srs.SetWellKnownGeogCS(coords)
          rast.SetProjection(srs.ExportToWkt())
+      if epsg is not None:
+         try:
+            epsgint = isinstance(epsg,(int,long))
+         except:
+            epsgint = isinstance(epsg,int)
+         if not epsgint:
+            raise ValueError('epsg must be type int')   
+         srs = osr.SpatialReference()
+         srs.ImportFromEPSG(epsg)
+         rast.SetProjection(srs.ExportToWkt())
 
       band = rast.GetRasterBand(1)
       band.WriteArray(z)   ### write z data 
@@ -172,7 +184,7 @@ def writeRaster(z,filename,filetype='GTiff',x=None,y=None,null=None,coords='EPSG
       rast, band = None, None
 
 ###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-def writeGeoTiff(z,filename,x=None,y=None,null=None,coords='EPSG:4326'):
+def writeGeoTiff(z,filename,x=None,y=None,null=None,coords=None,epsg=4326):
    '''
    Write binary data to a GeoTiff file
 
@@ -192,7 +204,9 @@ def writeGeoTiff(z,filename,x=None,y=None,null=None,coords='EPSG:4326'):
    null     :  scalar type(z)
                Null or no-data value [None]
    coords   :  str
-               Coordinate system (must be recognizable by GDAL) [EPSG:4326]
+               Coordinate system (must be recognizable by GDAL) [None]
+   epsg     :  int
+               EPSG-defined coordinate system [4326]
 
    Notes
    -----
@@ -276,9 +290,13 @@ def writeNetCDF(z,filename,x=None,y=None,null=None,xunit=None,yunit=None,zunit=N
    elif y.dtype != z.dtype:
       y = y.astype(z.dtype)
 
-   if xunit is None:  xunit = 'None'
-   if yunit is None:  yunit = 'None'
-   if zunit is None:  zunit = 'None'
+   if xunit is None:  
+      xunit = 'None'
+   if yunit is None:  
+      yunit = 'None'
+   if zunit is None:  
+      zunit = 'None'
+
    if sys.version_info[0] == 2 and isinstance(dataname,basestring):
       zname = dataname
    elif sys.version_info[0] == 3 and isinstance(dataname,str):

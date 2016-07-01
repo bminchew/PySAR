@@ -36,8 +36,10 @@ def taper(data,percent=3):
 
    """
 
-   if not len(data) > 1: raise ValueError('data is a scalar')
-   if not percent >= 0:  raise ValueError('percent must be >= 0')
+   if not len(data) > 1: 
+      raise ValueError('data is a scalar')
+   if not percent >= 0:  
+      raise ValueError('percent must be >= 0')
 
    n = np.int32(len(data)*percent/100.)
    if n == 0: return data
@@ -47,6 +49,4 @@ def taper(data,percent=3):
    data[:n]  *= taper
    data[-n:] *= taper[::-1]
    return data
-
-
 
