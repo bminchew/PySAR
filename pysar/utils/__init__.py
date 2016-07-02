@@ -39,7 +39,7 @@ Geographic tools (:mod:`pysar.utils.geo_tools`)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autosummary::
-    :toctree: generated/
+   :toctree: generated/
 
    radius_lat        Planet radius at latitude  
    greatCircDist     Great circle distanc
