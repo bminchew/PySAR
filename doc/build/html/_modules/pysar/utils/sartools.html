@@ -38,16 +38,16 @@
           <div class="body" role="main">
             
   <h1>Source code for pysar.utils.sartools</h1><div class="highlight"><pre>
-<span class="sd">&#39;&#39;&#39;</span>
+<span></span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">SAR-specific tools</span>
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">gen_tools</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;inc2range&#39;</span><span class="p">,</span><span class="s">&#39;range2inc&#39;</span><span class="p">,</span><span class="s">&#39;alpha_hh&#39;</span><span class="p">,</span><span class="s">&#39;alpha_vv&#39;</span><span class="p">]</span>
-<span class="c">###---------------------------------------------------------------------------------------------</span>
-<div class="viewcode-block" id="inc2range"><a class="viewcode-back" href="../../../utils/sartools.html#pysar.utils.inc2range">[docs]</a><span class="k">def</span> <span class="nf">inc2range</span><span class="p">(</span><span class="n">inc</span><span class="p">,</span><span class="n">h</span><span class="o">=</span><span class="mf">12495.</span><span class="p">,</span><span class="n">rho_0</span><span class="o">=</span><span class="mf">13450.4278</span><span class="p">,</span><span class="n">Re</span><span class="o">=</span><span class="mf">6371000.</span><span class="p">,</span><span class="n">xlook</span><span class="o">=</span><span class="mf">3.</span><span class="p">,</span><span class="n">xspace</span><span class="o">=</span><span class="mf">1.665514</span><span class="p">,</span><span class="n">units</span><span class="o">=</span><span class="s">&#39;deg&#39;</span><span class="p">):</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;inc2range&#39;</span><span class="p">,</span><span class="s1">&#39;range2inc&#39;</span><span class="p">,</span><span class="s1">&#39;alpha_hh&#39;</span><span class="p">,</span><span class="s1">&#39;alpha_vv&#39;</span><span class="p">]</span>
+<span class="c1">###---------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="inc2range"><a class="viewcode-back" href="../../../utils/sartools.html#pysar.utils.inc2range">[docs]</a><span class="k">def</span> <span class="nf">inc2range</span><span class="p">(</span><span class="n">inc</span><span class="p">,</span><span class="n">h</span><span class="o">=</span><span class="mf">12495.</span><span class="p">,</span><span class="n">rho_0</span><span class="o">=</span><span class="mf">13450.4278</span><span class="p">,</span><span class="n">Re</span><span class="o">=</span><span class="mf">6371000.</span><span class="p">,</span><span class="n">xlook</span><span class="o">=</span><span class="mf">3.</span><span class="p">,</span><span class="n">xspace</span><span class="o">=</span><span class="mf">1.665514</span><span class="p">,</span><span class="n">units</span><span class="o">=</span><span class="s1">&#39;deg&#39;</span><span class="p">):</span>
    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">      inc2range(inc, h=12495., rho_0=13450.4278, Re=6371000., xlook=3., xspace=1.665514, units=&#39;deg&#39;)</span>
 
@@ -71,20 +71,20 @@
 <span class="sd">               incidence angle units: {&#39;deg&#39; or &#39;rad&#39;} [&#39;deg&#39;] </span>
 
 <span class="sd">   &quot;&quot;&quot;</span>
-   <span class="k">if</span> <span class="ow">not</span> <span class="n">h</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;platform altitude must be &gt; 0&#39;</span><span class="p">)</span>
-   <span class="k">if</span> <span class="ow">not</span> <span class="n">rho_0</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;rho_0 must be &gt; 0&#39;</span><span class="p">)</span>
-   <span class="k">if</span> <span class="ow">not</span> <span class="n">Re</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Earth&#39;s radius must be &gt; 0&quot;</span><span class="p">)</span>
-   <span class="k">if</span> <span class="ow">not</span> <span class="n">xlook</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;xlook must be &gt; 0&quot;</span><span class="p">)</span>
-   <span class="k">if</span> <span class="ow">not</span> <span class="n">xspace</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;xspace must be &gt; 0&quot;</span><span class="p">)</span>
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">h</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;platform altitude must be &gt; 0&#39;</span><span class="p">)</span>
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">rho_0</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;rho_0 must be &gt; 0&#39;</span><span class="p">)</span>
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">Re</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Earth&#39;s radius must be &gt; 0&quot;</span><span class="p">)</span>
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">xlook</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;xlook must be &gt; 0&quot;</span><span class="p">)</span>
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">xspace</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;xspace must be &gt; 0&quot;</span><span class="p">)</span>
 
-   <span class="k">if</span> <span class="s">&#39;deg&#39;</span> <span class="ow">in</span> <span class="n">units</span><span class="p">:</span>
+   <span class="k">if</span> <span class="s1">&#39;deg&#39;</span> <span class="ow">in</span> <span class="n">units</span><span class="p">:</span>
       <span class="n">inc</span> <span class="o">=</span> <span class="n">d2r</span><span class="p">(</span><span class="n">inc</span><span class="p">)</span>
    <span class="n">phi</span> <span class="o">=</span> <span class="n">inc</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
    <span class="n">rho</span> <span class="o">=</span> <span class="n">Re</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span> <span class="o">+</span>  <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">Re</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">h</span><span class="o">+</span><span class="n">Re</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">)</span>
    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">((</span><span class="n">rho</span><span class="o">-</span><span class="n">rho_0</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">xlook</span><span class="o">*</span><span class="n">xspace</span><span class="p">)))</span></div>
 
-<span class="c">###---------------------------------------------------------------------------------------------</span>
-<div class="viewcode-block" id="range2inc"><a class="viewcode-back" href="../../../utils/sartools.html#pysar.utils.range2inc">[docs]</a><span class="k">def</span> <span class="nf">range2inc</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">h</span><span class="o">=</span><span class="mf">12495.</span><span class="p">,</span><span class="n">rho_0</span><span class="o">=</span><span class="mf">13450.4278</span><span class="p">,</span><span class="n">Re</span><span class="o">=</span><span class="mf">6371000.</span><span class="p">,</span><span class="n">xlook</span><span class="o">=</span><span class="mf">3.</span><span class="p">,</span><span class="n">xspace</span><span class="o">=</span><span class="mf">1.665514</span><span class="p">,</span><span class="n">units</span><span class="o">=</span><span class="s">&#39;deg&#39;</span><span class="p">):</span>
+<span class="c1">###---------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="range2inc"><a class="viewcode-back" href="../../../utils/sartools.html#pysar.utils.range2inc">[docs]</a><span class="k">def</span> <span class="nf">range2inc</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">h</span><span class="o">=</span><span class="mf">12495.</span><span class="p">,</span><span class="n">rho_0</span><span class="o">=</span><span class="mf">13450.4278</span><span class="p">,</span><span class="n">Re</span><span class="o">=</span><span class="mf">6371000.</span><span class="p">,</span><span class="n">xlook</span><span class="o">=</span><span class="mf">3.</span><span class="p">,</span><span class="n">xspace</span><span class="o">=</span><span class="mf">1.665514</span><span class="p">,</span><span class="n">units</span><span class="o">=</span><span class="s1">&#39;deg&#39;</span><span class="p">):</span>
    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">      range2inc(r,h=12495.,rho_0=13450.4278,Re=6371000.,xlook=3.,xspace=1.665514,units=&#39;deg&#39;)</span>
 
@@ -112,21 +112,21 @@
 <span class="sd">      inc    : float</span>
 <span class="sd">               incidence angle [units]</span>
 <span class="sd">   &quot;&quot;&quot;</span>
-   <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;r must be &gt; 0&#39;</span><span class="p">)</span>
-   <span class="k">if</span> <span class="ow">not</span> <span class="n">h</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;platform altitude must be &gt; 0&#39;</span><span class="p">)</span>
-   <span class="k">if</span> <span class="ow">not</span> <span class="n">rho_0</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;rho_0 must be &gt; 0&#39;</span><span class="p">)</span>
-   <span class="k">if</span> <span class="ow">not</span> <span class="n">Re</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Earth&#39;s radius must be &gt; 0&quot;</span><span class="p">)</span>
-   <span class="k">if</span> <span class="ow">not</span> <span class="n">xlook</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;xlook must be &gt; 0&quot;</span><span class="p">)</span>
-   <span class="k">if</span> <span class="ow">not</span> <span class="n">xspace</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;xspace must be &gt; 0&quot;</span><span class="p">)</span>
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;r must be &gt; 0&#39;</span><span class="p">)</span>
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">h</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;platform altitude must be &gt; 0&#39;</span><span class="p">)</span>
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">rho_0</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;rho_0 must be &gt; 0&#39;</span><span class="p">)</span>
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">Re</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Earth&#39;s radius must be &gt; 0&quot;</span><span class="p">)</span>
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">xlook</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;xlook must be &gt; 0&quot;</span><span class="p">)</span>
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">xspace</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;xspace must be &gt; 0&quot;</span><span class="p">)</span>
  
    <span class="n">rho</span> <span class="o">=</span> <span class="n">rho_0</span> <span class="o">+</span> <span class="n">r</span> <span class="o">*</span> <span class="n">xlook</span> <span class="o">*</span> <span class="n">xspace</span>
    <span class="n">inc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">((</span><span class="o">-</span><span class="p">(</span><span class="n">h</span> <span class="o">+</span> <span class="n">Re</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">rho</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">Re</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">rho</span><span class="o">*</span><span class="n">Re</span><span class="p">))</span>
-   <span class="k">if</span> <span class="s">&#39;deg&#39;</span> <span class="ow">in</span> <span class="n">units</span><span class="p">:</span>
+   <span class="k">if</span> <span class="s1">&#39;deg&#39;</span> <span class="ow">in</span> <span class="n">units</span><span class="p">:</span>
       <span class="n">inc</span> <span class="o">=</span> <span class="n">r2d</span><span class="p">(</span><span class="n">inc</span><span class="p">)</span>
    <span class="k">return</span> <span class="n">inc</span></div>
 
-<span class="c">###---------------------------------------------------------------------------------------------</span>
-<div class="viewcode-block" id="alpha_hh"><a class="viewcode-back" href="../../../utils/sartools.html#pysar.utils.alpha_hh">[docs]</a><span class="k">def</span> <span class="nf">alpha_hh</span><span class="p">(</span><span class="n">eps</span><span class="p">,</span><span class="n">theta</span><span class="p">,</span><span class="n">units</span><span class="o">=</span><span class="s">&#39;deg&#39;</span><span class="p">):</span>
+<span class="c1">###---------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="alpha_hh"><a class="viewcode-back" href="../../../utils/sartools.html#pysar.utils.alpha_hh">[docs]</a><span class="k">def</span> <span class="nf">alpha_hh</span><span class="p">(</span><span class="n">eps</span><span class="p">,</span><span class="n">theta</span><span class="p">,</span><span class="n">units</span><span class="o">=</span><span class="s1">&#39;deg&#39;</span><span class="p">):</span>
    <span class="sd">&quot;&quot;&quot;  </span>
 <span class="sd">      alpha_hh(eps, theta, units=&#39;deg&#39;) </span>
 
@@ -155,15 +155,15 @@
 <span class="sd">      *  If both eps and theta are arrays, they must have the same shape. Output will be element-wise.</span>
 
 <span class="sd">   &quot;&quot;&quot;</span>
-   <span class="k">if</span> <span class="s">&#39;rad&#39;</span> <span class="ow">in</span> <span class="n">units</span><span class="p">:</span>
+   <span class="k">if</span> <span class="s1">&#39;rad&#39;</span> <span class="ow">in</span> <span class="n">units</span><span class="p">:</span>
       <span class="n">theta</span> <span class="o">*=</span> <span class="mi">180</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
    <span class="n">ci</span> <span class="o">=</span> <span class="n">cosd</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
    <span class="n">sis</span> <span class="o">=</span> <span class="p">(</span><span class="n">sind</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span>
    <span class="n">sqr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">eps</span> <span class="o">-</span> <span class="n">sis</span><span class="p">)</span>
    <span class="k">return</span> <span class="p">(</span><span class="n">ci</span> <span class="o">-</span> <span class="n">sqr</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">ci</span> <span class="o">+</span> <span class="n">sqr</span><span class="p">)</span></div>
 
-<span class="c">###---------------------------------------------------------------------------------------------</span>
-<div class="viewcode-block" id="alpha_vv"><a class="viewcode-back" href="../../../utils/sartools.html#pysar.utils.alpha_vv">[docs]</a><span class="k">def</span> <span class="nf">alpha_vv</span><span class="p">(</span><span class="n">eps</span><span class="p">,</span><span class="n">theta</span><span class="p">,</span><span class="n">units</span><span class="o">=</span><span class="s">&#39;deg&#39;</span><span class="p">):</span>
+<span class="c1">###---------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="alpha_vv"><a class="viewcode-back" href="../../../utils/sartools.html#pysar.utils.alpha_vv">[docs]</a><span class="k">def</span> <span class="nf">alpha_vv</span><span class="p">(</span><span class="n">eps</span><span class="p">,</span><span class="n">theta</span><span class="p">,</span><span class="n">units</span><span class="o">=</span><span class="s1">&#39;deg&#39;</span><span class="p">):</span>
    <span class="sd">&quot;&quot;&quot;  </span>
 <span class="sd">      alpha_vv(eps,theta,units=&#39;deg&#39;)</span>
 
@@ -192,7 +192,7 @@
 <span class="sd">      *  If both eps and theta are arrays, they must have the same shape. Output will be element-wise.</span>
 
 <span class="sd">   &quot;&quot;&quot;</span>
-   <span class="k">if</span> <span class="s">&#39;rad&#39;</span> <span class="ow">in</span> <span class="n">units</span><span class="p">:</span>
+   <span class="k">if</span> <span class="s1">&#39;rad&#39;</span> <span class="ow">in</span> <span class="n">units</span><span class="p">:</span>
       <span class="n">theta</span> <span class="o">*=</span> <span class="mi">180</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
    <span class="n">ci</span> <span class="o">=</span> <span class="n">cosd</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
    <span class="n">sis</span> <span class="o">=</span> <span class="p">(</span><span class="n">sind</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span>
@@ -200,7 +200,7 @@
    <span class="k">return</span> <span class="p">(</span><span class="n">eps</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">sis</span> <span class="o">-</span> <span class="n">eps</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">sis</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">eps</span><span class="o">*</span><span class="n">ci</span> <span class="o">+</span> <span class="n">sqr</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span></div>
 
 
-<span class="c">###---------------------------------------------------------------------------------------------</span>
+<span class="c1">###---------------------------------------------------------------------------------------------</span>
 </pre></div>
 
           </div>
@@ -220,14 +220,11 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
 
@@ -239,7 +236,7 @@
       &copy;2014, Brent Minchew.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
       
     </div>

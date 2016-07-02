@@ -56,26 +56,26 @@
 <div><p>input data vector (real-valued)</p>
 </div></blockquote>
 <dl class="docutils">
-<dt>low <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd><p class="first last">min frequency in passband [Hz] (default = None &#8211;&gt; lowpass filter)</p>
+<dt>low</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">float</span><dd><p class="first last">min frequency in passband [Hz] (default = None &#8211;&gt; lowpass filter)</p>
 </dd>
-<dt>high <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd><p class="first last">max frequency in passband [Hz] (default = None &#8211;&gt; highpass filter)</p>
+<dt>high</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">float</span><dd><p class="first last">max frequency in passband [Hz] (default = None &#8211;&gt; highpass filter)</p>
 </dd>
-<dt>dt <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd><p class="first last">sampling interval [sec]</p>
+<dt>dt</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">float</span><dd><p class="first last">sampling interval [sec]</p>
 </dd>
-<dt>df <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd><p class="first last">sampling frequency [Hz]</p>
+<dt>df</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">float</span><dd><p class="first last">sampling frequency [Hz]</p>
 </dd>
-<dt>order <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
-<dd><p class="first last">filter order (default = 4; max = 10)</p>
+<dt>order</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">int</span><dd><p class="first last">filter order (default = 4; max = 10)</p>
 </dd>
 <dt>zero_phase: bool</dt>
 <dd><p class="first last">True to run the filter fwd and rev for 0 phase shift (default = False)</p>
 </dd>
-<dt>reject <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
-<dd><p class="first last">True initializes a band reject instead of bandpass filter (default = False)</p>
+<dt>reject</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">bool</span><dd><p class="first last">True initializes a band reject instead of bandpass filter (default = False)</p>
 </dd>
 </dl>
 </div></blockquote>
@@ -136,14 +136,11 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
 
@@ -155,7 +152,7 @@
       &copy;2014, Brent Minchew.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
       
       |

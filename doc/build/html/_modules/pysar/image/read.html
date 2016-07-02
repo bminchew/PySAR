@@ -38,17 +38,17 @@
           <div class="body" role="main">
             
   <h1>Source code for pysar.image.read</h1><div class="highlight"><pre>
-<span class="sd">&#39;&#39;&#39;</span>
+<span></span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Read routines for a few standard file formats</span>
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
 <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;readHDF5&#39;</span><span class="p">,</span><span class="s">&#39;readNetCDF&#39;</span><span class="p">]</span> 
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;readHDF5&#39;</span><span class="p">,</span><span class="s1">&#39;readNetCDF&#39;</span><span class="p">]</span> 
 
-<span class="c">###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=</span>
-<div class="viewcode-block" id="readHDF5"><a class="viewcode-back" href="../../../image/read.html#pysar.image.readHDF5">[docs]</a><span class="k">def</span> <span class="nf">readHDF5</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">dataid</span><span class="o">=</span><span class="s">&#39;z&#39;</span><span class="p">,</span><span class="n">rtrnxy</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<span class="c1">###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=</span>
+<div class="viewcode-block" id="readHDF5"><a class="viewcode-back" href="../../../image/read.html#pysar.image.readHDF5">[docs]</a><span class="k">def</span> <span class="nf">readHDF5</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">dataid</span><span class="o">=</span><span class="s1">&#39;z&#39;</span><span class="p">,</span><span class="n">rtrnxy</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">   Return binary data from a single band HDF5 file</span>
 
@@ -71,14 +71,14 @@
    <span class="k">try</span><span class="p">:</span>
       <span class="kn">import</span> <span class="nn">h5py</span>
    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-      <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s">&#39;h5py is required for readhdf5&#39;</span><span class="p">)</span>
+      <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s1">&#39;h5py is required for readhdf5&#39;</span><span class="p">)</span>
 
    <span class="k">try</span><span class="p">:</span>
-      <span class="n">fn</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">)</span>
+      <span class="n">fn</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
       <span class="n">z</span> <span class="o">=</span> <span class="n">fn</span><span class="p">[</span><span class="n">dataid</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
       <span class="k">try</span><span class="p">:</span>
-         <span class="n">x</span> <span class="o">=</span> <span class="n">fn</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
-         <span class="n">y</span> <span class="o">=</span> <span class="n">fn</span><span class="p">[</span><span class="s">&#39;y&#39;</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
+         <span class="n">x</span> <span class="o">=</span> <span class="n">fn</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
+         <span class="n">y</span> <span class="o">=</span> <span class="n">fn</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
       <span class="k">except</span><span class="p">:</span>
          <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span>
    <span class="k">except</span><span class="p">:</span>
@@ -91,8 +91,8 @@
    <span class="k">else</span><span class="p">:</span>
       <span class="k">return</span> <span class="n">z</span></div>
 
-<span class="c">###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=</span>
-<div class="viewcode-block" id="readNetCDF"><a class="viewcode-back" href="../../../image/read.html#pysar.image.readNetCDF">[docs]</a><span class="k">def</span> <span class="nf">readNetCDF</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">dataid</span><span class="o">=</span><span class="s">&#39;z&#39;</span><span class="p">,</span><span class="n">rtrnxy</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<span class="c1">###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=</span>
+<div class="viewcode-block" id="readNetCDF"><a class="viewcode-back" href="../../../image/read.html#pysar.image.readNetCDF">[docs]</a><span class="k">def</span> <span class="nf">readNetCDF</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">dataid</span><span class="o">=</span><span class="s1">&#39;z&#39;</span><span class="p">,</span><span class="n">rtrnxy</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">   Return binary data from a single band NetCDF file</span>
 
@@ -115,19 +115,19 @@
    <span class="k">try</span><span class="p">:</span>
       <span class="kn">from</span> <span class="nn">netCDF4</span> <span class="kn">import</span> <span class="n">Dataset</span>
    <span class="k">except</span><span class="p">:</span>
-      <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s">&#39;netCDF4 for Python is required for readNetCDF&#39;</span><span class="p">)</span>
+      <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s1">&#39;netCDF4 for Python is required for readNetCDF&#39;</span><span class="p">)</span>
   
    <span class="k">try</span><span class="p">:</span>
-      <span class="n">fn</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">)</span>
+      <span class="n">fn</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
       <span class="n">z</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">dataid</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
       <span class="k">try</span><span class="p">:</span>
-         <span class="n">x</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
-         <span class="n">y</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s">&#39;y&#39;</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
+         <span class="n">x</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
+         <span class="n">y</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
       <span class="k">except</span><span class="p">:</span>
-         <span class="k">try</span><span class="p">:</span>  <span class="c">### for backward compatability </span>
-             <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s">&#39;dimension&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">fn</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s">&#39;dimension&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-             <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s">&#39;x_range&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">fn</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s">&#39;x_range&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-             <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s">&#39;y_range&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">fn</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s">&#39;y_range&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+         <span class="k">try</span><span class="p">:</span>  <span class="c1">### for backward compatability </span>
+             <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;dimension&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">fn</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;dimension&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+             <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;x_range&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">fn</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;x_range&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+             <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;y_range&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">fn</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;y_range&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
              <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span><span class="n">xmax</span><span class="p">,</span><span class="n">cols</span><span class="p">)</span>
              <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span><span class="n">ymax</span><span class="p">,</span><span class="n">rows</span><span class="p">)</span>
              <span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">)</span>
@@ -163,14 +163,11 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
 
@@ -182,7 +179,7 @@
       &copy;2014, Brent Minchew.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
       
     </div>

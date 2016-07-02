@@ -43,7 +43,7 @@
 <h1>pysar.image.writeGeoTiff<a class="headerlink" href="#pysar-image-writegeotiff" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="pysar.image.writeGeoTiff">
-<code class="descclassname">pysar.image.</code><code class="descname">writeGeoTiff</code><span class="sig-paren">(</span><em>z</em>, <em>filename</em>, <em>x=None</em>, <em>y=None</em>, <em>null=None</em>, <em>coords='EPSG:4326'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pysar/image/write.html#writeGeoTiff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.image.writeGeoTiff" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pysar.image.</code><code class="descname">writeGeoTiff</code><span class="sig-paren">(</span><em>z</em>, <em>filename</em>, <em>x=None</em>, <em>y=None</em>, <em>null=None</em>, <em>coords=None</em>, <em>epsg=4326</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pysar/image/write.html#writeGeoTiff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.image.writeGeoTiff" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write binary data to a GeoTiff file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -72,8 +72,12 @@ or array of y positions [(z.shape[0]-1,-1)]</p>
 <div><p>Null or no-data value [None]</p>
 </div></blockquote>
 <p><strong>coords</strong> :  str</p>
+<blockquote>
+<div><p>Coordinate system (must be recognizable by GDAL) [None]</p>
+</div></blockquote>
+<p><strong>epsg</strong> :  int</p>
 <blockquote class="last">
-<div><p>Coordinate system (must be recognizable by GDAL) [EPSG:4326]</p>
+<div><p>EPSG-defined coordinate system [4326]</p>
 </div></blockquote>
 </td>
 </tr>
@@ -121,14 +125,11 @@ or array of y positions [(z.shape[0]-1,-1)]</p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
 
@@ -140,7 +141,7 @@ or array of y positions [(z.shape[0]-1,-1)]</p>
       &copy;2014, Brent Minchew.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
       
       |

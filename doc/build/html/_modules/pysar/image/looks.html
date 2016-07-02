@@ -38,7 +38,7 @@
           <div class="body" role="main">
             
   <h1>Source code for pysar.image.looks</h1><div class="highlight"><pre>
-<span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Look routine</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
@@ -49,7 +49,7 @@
 <span class="kn">import</span> <span class="nn">_looks_mod</span>
 <span class="kn">from</span> <span class="nn">pysar.utils.gen_tools</span> <span class="kn">import</span> <span class="n">typecomplex</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;look&#39;</span><span class="p">,</span><span class="s">&#39;look2D&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;look&#39;</span><span class="p">,</span><span class="s1">&#39;look2D&#39;</span><span class="p">]</span>
 
 <div class="viewcode-block" id="look"><a class="viewcode-back" href="../../../image/looks.html#pysar.image.look">[docs]</a><span class="k">def</span> <span class="nf">look</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">win</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
    <span class="sd">&quot;&quot;&quot; </span>
@@ -105,7 +105,7 @@
       <span class="k">elif</span> <span class="n">a</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
          <span class="n">d0</span><span class="p">,</span> <span class="n">d1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">win</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">win</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
       <span class="k">else</span><span class="p">:</span>
-         <span class="k">print</span><span class="p">(</span><span class="s">&#39;Incorrect window:  must be list length 1 or 2&#39;</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Incorrect window:  must be list length 1 or 2&#39;</span><span class="p">)</span>
          <span class="k">return</span> <span class="bp">None</span>
    <span class="k">except</span><span class="p">:</span>
       <span class="n">d0</span><span class="p">,</span> <span class="n">d1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">win</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">win</span><span class="p">)</span>      
@@ -130,7 +130,7 @@
    <span class="k">elif</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">:</span>
       <span class="n">out</span> <span class="o">=</span> <span class="n">_looks_mod</span><span class="o">.</span><span class="n">look2d_dcmplx</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">shp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">d1</span><span class="p">,</span><span class="n">d0</span><span class="p">,</span><span class="n">outlen</span><span class="p">,</span><span class="n">donul</span><span class="p">,</span><span class="n">null</span><span class="p">,</span><span class="n">verbose</span><span class="p">)</span>    
    <span class="k">else</span><span class="p">:</span>
-      <span class="k">print</span><span class="p">(</span><span class="s">&#39;Unsupported data type...defaulting to float or complex&#39;</span><span class="p">)</span>
+      <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Unsupported data type...defaulting to float or complex&#39;</span><span class="p">)</span>
       <span class="n">dtyp</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span>
       <span class="k">if</span> <span class="n">typecomplex</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
          <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">complex64</span><span class="p">)</span>
@@ -171,14 +171,11 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
 
@@ -190,7 +187,7 @@
       &copy;2014, Brent Minchew.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
       
     </div>

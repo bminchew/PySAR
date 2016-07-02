@@ -5,7 +5,7 @@ from __future__ import print_function, division
 import sys,os
 import numpy as np
 
-__all__ = ['radius_lat','greatCircDist']
+__all__ = ['radius_lat','greatCircDist','distance2line','distance2lineseg']
 
 def radius_lat(latitude,a=6378.137,b=6356.7523):
     '''
@@ -42,3 +42,49 @@ def greatCircDist(lat0,lon0,lat,lon,a=6378.137,b=6356.7523):
     dist = 2.*Re*np.arcsin(np.sqrt(np.sin(0.5*d2r*(lat-lat0))**2 +
                 np.cos(d2r*lat0)*np.cos(d2r*lat)*np.sin(0.5*d2r*(lon-lon0))**2))
     return dist 
+
+def distance2line(vert1,vert2,point):
+    '''
+    Calculate the distance of a point from a line
+
+    Parameters
+    ----------
+    vert1           :       array-like
+                            2D coordinate (x,y) of one point that defines the line 
+    vert2           :       array-like
+                            2D coordinate (x,y) of another point that defines the line
+    point           :       array-like
+                            2D coordinate (x,y) of the point of interest
+    '''
+    x0, x1, x2 = np.float64(point[0]),np.float64(vert1[0]),np.float64(vert2[0])
+    y0, y1, y2 = np.float64(point[1]),np.float64(vert1[1]),np.float64(vert2[1])
+
+    dist = np.abs((y2-y1)*x0 - (x2-x1)*y0 + x2*y1 -x1*y2)/np.sqrt((y2-y1)**2 + (x2-x1)**2)
+    return dist
+    
+def distance2lineseg(vert1,vert2,point):
+    '''
+    Calculate the distance of a point from a line segment
+
+    Parameters
+    ----------
+    vert1           :       array-like
+                            2D coordinate (x,y) of one vertex
+    vert2           :       array-like
+                            2D coordinate (x,y) of the other vertex
+    point           :       array-like
+                            2D coordinate (x,y) of the point of interest
+    ''' 
+    v1 = np.array(vert1,dtype=np.float64)
+    v2 = np.array(vert2,dtype=np.float64)
+    p = np.array(point,dtype=np.float64)
+
+    if all(v1 == p) or all(v2 == p):
+        return 0.
+    elif np.arccos(np.dot((p - v1)/np.linalg.norm(p - v1),(v2 - v1)/np.linalg.norm(v2 - v1))) > 0.5*np.pi:
+        return np.linalg.norm(p - v1)
+    elif np.arccos(np.dot((p - v2)/np.linalg.norm(p - v2),(v1 - v2)/np.linalg.norm(v1 - v2))) > 0.5*np.pi:
+        return np.linalg.norm(p - v2)
+    else:
+        return np.abs(np.dot(v1 - v2, p[::-1]) + np.det([v1, v2]))/np.linalg.norm(v1 - v2)
+
