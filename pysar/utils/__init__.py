@@ -42,6 +42,9 @@ Geographic tools (:mod:`pysar.utils.geo_tools`)
     :toctree: generated/
 
    radius_lat        Planet radius at latitude  
+   greatCircDist     Great circle distanc
+   distance2line     Distance from a point to a line
+   distance2lineseg  Distance from a point to a line segment
 
 Scripts
 -------
