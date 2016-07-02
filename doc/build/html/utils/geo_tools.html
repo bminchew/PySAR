@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>geo_tools &mdash; PySAR 0.1.0</title>
+    
+    <link rel="stylesheet" href="../_static/pysar.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="PySAR 0.1.0" href="../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="geo-tools">
+<span id="id1"></span><h1>geo_tools<a class="headerlink" href="#geo-tools" title="Permalink to this headline">¶</a></h1>
+<p>Geographic and geometric toolbox</p>
+<span class="target" id="module-pysar.utils.geo_tools"></span><p>Geo tools</p>
+<dl class="function">
+<dt id="pysar.utils.geo_tools.radius_lat">
+<code class="descclassname">pysar.utils.geo_tools.</code><code class="descname">radius_lat</code><span class="sig-paren">(</span><em>latitude</em>, <em>a=6378.137</em>, <em>b=6356.7523</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysar/utils/geo_tools.html#radius_lat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.utils.geo_tools.radius_lat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the radius of a planet at a given latitude</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>latitude</strong> :       float or array-like</p>
+<blockquote>
+<div><p>Geodetic latitude in degrees</p>
+</div></blockquote>
+<p><strong>a,b</strong> :       float</p>
+<blockquote class="last">
+<div><p>semi-major and semi-minor axis [Earth values]</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pysar.utils.geo_tools.greatCircDist">
+<code class="descclassname">pysar.utils.geo_tools.</code><code class="descname">greatCircDist</code><span class="sig-paren">(</span><em>lat0</em>, <em>lon0</em>, <em>lat</em>, <em>lon</em>, <em>a=6378.137</em>, <em>b=6356.7523</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysar/utils/geo_tools.html#greatCircDist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.utils.geo_tools.greatCircDist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the Great Circle distance between two points given in degrees latitude and longitude</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>lat0 and lat</strong> :       float</p>
+<blockquote>
+<div><p>Reference and secondary latitudes in degrees</p>
+</div></blockquote>
+<p><strong>lon0 and lon</strong> :       float</p>
+<blockquote>
+<div><p>Reference and secondary longitudes in degress</p>
+</div></blockquote>
+<p><strong>a,b</strong> :       float</p>
+<blockquote class="last">
+<div><p>semi-major and semi-minor axis [Earth values]</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pysar.utils.geo_tools.distance2line">
+<code class="descclassname">pysar.utils.geo_tools.</code><code class="descname">distance2line</code><span class="sig-paren">(</span><em>vert1</em>, <em>vert2</em>, <em>point</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysar/utils/geo_tools.html#distance2line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.utils.geo_tools.distance2line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the distance of a point from a line</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>vert1</strong> :       array-like</p>
+<blockquote>
+<div><p>2D coordinate (x,y) of one point that defines the line</p>
+</div></blockquote>
+<p><strong>vert2</strong> :       array-like</p>
+<blockquote>
+<div><p>2D coordinate (x,y) of another point that defines the line</p>
+</div></blockquote>
+<p><strong>point</strong> :       array-like</p>
+<blockquote class="last">
+<div><p>2D coordinate (x,y) of the point of interest</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pysar.utils.geo_tools.distance2lineseg">
+<code class="descclassname">pysar.utils.geo_tools.</code><code class="descname">distance2lineseg</code><span class="sig-paren">(</span><em>vert1</em>, <em>vert2</em>, <em>point</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysar/utils/geo_tools.html#distance2lineseg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.utils.geo_tools.distance2lineseg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the distance of a point from a line segment</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>vert1</strong> :       array-like</p>
+<blockquote>
+<div><p>2D coordinate (x,y) of one vertex</p>
+</div></blockquote>
+<p><strong>vert2</strong> :       array-like</p>
+<blockquote>
+<div><p>2D coordinate (x,y) of the other vertex</p>
+</div></blockquote>
+<p><strong>point</strong> :       array-like</p>
+<blockquote class="last">
+<div><p>2D coordinate (x,y) of the point of interest</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/utils/geo_tools.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<ul class="this-page-menu">
+  <li><a href="/numpy/docs/numpy-docs/utils/geo_tools.rst">Edit page</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Brent Minchew.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+      |
+      <a href="../_sources/utils/geo_tools.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
