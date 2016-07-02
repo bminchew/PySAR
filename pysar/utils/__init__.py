@@ -36,7 +36,7 @@ General tools (:mod:`pysar.utils.gen_tools`)
    typecomplex       Tests for any valid type of complex value
 
 Geographic tools (:mod:`pysar.utils.geo_tools`)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autosummary::
     :toctree: generated/
