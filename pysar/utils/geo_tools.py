@@ -43,7 +43,7 @@ def greatCircDist(lat0,lon0,lat,lon,a=6378.137,b=6356.7523):
                 np.cos(d2r*lat0)*np.cos(d2r*lat)*np.sin(0.5*d2r*(lon-lon0))**2))
     return dist 
 
-def distance2line(vert1,vert2,point):
+def distance2line(vert1,vert2,point,isseg=False):
     '''
     Calculate the distance of a point from a line
 
@@ -56,10 +56,13 @@ def distance2line(vert1,vert2,point):
     point           :       array-like
                             2D coordinate (x,y) of the point of interest
     '''
-    x0, x1, x2 = np.float64(point[0]),np.float64(vert1[0]),np.float64(vert2[0])
-    y0, y1, y2 = np.float64(point[1]),np.float64(vert1[1]),np.float64(vert2[1])
+    if isseg:
+        dist = distance2lineseg(vert1,vert2,point)
+    else:
+        x0, x1, x2 = np.float64(point[0]),np.float64(vert1[0]),np.float64(vert2[0])
+        y0, y1, y2 = np.float64(point[1]),np.float64(vert1[1]),np.float64(vert2[1])
 
-    dist = np.abs((y2-y1)*x0 - (x2-x1)*y0 + x2*y1 -x1*y2)/np.sqrt((y2-y1)**2 + (x2-x1)**2)
+        dist = np.abs((y2-y1)*x0 - (x2-x1)*y0 + x2*y1 -x1*y2)/np.sqrt((y2-y1)**2 + (x2-x1)**2)
     return dist
     
 def distance2lineseg(vert1,vert2,point):
@@ -88,4 +91,4 @@ def distance2lineseg(vert1,vert2,point):
     elif np.arccos(np.dot((p - v2)/np.linalg.norm(p - v2),(v1 - v2)/np.linalg.norm(v1 - v2))) > 0.5*np.pi:
         return np.linalg.norm(p - v2)
     else:
-        return distance2line(v1,v2,p)
+        return distance2line(v1,v2,p,isseg=False)
