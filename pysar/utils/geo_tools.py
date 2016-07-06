@@ -88,5 +88,4 @@ def distance2lineseg(vert1,vert2,point):
     elif np.arccos(np.dot((p - v2)/np.linalg.norm(p - v2),(v1 - v2)/np.linalg.norm(v1 - v2))) > 0.5*np.pi:
         return np.linalg.norm(p - v2)
     else:
-        return np.abs(np.dot(v1 - v2, p[::-1]) + np.linalg.det([v1, v2]))/np.linalg.norm(v1 - v2)
-
+        return distance2line(v1,v2,p)
