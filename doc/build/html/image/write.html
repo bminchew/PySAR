@@ -138,7 +138,7 @@ or array of y positions [(z.shape[0]-1,-1)]</p>
 
 <dl class="function">
 <dt id="pysar.image.write.writeRaster">
-<code class="descclassname">pysar.image.write.</code><code class="descname">writeRaster</code><span class="sig-paren">(</span><em>z</em>, <em>filename</em>, <em>filetype='GTiff'</em>, <em>x=None</em>, <em>y=None</em>, <em>null=None</em>, <em>coords=None</em>, <em>epsg=4326</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysar/image/write.html#writeRaster"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.image.write.writeRaster" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pysar.image.write.</code><code class="descname">writeRaster</code><span class="sig-paren">(</span><em>z</em>, <em>filename</em>, <em>filetype='GTiff'</em>, <em>x=None</em>, <em>y=None</em>, <em>null=nan</em>, <em>coords=None</em>, <em>epsg=4326</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysar/image/write.html#writeRaster"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.image.write.writeRaster" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write binary data to a raster file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -176,7 +176,7 @@ or array of y positions [(z.shape[0]-1,-1)]</p>
 </div></blockquote>
 <p><strong>epsg</strong> :  int</p>
 <blockquote class="last">
-<div><p>EPSG-defined coordinate system [4326]</p>
+<div><p>EPSG-defined coordinate system (more robust than coords) [4326]</p>
 </div></blockquote>
 </td>
 </tr>
@@ -192,7 +192,7 @@ or array of y positions [(z.shape[0]-1,-1)]</p>
 
 <dl class="function">
 <dt id="pysar.image.write.writeGeoTiff">
-<code class="descclassname">pysar.image.write.</code><code class="descname">writeGeoTiff</code><span class="sig-paren">(</span><em>z</em>, <em>filename</em>, <em>x=None</em>, <em>y=None</em>, <em>null=None</em>, <em>coords=None</em>, <em>epsg=4326</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysar/image/write.html#writeGeoTiff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.image.write.writeGeoTiff" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pysar.image.write.</code><code class="descname">writeGeoTiff</code><span class="sig-paren">(</span><em>z</em>, <em>filename</em>, <em>x=None</em>, <em>y=None</em>, <em>null=nan</em>, <em>coords=None</em>, <em>epsg=4326</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysar/image/write.html#writeGeoTiff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.image.write.writeGeoTiff" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write binary data to a GeoTiff file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />

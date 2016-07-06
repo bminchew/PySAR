@@ -122,7 +122,7 @@
       <span class="n">fn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 <span class="c1">###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=</span>
-<div class="viewcode-block" id="writeRaster"><a class="viewcode-back" href="../../../image/write.html#pysar.image.writeRaster">[docs]</a><span class="k">def</span> <span class="nf">writeRaster</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">filename</span><span class="p">,</span><span class="n">filetype</span><span class="o">=</span><span class="s1">&#39;GTiff&#39;</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">coords</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">epsg</span><span class="o">=</span><span class="mi">4326</span><span class="p">):</span>
+<div class="viewcode-block" id="writeRaster"><a class="viewcode-back" href="../../../image/write.html#pysar.image.writeRaster">[docs]</a><span class="k">def</span> <span class="nf">writeRaster</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">filename</span><span class="p">,</span><span class="n">filetype</span><span class="o">=</span><span class="s1">&#39;GTiff&#39;</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span><span class="n">coords</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">epsg</span><span class="o">=</span><span class="mi">4326</span><span class="p">):</span>
    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">   Write binary data to a raster file</span>
 
@@ -146,7 +146,7 @@
 <span class="sd">   coords   :  str</span>
 <span class="sd">               Coordinate system (must be recognizable by GDAL) [None]</span>
 <span class="sd">   epsg     :  int</span>
-<span class="sd">               EPSG-defined coordinate system [4326]</span>
+<span class="sd">               EPSG-defined coordinate system (more robust than coords) [4326]</span>
 
 <span class="sd">   Notes</span>
 <span class="sd">   -----</span>
@@ -224,7 +224,7 @@
       <span class="n">rast</span><span class="p">,</span> <span class="n">band</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span></div>
 
 <span class="c1">###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=</span>
-<div class="viewcode-block" id="writeGeoTiff"><a class="viewcode-back" href="../../../image/write.html#pysar.image.writeGeoTiff">[docs]</a><span class="k">def</span> <span class="nf">writeGeoTiff</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">filename</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">coords</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">epsg</span><span class="o">=</span><span class="mi">4326</span><span class="p">):</span>
+<div class="viewcode-block" id="writeGeoTiff"><a class="viewcode-back" href="../../../image/write.html#pysar.image.writeGeoTiff">[docs]</a><span class="k">def</span> <span class="nf">writeGeoTiff</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">filename</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span><span class="n">coords</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">epsg</span><span class="o">=</span><span class="mi">4326</span><span class="p">):</span>
    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">   Write binary data to a GeoTiff file</span>
 

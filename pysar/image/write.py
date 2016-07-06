@@ -82,7 +82,7 @@ def writeHDF5(z,filename,x=None,y=None,dataname=None):
       fn.close()
 
 ###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-def writeRaster(z,filename,filetype='GTiff',x=None,y=None,null=None,coords=None,epsg=4326):
+def writeRaster(z,filename,filetype='GTiff',x=None,y=None,null=np.nan,coords=None,epsg=4326):
    '''
    Write binary data to a raster file
 
@@ -106,7 +106,7 @@ def writeRaster(z,filename,filetype='GTiff',x=None,y=None,null=None,coords=None,
    coords   :  str
                Coordinate system (must be recognizable by GDAL) [None]
    epsg     :  int
-               EPSG-defined coordinate system [4326]
+               EPSG-defined coordinate system (more robust than coords) [4326]
 
    Notes
    -----
@@ -184,7 +184,7 @@ def writeRaster(z,filename,filetype='GTiff',x=None,y=None,null=None,coords=None,
       rast, band = None, None
 
 ###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-def writeGeoTiff(z,filename,x=None,y=None,null=None,coords=None,epsg=4326):
+def writeGeoTiff(z,filename,x=None,y=None,null=np.nan,coords=None,epsg=4326):
    '''
    Write binary data to a GeoTiff file
 
