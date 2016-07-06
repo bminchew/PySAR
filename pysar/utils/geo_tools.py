@@ -79,7 +79,9 @@ def distance2lineseg(vert1,vert2,point):
     v2 = np.array(vert2,dtype=np.float64)
     p = np.array(point,dtype=np.float64)
 
-    if all(v1 == p) or all(v2 == p):
+    if all(v1 == v2):
+        raise ValueError('vertices are collocated')
+    elif all(v1 == p) or all(v2 == p):
         return 0.
     elif np.arccos(np.dot((p - v1)/np.linalg.norm(p - v1),(v2 - v1)/np.linalg.norm(v2 - v1))) > 0.5*np.pi:
         return np.linalg.norm(p - v1)
