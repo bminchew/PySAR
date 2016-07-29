@@ -127,6 +127,8 @@ def boxcar2d(data,window,null=None,nullset=None,thread='auto',numthrd=8,tdthrsh=
             data[nuls] = nullset
 
     shp = np.shape(data)
+    if len(shp) != 2:
+        raise ValueError('Data must have 2 dimensions. Given %d' % len(shp))
     data = data.flatten()
     dtyp = data.dtype
 

@@ -44,7 +44,8 @@ def poly2mask(polygon,imdim,imtype=np.float32):
    except:
       raise ImportError('poly2mask.py requires PIL.')
 
-   if polygon[-1] != polygon[0]:  polygon.append(polygon[0])
+   if polygon[-1] != polygon[0]:  
+      polygon.append(polygon[0])
 
    nx, ny = imdim[0], imdim[1]
    img = Image.new('L', (nx,ny), 0) 
