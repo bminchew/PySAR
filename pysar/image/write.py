@@ -123,7 +123,9 @@ def writeRaster(z,filename,filetype='GTiff',x=None,y=None,null=np.nan,coords=Non
       try:
          import gdal, osr
       except ImportError:
-         raise ImportError('gdal for Python is required for writeGeoTiff')
+         raise ImportError('gdal for Python is required for writeRaster and writeGeoTiff')
+   gdal.UseExceptions()
+
    try:
       ztype = z.dtype.name
       gdtp = _npdtype2gdaldtype()

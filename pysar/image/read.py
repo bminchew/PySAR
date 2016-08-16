@@ -118,7 +118,7 @@ def readRaster(filename,bandnum=1,rtrnmeta=True,rtrndtyp=np.float32):
    rtrnmeta :  bool
                Return metadata [True]
    rtrndtyp :  dtype
-               Return data type [np.float32]
+               Return data type [numpy.float32]
 
    Returns
    -------
@@ -133,38 +133,45 @@ def readRaster(filename,bandnum=1,rtrnmeta=True,rtrndtyp=np.float32):
       except ImportError:
          raise ImportError('gdal for Python is required for readRaster')
 
-   meta = {}
-   ds = gdal.Open(filename)
-   meta['driver'] = ds.GetDriver().ShortName
+   gdal.UseExceptions()
+   if not os.path.exists(filename):
+       raise ValueError('%s does not exist' % filename)
 
-   gt = ds.GetGeoTransform()
-   sr = osr.SpatialReference(wkt=ds.GetProjection()) 
-   
-   meta['width'] = ds.RasterXSize
-   meta['length'] = ds.RasterYSize
+   try:   
+       meta = {}
+       ds = gdal.Open(filename)
+       meta['driver'] = ds.GetDriver().ShortName
 
-   meta['minx'] = gt[0]
-   meta['miny'] = gt[3] + meta['width']*gt[4] + meta['length']*gt[5]
-   meta['maxx'] = gt[0] + meta['width']*gt[1] + meta['length']*gt[2]
-   meta['maxy'] = gt[3]
-   meta['dx'] = gt[1]
-   meta['dy'] = gt[5]
+       gt = ds.GetGeoTransform()
+       sr = osr.SpatialReference(wkt=ds.GetProjection()) 
+       
+       meta['width'] = ds.RasterXSize
+       meta['length'] = ds.RasterYSize
 
-   meta['reference'] = ds.GetProjectionRef()
-   meta['projection'] = sr.GetAttrValue('projection').strip().replace('_',' ')
-   meta['datum'] = sr.GetAttrValue('datum').strip()
-   meta['unit'] = sr.GetAttrValue('unit').strip().lower()
+       meta['minx'] = gt[0]
+       meta['miny'] = gt[3] + meta['width']*gt[4] + meta['length']*gt[5]
+       meta['maxx'] = gt[0] + meta['width']*gt[1] + meta['length']*gt[2]
+       meta['maxy'] = gt[3]
+       meta['dx'] = gt[1]
+       meta['dy'] = gt[5]
 
-   band = ds.GetRasterBand(bandnum)
-   meta['bandnum'] = bandnum
-   meta['dtype'] = gdal.GetDataTypeName(band.DataType)
+       meta['reference'] = ds.GetProjectionRef()
+       meta['projection'] = sr.GetAttrValue('projection').strip().replace('_',' ')
+       meta['datum'] = sr.GetAttrValue('datum').strip()
+       meta['unit'] = sr.GetAttrValue('unit').strip().lower()
 
-   data = band.ReadAsArray(0,0,meta['width'],meta['length'])
-   if rtrndtyp is not None:
-      data = data.astype(rtrndtyp)
+       band = ds.GetRasterBand(bandnum)
+       meta['bandnum'] = bandnum
+       meta['dtype'] = gdal.GetDataTypeName(band.DataType)
 
-   band = None
-   ds = None
+       data = band.ReadAsArray(0,0,meta['width'],meta['length'])
+       if rtrndtyp is not None:
+          data = data.astype(rtrndtyp)
+   except:
+       raise 
+   finally:
+       band = None
+       ds = None
 
    if rtrnmeta:
       return data,meta
