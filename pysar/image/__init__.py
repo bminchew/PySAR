@@ -48,6 +48,7 @@ Read some standard formats (:mod:`pysar.image.read`)
 
    readHDF5             Read data from an HDF5 file
    readNetCDF           Read data from a NetCDF file
+   readRaster           Read data from a GDAL-supported raster file
 
 Scripts
 -------
