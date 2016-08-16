@@ -118,7 +118,7 @@ def readRaster(filename,bandnum=1,rtrnmeta=True,rtrndtyp=np.float32):
    rtrnmeta :  bool
                Return metadata [True]
    rtrndtyp :  dtype
-               Return data type [numpy.float32]
+               Return array data type [numpy.float32]
 
    Returns
    -------
