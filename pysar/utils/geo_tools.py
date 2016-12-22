@@ -5,7 +5,7 @@ from __future__ import print_function, division
 import sys,os
 import numpy as np
 
-__all__ = ['radius_lat','greatCircDist','distance2line','distance2lineseg']
+__all__ = ['radius_lat','greatCircDist','distance2line','distance2lineseg','epsg2epsg']
 
 def radius_lat(latitude,a=6378.137,b=6356.7523):
     '''
@@ -92,3 +92,59 @@ def distance2lineseg(vert1,vert2,point):
         return np.linalg.norm(p - v2)
     else:
         return distance2line(v1,v2,p,isseg=False)
+
+def epsg2epsg(x,y,epsgin,epsgout,z=None):
+    '''
+    Convert x,y data in an EPSG-defined reference frame to another EPSG-defined reference frame
+
+    Parameters
+    ----------
+    x           :       float or array-like
+                        x-coordinate(s)
+    y           :       float or array-like (same length as x)
+                        y-coordinate(s)
+    epsgin      :       integer
+                        Input EPSG 
+    epsgout     :       integer
+                        Output EPSG
+
+    Options
+    -------
+    z           :       float or array-like (same length as x)
+                        z-coordinate(s)
+
+    Returns
+    -------
+    xout,yout   :       tuple
+                        x,y coordinates in new EPSG refernece frame
+    '''
+    try:
+        from osgeo import osr
+    except ImportError:
+        try:
+            import osr
+        except ImportError:
+            raise ImportError('epsg2epsg requires osgeo, but osgeo was not found')
+    try:
+        from pyproj import Proj, transform
+    except ImportError:
+        raise ImportError('epsg2epsg requires pyproj, but pyproj was not found')  
+
+    srsin = osr.SpatialReference()
+    srsin.ImportFromEPSG(epsgin)
+    srsin_proj4 = Proj(srsin.ExportToProj4())
+
+    srsot = osr.SpatialReference()
+    srsot.ImportFromEPSG(epsgout)
+    srsot_proj4 = Proj(srsot.ExportToProj4())
+
+    if z is None:
+        xout,yout = transform(srsin_proj4,srsot_proj4,x,y)
+        return xout,yout
+    else:
+        xout,yout,zout = transform(srsin_proj4,srsot_proj4,x,y,z)
+        return xout,yout,zout
+
+  
+
+

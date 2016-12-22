@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>geo_tools &mdash; PySAR 0.1.0</title>
+    <title>geo_tools &#8212; PySAR 0.1.0</title>
     
     <link rel="stylesheet" href="../_static/pysar.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -17,13 +17,15 @@
         VERSION:     '0.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="PySAR 0.1.0" href="../index.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -140,6 +142,42 @@
 </table>
 </dd></dl>
 
+<dl class="function">
+<dt id="pysar.utils.geo_tools.epsg2epsg">
+<code class="descclassname">pysar.utils.geo_tools.</code><code class="descname">epsg2epsg</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>epsgin</em>, <em>epsgout</em>, <em>z=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysar/utils/geo_tools.html#epsg2epsg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.utils.geo_tools.epsg2epsg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert x,y data in an EPSG-defined reference frame to another EPSG-defined reference frame</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x</strong> :       float or array-like</p>
+<blockquote>
+<div><p>x-coordinate(s)</p>
+</div></blockquote>
+<p><strong>y</strong> :       float or array-like (same length as x)</p>
+<blockquote>
+<div><p>y-coordinate(s)</p>
+</div></blockquote>
+<p><strong>epsgin</strong> :       integer</p>
+<blockquote>
+<div><p>Input EPSG</p>
+</div></blockquote>
+<p><strong>epsgout</strong> :       integer</p>
+<blockquote>
+<div><p>Output EPSG</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>xout,yout</strong> :       tuple</p>
+<blockquote class="last">
+<div><p>x,y coordinates in new EPSG refernece frame</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 
 
@@ -157,12 +195,12 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/utils/geo_tools.txt"
+      <li><a href="../_sources/utils/geo_tools.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <ul class="this-page-menu">
-  <li><a href="/numpy/docs/numpy-docs/utils/geo_tools.rst">Edit page</a></li>
+  <li><a href="/numpy/docs/numpy-docs/utils/geo_tools.rst.rst">Edit page</a></li>
 </ul>
 
 <div id="searchbox" style="display: none" role="search">
@@ -184,11 +222,11 @@
       &copy;2014, Brent Minchew.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
       
       |
-      <a href="../_sources/utils/geo_tools.txt"
+      <a href="../_sources/utils/geo_tools.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

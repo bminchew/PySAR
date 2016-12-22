@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pysar.image.read &mdash; PySAR 0.1.0</title>
+    <title>pysar.image.read &#8212; PySAR 0.1.0</title>
     
     <link rel="stylesheet" href="../../../_static/pysar.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -17,14 +17,15 @@
         VERSION:     '0.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="PySAR 0.1.0" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -41,14 +42,14 @@
 <span></span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Read routines for a few standard file formats</span>
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
 <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;readHDF5&#39;</span><span class="p">,</span><span class="s1">&#39;readNetCDF&#39;</span><span class="p">]</span> 
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;readHDF5&#39;</span><span class="p">,</span><span class="s1">&#39;readNetCDF&#39;</span><span class="p">,</span><span class="s1">&#39;readRaster&#39;</span><span class="p">]</span> 
 
 <span class="c1">###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=</span>
-<div class="viewcode-block" id="readHDF5"><a class="viewcode-back" href="../../../image/read.html#pysar.image.readHDF5">[docs]</a><span class="k">def</span> <span class="nf">readHDF5</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">dataid</span><span class="o">=</span><span class="s1">&#39;z&#39;</span><span class="p">,</span><span class="n">rtrnxy</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="readHDF5"><a class="viewcode-back" href="../../../image/read.html#pysar.image.readHDF5">[docs]</a><span class="k">def</span> <span class="nf">readHDF5</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">dataid</span><span class="o">=</span><span class="s1">&#39;z&#39;</span><span class="p">,</span><span class="n">rtrnxy</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">   Return binary data from a single band HDF5 file</span>
 
@@ -80,7 +81,7 @@
          <span class="n">x</span> <span class="o">=</span> <span class="n">fn</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
          <span class="n">y</span> <span class="o">=</span> <span class="n">fn</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
       <span class="k">except</span><span class="p">:</span>
-         <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span>
+         <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
    <span class="k">except</span><span class="p">:</span>
       <span class="k">raise</span>
    <span class="k">finally</span><span class="p">:</span>
@@ -92,7 +93,7 @@
       <span class="k">return</span> <span class="n">z</span></div>
 
 <span class="c1">###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=</span>
-<div class="viewcode-block" id="readNetCDF"><a class="viewcode-back" href="../../../image/read.html#pysar.image.readNetCDF">[docs]</a><span class="k">def</span> <span class="nf">readNetCDF</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">dataid</span><span class="o">=</span><span class="s1">&#39;z&#39;</span><span class="p">,</span><span class="n">rtrnxy</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="readNetCDF"><a class="viewcode-back" href="../../../image/read.html#pysar.image.readNetCDF">[docs]</a><span class="k">def</span> <span class="nf">readNetCDF</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">dataid</span><span class="o">=</span><span class="s1">&#39;z&#39;</span><span class="p">,</span><span class="n">rtrnxy</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">   Return binary data from a single band NetCDF file</span>
 
@@ -113,7 +114,7 @@
 <span class="sd">               Data tagged dataid, &#39;x&#39;, and &#39;y&#39;</span>
 <span class="sd">   &#39;&#39;&#39;</span>
    <span class="k">try</span><span class="p">:</span>
-      <span class="kn">from</span> <span class="nn">netCDF4</span> <span class="kn">import</span> <span class="n">Dataset</span>
+      <span class="kn">from</span> <span class="nn">netCDF4</span> <span class="k">import</span> <span class="n">Dataset</span>
    <span class="k">except</span><span class="p">:</span>
       <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s1">&#39;netCDF4 for Python is required for readNetCDF&#39;</span><span class="p">)</span>
   
@@ -132,7 +133,7 @@
              <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span><span class="n">ymax</span><span class="p">,</span><span class="n">rows</span><span class="p">)</span>
              <span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">)</span>
          <span class="k">except</span><span class="p">:</span>
-             <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span>
+             <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
    <span class="k">except</span><span class="p">:</span>
       <span class="k">raise</span>
    <span class="k">finally</span><span class="p">:</span>
@@ -142,8 +143,82 @@
       <span class="k">return</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span>
    <span class="k">else</span><span class="p">:</span>
       <span class="k">return</span> <span class="n">z</span></div>
+
+<span class="c1">###-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=</span>
+<div class="viewcode-block" id="readRaster"><a class="viewcode-back" href="../../../image/read.html#pysar.image.readRaster">[docs]</a><span class="k">def</span> <span class="nf">readRaster</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">bandnum</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">rtrnmeta</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">rtrndtyp</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">):</span>
+   <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">   Return data from a GDAL-readable raster file </span>
+
+<span class="sd">   Parameters</span>
+<span class="sd">   ----------</span>
+
+<span class="sd">   filename :  str</span>
+<span class="sd">               Name of file</span>
+<span class="sd">   bandnum  :  int</span>
+<span class="sd">               Band number to retrieve [1]</span>
+<span class="sd">   rtrnmeta :  bool</span>
+<span class="sd">               Return metadata [True]</span>
+<span class="sd">   rtrndtyp :  dtype</span>
+<span class="sd">               Return array data type [numpy.float32]</span>
+
+<span class="sd">   Returns</span>
+<span class="sd">   -------</span>
+
+<span class="sd">   rtrn     :  array[,meta]</span>
+<span class="sd">   &#39;&#39;&#39;</span>
+   <span class="k">try</span><span class="p">:</span>
+      <span class="kn">from</span> <span class="nn">osgeo</span> <span class="k">import</span> <span class="n">gdal</span><span class="p">,</span> <span class="n">osr</span>
+   <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+      <span class="k">try</span><span class="p">:</span>
+         <span class="kn">import</span> <span class="nn">gdal</span><span class="o">,</span> <span class="nn">osr</span>
+      <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+         <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s1">&#39;gdal for Python is required for readRaster&#39;</span><span class="p">)</span>
+
+   <span class="n">gdal</span><span class="o">.</span><span class="n">UseExceptions</span><span class="p">()</span>
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+       <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> does not exist&#39;</span> <span class="o">%</span> <span class="n">filename</span><span class="p">)</span>
+
+   <span class="k">try</span><span class="p">:</span>   
+       <span class="n">meta</span> <span class="o">=</span> <span class="p">{}</span>
+       <span class="n">ds</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+       <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;driver&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">GetDriver</span><span class="p">()</span><span class="o">.</span><span class="n">ShortName</span>
+
+       <span class="n">gt</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">GetGeoTransform</span><span class="p">()</span>
+       <span class="n">sr</span> <span class="o">=</span> <span class="n">osr</span><span class="o">.</span><span class="n">SpatialReference</span><span class="p">(</span><span class="n">wkt</span><span class="o">=</span><span class="n">ds</span><span class="o">.</span><span class="n">GetProjection</span><span class="p">())</span> 
+       
+       <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;width&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">RasterXSize</span>
+       <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">RasterYSize</span>
+
+       <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;minx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+       <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;miny&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gt</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;width&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">gt</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">+</span> <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">gt</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+       <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;maxx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;width&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">gt</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">gt</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+       <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;maxy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gt</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+       <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;dx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gt</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+       <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;dy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gt</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+
+       <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;reference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">GetProjectionRef</span><span class="p">()</span>
+       <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;projection&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sr</span><span class="o">.</span><span class="n">GetAttrValue</span><span class="p">(</span><span class="s1">&#39;projection&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+       <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;datum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sr</span><span class="o">.</span><span class="n">GetAttrValue</span><span class="p">(</span><span class="s1">&#39;datum&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+       <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;unit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sr</span><span class="o">.</span><span class="n">GetAttrValue</span><span class="p">(</span><span class="s1">&#39;unit&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+       <span class="n">band</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">GetRasterBand</span><span class="p">(</span><span class="n">bandnum</span><span class="p">)</span>
+       <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;bandnum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bandnum</span>
+       <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;dtype&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">GetDataTypeName</span><span class="p">(</span><span class="n">band</span><span class="o">.</span><span class="n">DataType</span><span class="p">)</span>
+
+       <span class="n">data</span> <span class="o">=</span> <span class="n">band</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">meta</span><span class="p">[</span><span class="s1">&#39;width&#39;</span><span class="p">],</span><span class="n">meta</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">])</span>
+       <span class="k">if</span> <span class="n">rtrndtyp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+          <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">rtrndtyp</span><span class="p">)</span>
+   <span class="k">except</span><span class="p">:</span>
+       <span class="k">raise</span> 
+   <span class="k">finally</span><span class="p">:</span>
+       <span class="n">band</span> <span class="o">=</span> <span class="kc">None</span>
+       <span class="n">ds</span> <span class="o">=</span> <span class="kc">None</span>
+
+   <span class="k">if</span> <span class="n">rtrnmeta</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">data</span><span class="p">,</span><span class="n">meta</span>
+   <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">data</span></div>
  
-    
 </pre></div>
 
           </div>
@@ -179,7 +254,7 @@
       &copy;2014, Brent Minchew.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
       
     </div>

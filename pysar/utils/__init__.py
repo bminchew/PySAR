@@ -45,6 +45,7 @@ Geographic tools (:mod:`pysar.utils.geo_tools`)
    greatCircDist     Great circle distanc
    distance2line     Distance from a point to a line
    distance2lineseg  Distance from a point to a line segment
+   epsg2epsg         Convert geographic coordinates from one EPSG ref. frame to another
 
 Scripts
 -------

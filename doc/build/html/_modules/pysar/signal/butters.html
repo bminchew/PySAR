@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pysar.signal.butters &mdash; PySAR 0.1.0</title>
+    <title>pysar.signal.butters &#8212; PySAR 0.1.0</title>
     
     <link rel="stylesheet" href="../../../_static/pysar.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -17,14 +17,15 @@
         VERSION:     '0.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="PySAR 0.1.0" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -52,15 +53,15 @@
 <span class="sd">taper(data,percent)                                                  :  Basic cosine taper</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">_xapiir</span> <span class="kn">import</span> <span class="n">callxapiir</span>
-<span class="kn">from</span> <span class="nn">special</span> <span class="kn">import</span> <span class="n">taper</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">_xapiir</span> <span class="k">import</span> <span class="n">callxapiir</span>
+<span class="kn">from</span> <span class="nn">special</span> <span class="k">import</span> <span class="n">taper</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;taper&#39;</span><span class="p">,</span> <span class="s1">&#39;butter&#39;</span><span class="p">,</span><span class="s1">&#39;bandpass&#39;</span><span class="p">,</span><span class="s1">&#39;bandreject&#39;</span><span class="p">,</span><span class="s1">&#39;lowpass&#39;</span><span class="p">,</span><span class="s1">&#39;highpass&#39;</span><span class="p">]</span>
 
 <span class="c1">###===================================================================================</span>
-<div class="viewcode-block" id="butter"><a class="viewcode-back" href="../../../signal/generated/pysar.signal.butter.html#pysar.signal.butters.butter">[docs]</a><span class="k">def</span> <span class="nf">butter</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">low</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">high</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">zero_phase</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">reject</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="butter"><a class="viewcode-back" href="../../../signal/generated/pysar.signal.butter.html#pysar.signal.butters.butter">[docs]</a><span class="k">def</span> <span class="nf">butter</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">low</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">high</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">zero_phase</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">reject</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">   Butterworth filter </span>
 
@@ -109,7 +110,7 @@
    <span class="k">if</span> <span class="ow">not</span> <span class="n">low</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">high</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;low and/or high must be defined&quot;</span><span class="p">)</span>
    <span class="k">if</span> <span class="ow">not</span> <span class="n">nsamps</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;data is a scalar&quot;</span><span class="p">)</span>
 
-   <span class="k">if</span> <span class="n">dt</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>  <span class="n">dt</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">df</span>
+   <span class="k">if</span> <span class="n">dt</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="n">dt</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">df</span>
    <span class="k">if</span> <span class="n">zero_phase</span><span class="p">:</span>  <span class="n">passes</span> <span class="o">=</span> <span class="mi">2</span>
    <span class="k">if</span> <span class="n">reject</span><span class="p">:</span> 
       <span class="k">if</span> <span class="ow">not</span> <span class="n">low</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">high</span><span class="p">:</span> 
@@ -125,7 +126,7 @@
    <span class="k">return</span> <span class="n">data</span></div>
 
 <span class="c1">###===================================================================================</span>
-<div class="viewcode-block" id="bandpass"><a class="viewcode-back" href="../../../signal/generated/pysar.signal.bandpass.html#pysar.signal.butters.bandpass">[docs]</a><span class="k">def</span> <span class="nf">bandpass</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">low</span><span class="p">,</span><span class="n">high</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">zero_phase</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="bandpass"><a class="viewcode-back" href="../../../signal/generated/pysar.signal.bandpass.html#pysar.signal.butters.bandpass">[docs]</a><span class="k">def</span> <span class="nf">bandpass</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">low</span><span class="p">,</span><span class="n">high</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">zero_phase</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">   Butterworth bandpass filter </span>
 
@@ -163,7 +164,7 @@
    <span class="k">return</span> <span class="n">butter</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span><span class="n">low</span><span class="o">=</span><span class="n">low</span><span class="p">,</span><span class="n">high</span><span class="o">=</span><span class="n">high</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span><span class="n">zero_phase</span><span class="o">=</span><span class="n">zero_phase</span><span class="p">)</span></div>
 
 <span class="c1">###===================================================================================</span>
-<div class="viewcode-block" id="lowpass"><a class="viewcode-back" href="../../../signal/generated/pysar.signal.lowpass.html#pysar.signal.butters.lowpass">[docs]</a><span class="k">def</span> <span class="nf">lowpass</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">high</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">zero_phase</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="lowpass"><a class="viewcode-back" href="../../../signal/generated/pysar.signal.lowpass.html#pysar.signal.butters.lowpass">[docs]</a><span class="k">def</span> <span class="nf">lowpass</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">high</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">zero_phase</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">   Butterworth lowpass filter </span>
 
@@ -198,7 +199,7 @@
    <span class="k">return</span> <span class="n">butter</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span><span class="n">high</span><span class="o">=</span><span class="n">high</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span><span class="n">zero_phase</span><span class="o">=</span><span class="n">zero_phase</span><span class="p">)</span> </div>
 
 <span class="c1">###===================================================================================</span>
-<div class="viewcode-block" id="highpass"><a class="viewcode-back" href="../../../signal/generated/pysar.signal.highpass.html#pysar.signal.butters.highpass">[docs]</a><span class="k">def</span> <span class="nf">highpass</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">low</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">zero_phase</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="highpass"><a class="viewcode-back" href="../../../signal/generated/pysar.signal.highpass.html#pysar.signal.butters.highpass">[docs]</a><span class="k">def</span> <span class="nf">highpass</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">low</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">zero_phase</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">   Butterworth highpass filter </span>
 
@@ -234,7 +235,7 @@
    <span class="k">return</span> <span class="n">butter</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span><span class="n">low</span><span class="o">=</span><span class="n">low</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span><span class="n">zero_phase</span><span class="o">=</span><span class="n">zero_phase</span><span class="p">)</span> </div>
 
 <span class="c1">###===================================================================================</span>
-<div class="viewcode-block" id="bandreject"><a class="viewcode-back" href="../../../signal/butters.html#pysar.signal.butters.bandreject">[docs]</a><span class="k">def</span> <span class="nf">bandreject</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">low</span><span class="p">,</span><span class="n">high</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">zero_phase</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="bandreject"><a class="viewcode-back" href="../../../signal/butters.html#pysar.signal.butters.bandreject">[docs]</a><span class="k">def</span> <span class="nf">bandreject</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">low</span><span class="p">,</span><span class="n">high</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">zero_phase</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">   Butterworth bandreject filter </span>
 
@@ -276,7 +277,7 @@
    <span class="k">if</span> <span class="ow">not</span> <span class="n">low</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">high</span><span class="p">:</span> 
       <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;low and high must be defined for bandreject&#39;</span><span class="p">)</span>
    <span class="n">data</span> <span class="o">=</span> <span class="n">butter</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span><span class="n">low</span><span class="o">=</span><span class="n">low</span><span class="p">,</span><span class="n">high</span><span class="o">=</span><span class="n">high</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span>
-               <span class="n">zero_phase</span><span class="o">=</span><span class="n">zero_phase</span><span class="p">,</span><span class="n">reject</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+               <span class="n">zero_phase</span><span class="o">=</span><span class="n">zero_phase</span><span class="p">,</span><span class="n">reject</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
    <span class="k">return</span> <span class="n">data</span></div>
 
 
@@ -320,7 +321,7 @@
       &copy;2014, Brent Minchew.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
       
     </div>

@@ -177,8 +177,11 @@ def writeRaster(z,filename,filetype='GTiff',x=None,y=None,null=np.nan,coords=Non
 
       band = rast.GetRasterBand(1)
       band.WriteArray(z)   ### write z data 
-      if null is not None and filetype is not 'ENVI':
-         band.SetNoDataValue(null)
+      if null is not None:
+         try:
+            band.SetNoDataValue(null)
+         except:
+            pass
       band.FlushCache()   
    except:
       raise

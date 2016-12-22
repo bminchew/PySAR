@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pysar.image.looks &mdash; PySAR 0.1.0</title>
+    <title>pysar.image.looks &#8212; PySAR 0.1.0</title>
     
     <link rel="stylesheet" href="../../../_static/pysar.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -17,14 +17,15 @@
         VERSION:     '0.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="PySAR 0.1.0" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -41,17 +42,17 @@
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Look routine</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
 
 <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">getopt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">_looks_mod</span>
-<span class="kn">from</span> <span class="nn">pysar.utils.gen_tools</span> <span class="kn">import</span> <span class="n">typecomplex</span>
+<span class="kn">from</span> <span class="nn">pysar.utils.gen_tools</span> <span class="k">import</span> <span class="n">typecomplex</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;look&#39;</span><span class="p">,</span><span class="s1">&#39;look2D&#39;</span><span class="p">]</span>
 
-<div class="viewcode-block" id="look"><a class="viewcode-back" href="../../../image/looks.html#pysar.image.look">[docs]</a><span class="k">def</span> <span class="nf">look</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">win</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="viewcode-block" id="look"><a class="viewcode-back" href="../../../image/looks.html#pysar.image.look">[docs]</a><span class="k">def</span> <span class="nf">look</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">win</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
    <span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">   Incoherent averaging (looking) routine</span>
 
@@ -76,7 +77,7 @@
    <span class="n">out</span> <span class="o">=</span> <span class="n">look2D</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span><span class="n">win</span><span class="o">=</span><span class="n">win</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="n">null</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
    <span class="k">return</span> <span class="n">out</span></div>
 
-<div class="viewcode-block" id="look2D"><a class="viewcode-back" href="../../../image/looks.html#pysar.image.look2D">[docs]</a><span class="k">def</span> <span class="nf">look2D</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">win</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="viewcode-block" id="look2D"><a class="viewcode-back" href="../../../image/looks.html#pysar.image.look2D">[docs]</a><span class="k">def</span> <span class="nf">look2D</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">win</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">   Incoherent averaging (looking) routine</span>
 
@@ -105,8 +106,8 @@
       <span class="k">elif</span> <span class="n">a</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
          <span class="n">d0</span><span class="p">,</span> <span class="n">d1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">win</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">win</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
       <span class="k">else</span><span class="p">:</span>
-         <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Incorrect window:  must be list length 1 or 2&#39;</span><span class="p">)</span>
-         <span class="k">return</span> <span class="bp">None</span>
+         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Incorrect window:  must be list length 1 or 2&#39;</span><span class="p">)</span>
+         <span class="k">return</span> <span class="kc">None</span>
    <span class="k">except</span><span class="p">:</span>
       <span class="n">d0</span><span class="p">,</span> <span class="n">d1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">win</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">win</span><span class="p">)</span>      
 
@@ -130,7 +131,7 @@
    <span class="k">elif</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">:</span>
       <span class="n">out</span> <span class="o">=</span> <span class="n">_looks_mod</span><span class="o">.</span><span class="n">look2d_dcmplx</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">shp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">d1</span><span class="p">,</span><span class="n">d0</span><span class="p">,</span><span class="n">outlen</span><span class="p">,</span><span class="n">donul</span><span class="p">,</span><span class="n">null</span><span class="p">,</span><span class="n">verbose</span><span class="p">)</span>    
    <span class="k">else</span><span class="p">:</span>
-      <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Unsupported data type...defaulting to float or complex&#39;</span><span class="p">)</span>
+      <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Unsupported data type...defaulting to float or complex&#39;</span><span class="p">)</span>
       <span class="n">dtyp</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span>
       <span class="k">if</span> <span class="n">typecomplex</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
          <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">complex64</span><span class="p">)</span>
@@ -187,7 +188,7 @@
       &copy;2014, Brent Minchew.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
       
     </div>

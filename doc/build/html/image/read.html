@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>&lt;no title&gt; &mdash; PySAR 0.1.0</title>
+    <title>&lt;no title&gt; &#8212; PySAR 0.1.0</title>
     
     <link rel="stylesheet" href="../_static/pysar.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -17,13 +17,15 @@
         VERSION:     '0.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="PySAR 0.1.0" href="../index.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -101,6 +103,39 @@
 </table>
 </dd></dl>
 
+<dl class="function">
+<dt id="pysar.image.read.readRaster">
+<code class="descclassname">pysar.image.read.</code><code class="descname">readRaster</code><span class="sig-paren">(</span><em>filename</em>, <em>bandnum=1</em>, <em>rtrnmeta=True</em>, <em>rtrndtyp=&lt;type 'numpy.float32'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysar/image/read.html#readRaster"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysar.image.read.readRaster" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return data from a GDAL-readable raster file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>filename</strong> :  str</p>
+<blockquote>
+<div><p>Name of file</p>
+</div></blockquote>
+<p><strong>bandnum</strong> :  int</p>
+<blockquote>
+<div><p>Band number to retrieve [1]</p>
+</div></blockquote>
+<p><strong>rtrnmeta</strong> :  bool</p>
+<blockquote>
+<div><p>Return metadata [True]</p>
+</div></blockquote>
+<p><strong>rtrndtyp</strong> :  dtype</p>
+<blockquote>
+<div><p>Return array data type [numpy.float32]</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>rtrn</strong> :  array[,meta]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 
 
           </div>
@@ -117,12 +152,12 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/image/read.txt"
+      <li><a href="../_sources/image/read.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <ul class="this-page-menu">
-  <li><a href="/numpy/docs/numpy-docs/image/read.rst">Edit page</a></li>
+  <li><a href="/numpy/docs/numpy-docs/image/read.rst.rst">Edit page</a></li>
 </ul>
 
 <div id="searchbox" style="display: none" role="search">
@@ -144,11 +179,11 @@
       &copy;2014, Brent Minchew.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
       
       |
-      <a href="../_sources/image/read.txt"
+      <a href="../_sources/image/read.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 
